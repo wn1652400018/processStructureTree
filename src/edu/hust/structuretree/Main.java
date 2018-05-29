@@ -923,9 +923,10 @@ public class Main {
 						rightTree.setBackground((Color)new ColorUIResource(238,238,238));
 					}
 				} else {
-					returnValue = JOptionPane.showConfirmDialog(f, "是否要保存,当前页面的内容。", "确认对话框",
+					returnValue = JOptionPane.showConfirmDialog(f, "必须先保存当前界面上的树。", "确认对话框",
 							JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
 					if (returnValue == JOptionPane.YES_OPTION) {
+						
 						ArrayList<TreePanelNode> treesOfSameTxt = new ArrayList<TreePanelNode>();
 						if (t.getTreeLists().size() == 1) {// 当前面板上只有一棵树是才可以保存
 							if (currentTxtPath == null) {//新建的面板，代表一个txt中只有一棵树
