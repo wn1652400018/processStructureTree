@@ -37,6 +37,24 @@ public class TreeAtTxt {//一个括号表达式对应一个TreeAtTxt对象
 		return treeLists;
 	}
 	
+	public  String treePositionAtTxt(ArrayList<TreeAtTxt> allTreesAtTxt) {
+		String txtPath = this.txtPath;
+		int count = 0;
+		int position = 0;
+		for(int i = 0 ; i < allTreesAtTxt.size();i++) {
+			if(allTreesAtTxt.get(i).getTxtPath().equals(txtPath)) {
+				count ++;
+				if(allTreesAtTxt.get(i).equals(this))
+					position = count;
+			}else if(count != 0) {
+				break;
+			}
+			
+		}
+		return position + " / "+count;
+	}
+	
+	
 	public ArrayList<TreePanelNode> getTreeListWithOneTree() {
 		return treeListWithOneTree;
 	}

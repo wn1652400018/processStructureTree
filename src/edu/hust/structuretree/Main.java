@@ -36,15 +36,15 @@ import javax.swing.JScrollPane;
 
 import javax.swing.plaf.ColorUIResource;
 
-//import edu.stanford.nlp.ling.CoreAnnotations;
-//import edu.stanford.nlp.pipeline.Annotation;
-//import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-//import edu.stanford.nlp.trees.Tree;
-//import edu.stanford.nlp.trees.TreeCoreAnnotations;
-//import edu.stanford.nlp.util.CoreMap;
+import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.pipeline.Annotation;
+import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import edu.stanford.nlp.trees.Tree;
+import edu.stanford.nlp.trees.TreeCoreAnnotations;
+import edu.stanford.nlp.util.CoreMap;
 
 public class Main {	
-	private JFrame f = new JFrame("未命名");
+	private JFrame f = new JFrame("未命名.txt"+"[ "+1+" / "+1+" ]");
 	private TreePanel t =new TreePanel();
 	private JScrollPane paintjsp;
 	private JPanel editPanel = new JPanel();
@@ -64,8 +64,8 @@ public class Main {
 	private TreeAtTxt treeAtTxt = new TreeAtTxt();//表示当前面板上的括号表达式
 	private ArrayList<TreeAtTxt> allTreesAtTxt = new ArrayList<TreeAtTxt>();//表示所有文件中的括号表达式
 	private static int RIGHT = 0,LEFT = -1;//表示左右滑动
-//	private StanfordCoreNLP pipeline;
-//	private Annotation annotation;
+	private StanfordCoreNLP pipeline;
+	private Annotation annotation;
 	public void init() {
 		
 //		coreNLPInit();
@@ -336,7 +336,7 @@ public class Main {
 											hasModeified.put(currentTxtPath, Boolean.FALSE);
 											t.setHasModeified(hasModeified);
 											t.getTreeAtTxt().setTxtPath(currentTxtPath);// 修改文件的路径，之前是null
-											f.setTitle(new File(currentTxtPath).getName());
+											f.setTitle(new File(currentTxtPath).getName()+"[ " + "1 / 1" +" ]");
 											fw.close();
 											
 											//打开
@@ -460,7 +460,7 @@ public class Main {
 										resetButtonstatus();
 										t.setSelectedNodes(-1);
 										t.initCombineNodes();
-										f.setTitle(fileChooser.getSelectedFile().getName());	
+										f.setTitle(fileChooser.getSelectedFile().getName() + "[ " + "1 / 1" + " ]");	
 										t.repaint();
 										fw.close();
 									} catch (IOException e1) {
@@ -587,46 +587,46 @@ public class Main {
 				}
 			}});
 		
-//		parse.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//				String text = editArea0.getText();
-//				if (text.trim().length() != 0) {//将无格式的括号表达式转化为有格式的表达式
-//					annotation = new Annotation(text);
-//					pipeline.annotate(annotation);
-//					List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);
-//					ArrayList<TreePanelNode> treeLists = new ArrayList<TreePanelNode>();
-//					String expressionofAlltrees = "";
-//					for (CoreMap sentence : sentences) {
-//						Tree tree = sentence.get(TreeCoreAnnotations.TreeAnnotation.class);
-//						String eachSentenceofOneLine = tree.toString();
-//					    expressionofAlltrees = expressionofAlltrees +eachSentenceofOneLine;
-//					}
-//					System.out.println(expressionofAlltrees);	
-//					treeLists = new TreePanelNode().fromTextToTree(expressionofAlltrees);
-//					String sentencesofMultLines = "";
-//						int count = 0;
-//						for (TreePanelNode root : treeLists) {
-//							count++;
-//							if (root.examTheTree() && root != null)
-//								for (String word : root.changeIntoText())
-//									sentencesofMultLines = sentencesofMultLines + word;
-//							else
-//								sentencesofMultLines = sentencesofMultLines + "第" + count + "个括号表达式格式错误。";
-//
-//							sentencesofMultLines = sentencesofMultLines + "\r\n";
-//						}
-//                      editArea.setText(sentencesofMultLines);
-//
-//				}
-//				resetButtonstatus();
-//				t.setSelectedNodes(-1);
-//				t.initCombineNodes();
-//				t.repaint();
-//			}
-//		});
+		parse.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String text = editArea0.getText();
+				if (text.trim().length() != 0) {//将无格式的括号表达式转化为有格式的表达式
+					annotation = new Annotation(text);
+					pipeline.annotate(annotation);
+					List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);
+					ArrayList<TreePanelNode> treeLists = new ArrayList<TreePanelNode>();
+					String expressionofAlltrees = "";
+					for (CoreMap sentence : sentences) {
+						Tree tree = sentence.get(TreeCoreAnnotations.TreeAnnotation.class);
+						String eachSentenceofOneLine = tree.toString();
+					    expressionofAlltrees = expressionofAlltrees +eachSentenceofOneLine;
+					}
+					System.out.println(expressionofAlltrees);	
+					treeLists = new TreePanelNode().fromTextToTree(expressionofAlltrees);
+					String sentencesofMultLines = "";
+						int count = 0;
+						for (TreePanelNode root : treeLists) {
+							count++;
+							if (root.examTheTree() && root != null)
+								for (String word : root.changeIntoText())
+									sentencesofMultLines = sentencesofMultLines + word;
+							else
+								sentencesofMultLines = sentencesofMultLines + "第" + count + "个括号表达式格式错误。";
+
+							sentencesofMultLines = sentencesofMultLines + "\r\n";
+						}
+                      editArea.setText(sentencesofMultLines);
+
+				}
+				resetButtonstatus();
+				t.setSelectedNodes(-1);
+				t.initCombineNodes();
+				t.repaint();
+			}
+		});
 
 		start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -945,7 +945,7 @@ public class Main {
 											t.setHasModeified(hasModeified);
 											treeAtTxt.setTxtPath(currentTxtPath);											
 											t.getTreeAtTxt().setTxtPath(currentTxtPath);// 修改文件的路径，之前是null
-											f.setTitle(new File(currentTxtPath).getName());
+											f.setTitle(new File(currentTxtPath).getName() +"[ " + "1 / 1" + " ]" );
 											fw.close();
 											
 											//向右滑动
@@ -1067,7 +1067,7 @@ public class Main {
 											t.setHasModeified(hasModeified);
 											treeAtTxt.setTxtPath(currentTxtPath);
 											t.getTreeAtTxt().setTxtPath(currentTxtPath);// 修改文件的路径，之前是null
-											f.setTitle(new File(currentTxtPath).getName());
+											f.setTitle(new File(currentTxtPath).getName() + "[ " + "1 / 1" +" ]");
 											fw.close();
 											
 											//向左滑动
@@ -1185,7 +1185,7 @@ public class Main {
 		t.setSelectedNodes(-1);
 		t.initCombineNodes();
 		t.repaint();
-		f.setTitle("未命名");
+		f.setTitle("未命名.txt"+"[ "+1+" / "+1+" ]");
 		System.out.println("面板被清空了");	
 	}
 	
@@ -1212,7 +1212,7 @@ public class Main {
 				t.setSelectedNodes(-1);
 				t.initCombineNodes();
 				t.repaint();
-				f.setTitle(new File(t.getTreeAtTxt().getTxtPath()).getName());
+				f.setTitle(new File(t.getTreeAtTxt().getTxtPath()).getName() + "[ " + treeAtTxt.treePositionAtTxt(allTreesAtTxt) + " ]" );
 				return true;
 			}else
 				return false;
@@ -1235,7 +1235,7 @@ public class Main {
 				t.setSelectedNodes(-1);
 				t.initCombineNodes();
 				t.repaint();
-				f.setTitle(new File(t.getTreeAtTxt().getTxtPath()).getName());
+				f.setTitle(new File(t.getTreeAtTxt().getTxtPath()).getName() + "[ " + treeAtTxt.treePositionAtTxt(allTreesAtTxt) + " ]" );
 				return true;
 			}else
 				return false;
@@ -1286,26 +1286,26 @@ public class Main {
 			t.setSelectedNodes(-1);
 			t.initCombineNodes();
 			t.repaint();
-			f.setTitle(files[0].getName());
+			f.setTitle(files[0].getName() + "[ " + treeAtTxt.treePositionAtTxt(allTreesAtTxt) + " ]");
 			
 			
 		}
 	}
 	
-//	private void coreNLPInit() {
-//		Properties props = new Properties();
-//		try {
-//			props.load(this.getClass().getClassLoader().getResourceAsStream("StanfordCoreNLP-chinese.properties"));
-//			props.setProperty("annotators", "tokenize,ssplit,pos,parse");
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		pipeline = new StanfordCoreNLP(props);
-//		annotation = new Annotation("句法分析。");
-//		pipeline.annotate(annotation);
-//	}
+	private void coreNLPInit() {
+		Properties props = new Properties();
+		try {
+			props.load(this.getClass().getClassLoader().getResourceAsStream("StanfordCoreNLP-chinese.properties"));
+			props.setProperty("annotators", "tokenize,ssplit,pos,parse");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		pipeline = new StanfordCoreNLP(props);
+		annotation = new Annotation("句法分析。");
+		pipeline.annotate(annotation);
+	}
 	
 	public static void main (String args[]) {
 		new Main().init();	
