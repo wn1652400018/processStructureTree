@@ -2,8 +2,8 @@ package edu.hust.structuretree;
 
 import java.util.ArrayList;
 
-public class TreeAtTxt {//Ò»¸öÀ¨ºÅ±í´ïÊ½¶ÔÓ¦Ò»¸öTreeAtTxt¶ÔÏó
-	private ArrayList<TreePanelNode>  treeListWithOneTree ;//Ö»ÓĞÒ»¿ÅÊ÷µÄÉ­ÁÖ£¬ÓÃÀ´±íÊ¾Ä³¸ötxtÎÄ¼şÖĞµÄÒ»¸öÓÉÀ¨ºÅ±í´ïÊ½±íÊ¾µÄÊ÷
+public class TreeAtTxt {//ä¸€ä¸ªæ‹¬å·è¡¨è¾¾å¼å¯¹åº”ä¸€ä¸ªTreeAtTxtå¯¹è±¡
+	private ArrayList<TreePanelNode>  treeListWithOneTree ;//åªæœ‰ä¸€é¢—æ ‘çš„æ£®æ—ï¼Œç”¨æ¥è¡¨ç¤ºæŸä¸ªtxtæ–‡ä»¶ä¸­çš„ä¸€ä¸ªç”±æ‹¬å·è¡¨è¾¾å¼è¡¨ç¤ºçš„æ ‘
 	private String txtPath;
 	public TreeAtTxt() {
 	}
@@ -21,8 +21,9 @@ public class TreeAtTxt {//Ò»¸öÀ¨ºÅ±í´ïÊ½¶ÔÓ¦Ò»¸öTreeAtTxt¶ÔÏó
 	}
 	/*
 	 * 
-	 *   ¸Ã·½·¨½«ÓÉtxtÎÄ¼şÖĞÀ¨ºÅ±í´ïÊ½×é³ÉµÄÒ»¸öString×ª»»ÎªÒ»¸ö¸öTreeAtTxt¶ÔÏó£¬²¢·â×°µ½ArrayListÖĞ¡£
-	 *   TreeAtTxtµÄtxtPathÊôĞÔÎª¸ÃÎÄ¼şÂ·¾¶£¬treeListWithOneTreeÊôĞÔÎªÈÎÒâÒ»¸öÀ¨ºÅ±í´ïÊ½¶ÔÓ¦µÄÉ­ÁÖ¡£
+	 *
+	 *   è¯¥æ–¹æ³•å°†ç”±txtæ–‡ä»¶ä¸­æ‹¬å·è¡¨è¾¾å¼ç»„æˆçš„ä¸€ä¸ªStringè½¬æ¢ä¸ºä¸€ä¸ªä¸ªTreeAtTxtå¯¹è±¡ï¼Œå¹¶å°è£…åˆ°ArrayListä¸­ã€‚
+	 *   TreeAtTxtçš„txtPathå±æ€§ä¸ºè¯¥æ–‡ä»¶è·¯å¾„ï¼ŒtreeListWithOneTreeå±æ€§ä¸ºä»»æ„ä¸€ä¸ªæ‹¬å·è¡¨è¾¾å¼å¯¹åº”çš„æ£®æ—ã€‚
 	 *   
 	 * */
 
