@@ -44,26 +44,26 @@ import edu.stanford.nlp.trees.TreeCoreAnnotations;
 import edu.stanford.nlp.util.CoreMap;
 
 public class Main {	
-	private JFrame f = new JFrame("Î´ÃüÃû.txt"+"[ "+1+" / "+1+" ]");
+	private JFrame f = new JFrame("æœªå‘½å.txt"+"[ "+1+" / "+1+" ]");
 	private TreePanel t =new TreePanel();
 	private JScrollPane paintjsp;
 	private JPanel editPanel = new JPanel();
 	private TextArea editArea0= new TextArea(2,80);
 	private TextArea editArea= new TextArea(8,80);
-	private JButton start = new JButton("Éú³É½á¹¹Ê÷");
-	private JButton treeToText = new JButton("µ¼³öµ½ÎÄ¼ş");
-	private JButton rePaint = new JButton("ÖØ»­½á¹¹Ê÷");
-	private JButton updateExpression = new JButton("¸üĞÂ±í´ïÊ½");
-	private JButton parse = new JButton("¾ä·¨·ÖÎö");
-	private JButton importExpressionFromText = new JButton("µ¼Èë±í´ïÊ½");
+	private JButton start = new JButton("ç”Ÿæˆç»“æ„æ ‘");
+	private JButton treeToText = new JButton("å¯¼å‡ºåˆ°æ–‡ä»¶");
+	private JButton rePaint = new JButton("é‡ç”»ç»“æ„æ ‘");
+	private JButton updateExpression = new JButton("æ›´æ–°è¡¨è¾¾å¼");
+	private JButton parse = new JButton("å¥æ³•åˆ†æ");
+	private JButton importExpressionFromText = new JButton("å¯¼å…¥è¡¨è¾¾å¼");
 	private JFileChooser fileChooser = new JFileChooser(); 
 	private TxtFileFilter txtFileFilter = new TxtFileFilter() ;
 	private Vector<TreePanelNode> nodes = new Vector<TreePanelNode>();
 	private ArrayList<TreePanelNode> treeLists = new ArrayList<TreePanelNode>();
-	private HashMap<String,Boolean> hasModeified = new HashMap<String,Boolean>();//¼ÇÂ¼ÎÄ±¾ÊÇ·ñ±»¸Ä±ä
-	private TreeAtTxt treeAtTxt = new TreeAtTxt();//±íÊ¾µ±Ç°Ãæ°åÉÏµÄÀ¨ºÅ±í´ïÊ½
-	private ArrayList<TreeAtTxt> allTreesAtTxt = new ArrayList<TreeAtTxt>();//±íÊ¾ËùÓĞÎÄ¼şÖĞµÄÀ¨ºÅ±í´ïÊ½
-	private static int RIGHT = 0,LEFT = -1;//±íÊ¾×óÓÒ»¬¶¯
+	private HashMap<String,Boolean> hasModeified = new HashMap<String,Boolean>(); //è®°å½•æ–‡æœ¬æ˜¯å¦è¢«æ”¹å˜
+	private TreeAtTxt treeAtTxt = new TreeAtTxt();//è¡¨ç¤ºå½“å‰é¢æ¿ä¸Šçš„æ‹¬å·è¡¨è¾¾å¼
+	private ArrayList<TreeAtTxt> allTreesAtTxt = new ArrayList<TreeAtTxt>();//è¡¨ç¤ºæ‰€æœ‰æ–‡ä»¶ä¸­çš„æ‹¬å·è¡¨è¾¾å¼
+	private static int RIGHT = 0,LEFT = -1;//è¡¨ç¤ºå·¦å³æ»‘åŠ¨
 	private StanfordCoreNLP pipeline;
 	private Annotation annotation;
 	public void init() {
@@ -94,13 +94,13 @@ public class Main {
 //		buttonPanel.add(Box.createVerticalStrut(8));
 		buttonPanel.add(treeToText);
 		
-		//´´½¨²Ëµ¥
+		//åˆ›å»ºèœå•
 		JMenuBar jmb = new JMenuBar();
-		JMenu jm = new JMenu("ÎÄ¼ş");
-		JMenuItem jmi_new = new JMenuItem("ĞÂ½¨");
-		JMenuItem jmi_open = new JMenuItem("´ò¿ª");
-		JMenuItem jmi_save = new JMenuItem("±£´æ");
-		JMenuItem jmi_saveAs = new JMenuItem("Áí´æÎª");
+		JMenu jm = new JMenu("æ–‡ä»¶");
+		JMenuItem jmi_new = new JMenuItem("æ–°å»º");
+		JMenuItem jmi_open = new JMenuItem("æ‰“å¼€");
+		JMenuItem jmi_save = new JMenuItem("ä¿å­˜");
+		JMenuItem jmi_saveAs = new JMenuItem("å¦å­˜ä¸º");
 		jm.add(jmi_new);
 		jm.add(jmi_open);
 		jm.add(jmi_save);
@@ -109,8 +109,8 @@ public class Main {
 		
 		
 		
-		JScrollPane editjsp0 = new JScrollPane(editArea0);//ÊäÈëÎ´´¦ÀíµÄ¾ä×Ó
-		JScrollPane editjsp = new JScrollPane(editArea);//ÊäÈëÀ¨ºÅ±í´ïÊ½
+		JScrollPane editjsp0 = new JScrollPane(editArea0); //è¾“å…¥æœªå¤„ç†çš„å¥å­
+		JScrollPane editjsp = new JScrollPane(editArea);//è¾“å…¥æ‹¬å·è¡¨è¾¾å¼
 		JPanel editTextPanel = new JPanel();
 		editTextPanel.setLayout(new BorderLayout());
 		editTextPanel.add(editjsp);
@@ -124,14 +124,14 @@ public class Main {
 		
 		JPanel functionPanel = new JPanel();
 		functionPanel.setLayout(new BoxLayout(functionPanel,BoxLayout.Y_AXIS));
-		JButton add = new JButton("Ôö¼Ó");
-		JButton delete = new JButton("É¾³ı");
-//	    JButton modify = new JButton("ĞŞ¸Ä");
-		JButton combine = new JButton("Á¬½Ó");
+		JButton add = new JButton("å¢åŠ ");
+		JButton delete = new JButton("åˆ é™¤");
+//	    JButton modify = new JButton("ä¿®æ”¹");
+		JButton combine = new JButton("è¿æ¥");
 		JButton selectRoot = new JButton("root");
-		JButton clearPanel = new JButton("Çå¿Õ");
-		JButton leftTree = new JButton("<¡ª¡ª");
-		JButton rightTree = new JButton("¡ª¡ª>");
+		JButton clearPanel = new JButton("æ¸…ç©º");
+		JButton leftTree = new JButton("<â€”â€”");
+		JButton rightTree = new JButton("â€”â€”>");
 		
 		
 		functionPanel.add(add);
@@ -164,11 +164,11 @@ public class Main {
 		panel.add(editPanel, BorderLayout.NORTH);
 		
 		
-		double width = Toolkit.getDefaultToolkit().getScreenSize().width; // µÃµ½µ±Ç°ÆÁÄ»·Ö±æÂÊµÄ¸ß
-		double height = Toolkit.getDefaultToolkit().getScreenSize().height-45;// µÃµ½µ±Ç°ÆÁÄ»·Ö±æÂÊµÄ¿í
-		f.setSize((int) width, (int) height);// ÉèÖÃ´óĞ¡
-		f.setLocation(0, 0); // ÉèÖÃ´°Ìå¾ÓÖĞÏÔÊ¾
-		f.setResizable(false);// ½ûÓÃ×î´ó»¯°´Å¥
+		double width = Toolkit.getDefaultToolkit().getScreenSize().width; // å¾—åˆ°å½“å‰å±å¹•åˆ†è¾¨ç‡çš„é«˜
+		double height = Toolkit.getDefaultToolkit().getScreenSize().height-45;// å¾—åˆ°å½“å‰å±å¹•åˆ†è¾¨ç‡çš„å®½
+		f.setSize((int) width, (int) height);// è®¾ç½®å¤§å°
+		f.setLocation(0, 0); // è®¾ç½®çª—ä½“å±…ä¸­æ˜¾ç¤º
+//		f.setResizable(false);// ç¦ç”¨æœ€å¤§åŒ–æŒ‰é’®
 		f.setLocationRelativeTo(null);
 		f.add(panel);
 
@@ -176,46 +176,45 @@ public class Main {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
 
-//²âÊÔ
-		//ÎªÎÄ¼ş²Ëµ¥Ìí¼Óµã»÷ÊÂ¼ş
+//æµ‹è¯•
+		//ä¸ºæ–‡ä»¶èœå•æ·»åŠ ç‚¹å‡»äº‹ä»¶
 		jmi_new.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				int returnValue = JOptionPane.YES_OPTION;
 				String currentTxtPath = t.getTreeAtTxt().getTxtPath();
-				if (!hasModeified.get(currentTxtPath).booleanValue()) {// txtPath¶ÔÓ¦ÎÄ¼şÃ»ÓĞĞŞ¸Ä
-					//ĞÂ½¨
+				if (!hasModeified.get(currentTxtPath).booleanValue()) {// txtPathå¯¹åº”æ–‡ä»¶æ²¡æœ‰ä¿®æ”¹
+					//æ–°å»º
 					resetTreePanel();
 				} else {
-					returnValue = JOptionPane.showConfirmDialog(f, "ÊÇ·ñÒª±£´æ,µ±Ç°Ò³ÃæµÄÄÚÈİ¡£", "È·ÈÏ¶Ô»°¿ò",
+					returnValue = JOptionPane.showConfirmDialog(f, "æ˜¯å¦è¦ä¿å­˜,å½“å‰é¡µé¢çš„å†…å®¹ã€‚", "ç¡®è®¤å¯¹è¯æ¡†",
 							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
 					if (returnValue == JOptionPane.YES_OPTION) {
 						ArrayList<TreePanelNode> treesOfSameTxt = new ArrayList<TreePanelNode>();
-						if (t.getTreeLists().size() == 1) {// µ±Ç°Ãæ°åÉÏÖ»ÓĞÒ»¿ÃÊ÷ÊÇ²Å¿ÉÒÔ±£´æ
-							if (currentTxtPath == null) {//ĞÂ½¨µÄÃæ°å£¬´ú±íÒ»¸ötxtÖĞÖ»ÓĞÒ»¿ÃÊ÷
+						if (t.getTreeLists().size() == 1) {// å½“å‰é¢æ¿ä¸Šåªæœ‰ä¸€æ£µæ ‘æ˜¯æ‰å¯ä»¥ä¿å­˜
+							if (currentTxtPath == null) {//æ–°å»ºçš„é¢æ¿ï¼Œä»£è¡¨ä¸€ä¸ªtxtä¸­åªæœ‰ä¸€æ£µæ ‘
 								if (t.getTreeLists().get(0).examTheTree() && t.getTreeLists().get(0) != null) {
 									try {
 										SimpleDateFormat date = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
 										fileChooser.setSelectedFile(new File(date.format(new Date()) + ".txt"));
-										if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {//È·¶¨±£´æ
+										if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {//ç¡®å®šä¿å­˜
 											currentTxtPath = fileChooser.getSelectedFile().toString();
 											FileWriter fw = new FileWriter(currentTxtPath);
 											for (String word : t.getTreeLists().get(0).changeIntoText())
 												fw.write(word);
 
-											hasModeified.remove(null);// ½«Ã»ÓĞÉèÖÃÎ»ÖÃºÍÎÄ¼şÃûµÄÉ¾³ı£¬ÒòÎªÒÑ¾­ÎªËü±£´æµ½ÁËÖ¸¶¨ÎÄ¼şÖĞ
+											hasModeified.remove(null);// å°†æ²¡æœ‰è®¾ç½®ä½ç½®å’Œæ–‡ä»¶åçš„åˆ é™¤ï¼Œå› ä¸ºå·²ç»ä¸ºå®ƒä¿å­˜åˆ°äº†æŒ‡å®šæ–‡ä»¶ä¸­
 											hasModeified.put(currentTxtPath, Boolean.FALSE);
 											t.setHasModeified(hasModeified);
-											t.getTreeAtTxt().setTxtPath(currentTxtPath);// ĞŞ¸ÄÎÄ¼şµÄÂ·¾¶£¬Ö®Ç°ÊÇnull
+											t.getTreeAtTxt().setTxtPath(currentTxtPath);// ä¿®æ”¹æ–‡ä»¶çš„è·¯å¾„ï¼Œä¹‹å‰æ˜¯null
 
 											fw.close();
 											
-											//ĞÂ½¨
+											//æ–°å»º
 											resetTreePanel();
 											
-										}else {//µã»÷ÁËÈ¡Ïû»òÍË³ö¶Ô»°¿ò£¬Ê²Ã´Ò²²»ÓÃ×ö
+										}else {//ç‚¹å‡»äº†å–æ¶ˆæˆ–é€€å‡ºå¯¹è¯æ¡†ï¼Œä»€ä¹ˆä¹Ÿä¸ç”¨åš
 											
 										}
 										
@@ -223,24 +222,23 @@ public class Main {
 										
 										
 									} catch (IOException e1) {
-										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 									
 								}else {
-									JOptionPane.showMessageDialog(f, "½á¹¹Ê÷¸ñÊ½ÓĞ´íÎó,Çë¼ì²é¡£", "ÏûÏ¢ÌáÊ¾¿ò",
+									JOptionPane.showMessageDialog(f, "ç»“æ„æ ‘æ ¼å¼æœ‰é”™è¯¯,è¯·æ£€æŸ¥ã€‚", "æ¶ˆæ¯æç¤ºæ¡†",
 											JOptionPane.INFORMATION_MESSAGE);
 								}
 								
 								
-							}else {//ĞŞ¸ÄÁË´ò¿ªµÄÎÄ¼şÖĞµÄÄ³¿ÃÊ÷
+							}else {//ä¿®æ”¹äº†æ‰“å¼€çš„æ–‡ä»¶ä¸­çš„æŸæ£µæ ‘
 								for (TreeAtTxt tat : allTreesAtTxt) {
 									if(tat.getTxtPath().equals(currentTxtPath))
 										treesOfSameTxt.add(tat.getTreeListWithOneTree().get(0));
 								}
 							}
 							
-							if(!treesOfSameTxt.isEmpty()) {//Ö´ĞĞÁËÉÏÃæµÄelse
+							if(!treesOfSameTxt.isEmpty()) {//æ‰§è¡Œäº†ä¸Šé¢çš„else
 								boolean correctFormat = true;
 								for (TreePanelNode treeRoot : treesOfSameTxt) {
 									if (treeRoot.examTheTree() && treeRoot != null) {
@@ -251,7 +249,7 @@ public class Main {
 									}
 								}
 								if(correctFormat == false) {
-									JOptionPane.showMessageDialog(f, "½á¹¹Ê÷¸ñÊ½ÓĞ´íÎó,Çë¼ì²é¡£", "ÏûÏ¢ÌáÊ¾¿ò",
+									JOptionPane.showMessageDialog(f, "ç»“æ„æ ‘æ ¼å¼æœ‰é”™è¯¯,è¯·æ£€æŸ¥ã€‚", "æ¶ˆæ¯æç¤ºæ¡†",
 											JOptionPane.INFORMATION_MESSAGE);
 								} else {
 									try {
@@ -264,12 +262,11 @@ public class Main {
 										hasModeified.put(currentTxtPath, Boolean.FALSE);
 										t.setHasModeified(hasModeified);
 										fw.close();
-										//ĞÂ½¨
+										//æ–°å»º
 										resetTreePanel();
 										
 										
 									} catch (IOException e1) {
-										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 								}
@@ -277,15 +274,15 @@ public class Main {
 							}
 							
 							
-						}else {//µ±Ç°Ãæ°å²»Ö¹Ò»¿ÃÊ÷/»òÕßÃ»ÓĞÊ÷
-							JOptionPane.showMessageDialog(f, "»­°åÉÏÖ»ÓĞÒ»¿ÃÊ÷Ê±²ÅÄÜ±£´æ¡£", "ÏûÏ¢ÌáÊ¾¿ò",
+						}else {//å½“å‰é¢æ¿ä¸æ­¢ä¸€æ£µæ ‘/æˆ–è€…æ²¡æœ‰æ ‘
+							JOptionPane.showMessageDialog(f, "ç”»æ¿ä¸Šåªæœ‰ä¸€æ£µæ ‘æ—¶æ‰èƒ½ä¿å­˜ã€‚", "æ¶ˆæ¯æç¤ºæ¡†",
 									JOptionPane.INFORMATION_MESSAGE);
 						}
 
 					} else if (returnValue == JOptionPane.NO_OPTION) {
-						//ĞÂ½¨
+						//æ–°å»º
 						resetTreePanel();
-					} else {//µã»÷ÁËÈ¡Ïû»òÕßÍË³ö
+					} else {//ç‚¹å‡»äº†å–æ¶ˆæˆ–è€…é€€å‡º
 						resetButtonstatus();
 						t.initCombineNodes();
 						t.setSelectedNodes(-1);
@@ -303,51 +300,48 @@ public class Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				int returnValue = JOptionPane.YES_OPTION;
 				String currentTxtPath = t.getTreeAtTxt().getTxtPath();
-				if (!hasModeified.get(currentTxtPath).booleanValue()) {// txtPath¶ÔÓ¦ÎÄ¼şÃ»ÓĞĞŞ¸Ä
-					//´ò¿ª
+				if (!hasModeified.get(currentTxtPath).booleanValue()) {// txtPathå¯¹åº”æ–‡ä»¶æ²¡æœ‰ä¿®æ”¹
+					//æ‰“å¼€
 					try {
 						openTxts();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				} else {
-					returnValue = JOptionPane.showConfirmDialog(f, "ÊÇ·ñÒª±£´æ,µ±Ç°Ò³ÃæµÄÄÚÈİ¡£", "È·ÈÏ¶Ô»°¿ò",
+					returnValue = JOptionPane.showConfirmDialog(f, "æ˜¯å¦è¦ä¿å­˜,å½“å‰é¡µé¢çš„å†…å®¹ã€‚", "ç¡®è®¤å¯¹è¯æ¡†",
 							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
 					if (returnValue == JOptionPane.YES_OPTION) {
 					
 						ArrayList<TreePanelNode> treesOfSameTxt = new ArrayList<TreePanelNode>();
-						if (t.getTreeLists().size() == 1) {// µ±Ç°Ãæ°åÉÏÖ»ÓĞÒ»¿ÃÊ÷ÊÇ²Å¿ÉÒÔ±£´æ
-							if (currentTxtPath == null) {//ĞÂ½¨µÄÃæ°å£¬´ú±íÒ»¸ötxtÖĞÖ»ÓĞÒ»¿ÃÊ÷
+						if (t.getTreeLists().size() == 1) {// å½“å‰é¢æ¿ä¸Šåªæœ‰ä¸€æ£µæ ‘æ˜¯æ‰å¯ä»¥ä¿å­˜
+							if (currentTxtPath == null) {//æ–°å»ºçš„é¢æ¿ï¼Œä»£è¡¨ä¸€ä¸ªtxtä¸­åªæœ‰ä¸€æ£µæ ‘
 								if (t.getTreeLists().get(0).examTheTree() && t.getTreeLists().get(0) != null) {
 									try {
 										SimpleDateFormat date = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
 										fileChooser.setSelectedFile(new File(date.format(new Date()) + ".txt"));
-										if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {//È·¶¨±£´æ
+										if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {//ç¡®å®šä¿å­˜
 											currentTxtPath = fileChooser.getSelectedFile().toString();
 											FileWriter fw = new FileWriter(currentTxtPath);
 											for (String word : t.getTreeLists().get(0).changeIntoText())
 												fw.write(word);
 
-											hasModeified.remove(null);// ½«Ã»ÓĞÉèÖÃÎ»ÖÃºÍÎÄ¼şÃûµÄÉ¾³ı£¬ÒòÎªÒÑ¾­ÎªËü±£´æµ½ÁËÖ¸¶¨ÎÄ¼şÖĞ
+											hasModeified.remove(null);// å°†æ²¡æœ‰è®¾ç½®ä½ç½®å’Œæ–‡ä»¶åçš„åˆ é™¤ï¼Œå› ä¸ºå·²ç»ä¸ºå®ƒä¿å­˜åˆ°äº†æŒ‡å®šæ–‡ä»¶ä¸­
 											hasModeified.put(currentTxtPath, Boolean.FALSE);
 											t.setHasModeified(hasModeified);
-											t.getTreeAtTxt().setTxtPath(currentTxtPath);// ĞŞ¸ÄÎÄ¼şµÄÂ·¾¶£¬Ö®Ç°ÊÇnull
+											t.getTreeAtTxt().setTxtPath(currentTxtPath);// ä¿®æ”¹æ–‡ä»¶çš„è·¯å¾„ï¼Œä¹‹å‰æ˜¯null
 											f.setTitle(new File(currentTxtPath).getName()+"[ " + "1 / 1" +" ]");
 											fw.close();
 											
-											//´ò¿ª
+											//æ‰“å¼€
 											try {
 												openTxts();
 											} catch (IOException e1) {
-												// TODO Auto-generated catch block
 												e1.printStackTrace();
 											}
 											
-										}else {//µã»÷ÁËÈ¡Ïû»òÍË³ö¶Ô»°¿ò£¬Ê²Ã´Ò²²»ÓÃ×ö
+										}else {//ç‚¹å‡»äº†å–æ¶ˆæˆ–é€€å‡ºå¯¹è¯æ¡†ï¼Œä»€ä¹ˆä¹Ÿä¸ç”¨åš
 											
 										}
 										
@@ -355,24 +349,23 @@ public class Main {
 										
 										
 									} catch (IOException e1) {
-										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 									
 								}else {
-									JOptionPane.showMessageDialog(f, "½á¹¹Ê÷¸ñÊ½ÓĞ´íÎó,Çë¼ì²é¡£", "ÏûÏ¢ÌáÊ¾¿ò",
+									JOptionPane.showMessageDialog(f, "ç»“æ„æ ‘æ ¼å¼æœ‰é”™è¯¯,è¯·æ£€æŸ¥ã€‚", "æ¶ˆæ¯æç¤ºæ¡†",
 											JOptionPane.INFORMATION_MESSAGE);
 								}
 								
 								
-							}else {//ĞŞ¸ÄÁË´ò¿ªµÄÎÄ¼şÖĞµÄÄ³¿ÃÊ÷
+							}else {//ä¿®æ”¹äº†æ‰“å¼€çš„æ–‡ä»¶ä¸­çš„æŸæ£µæ ‘
 								for (TreeAtTxt tat : allTreesAtTxt) {
 									if(tat.getTxtPath().equals(currentTxtPath))
 										treesOfSameTxt.add(tat.getTreeListWithOneTree().get(0));
 								}
 							}
 							
-							if(!treesOfSameTxt.isEmpty()) {//Ö´ĞĞÁËÉÏÃæµÄelse
+							if(!treesOfSameTxt.isEmpty()) {//æ‰§è¡Œäº†ä¸Šé¢çš„else
 								boolean correctFormat = true;
 								for (TreePanelNode treeRoot : treesOfSameTxt) {
 									if (treeRoot.examTheTree() && treeRoot != null) {
@@ -383,7 +376,7 @@ public class Main {
 									}
 								}
 								if(correctFormat == false) {
-									JOptionPane.showMessageDialog(f, "½á¹¹Ê÷¸ñÊ½ÓĞ´íÎó,Çë¼ì²é¡£", "ÏûÏ¢ÌáÊ¾¿ò",
+									JOptionPane.showMessageDialog(f, "ç»“æ„æ ‘æ ¼å¼æœ‰é”™è¯¯,è¯·æ£€æŸ¥ã€‚", "æ¶ˆæ¯æç¤ºæ¡†",
 											JOptionPane.INFORMATION_MESSAGE);
 								} else {
 									try {
@@ -396,35 +389,32 @@ public class Main {
 										hasModeified.put(currentTxtPath, Boolean.FALSE);
 										t.setHasModeified(hasModeified);
 										fw.close();
-										//´ò¿ª
+										//æ‰“å¼€
 										try {
 											openTxts();
 										} catch (IOException e1) {
-											// TODO Auto-generated catch block
 											e1.printStackTrace();
 										}
 										
 										
 									} catch (IOException e1) {
-										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 								}							
 							}				
-						}else {//µ±Ç°Ãæ°å²»Ö¹Ò»¿ÃÊ÷/»òÕßÃ»ÓĞÊ÷
-							JOptionPane.showMessageDialog(f, "»­°åÉÏÖ»ÓĞÒ»¿ÃÊ÷Ê±²ÅÄÜ±£´æ¡£", "ÏûÏ¢ÌáÊ¾¿ò",
+						}else {//å½“å‰é¢æ¿ä¸æ­¢ä¸€æ£µæ ‘/æˆ–è€…æ²¡æœ‰æ ‘
+							JOptionPane.showMessageDialog(f, "ç”»æ¿ä¸Šåªæœ‰ä¸€æ£µæ ‘æ—¶æ‰èƒ½ä¿å­˜ã€‚", "æ¶ˆæ¯æç¤ºæ¡†",
 									JOptionPane.INFORMATION_MESSAGE);
 						}
 
 					} else if (returnValue == JOptionPane.NO_OPTION) {
-						//´ò¿ª
+						//æ‰“å¼€
 						try {
 							openTxts();
 						} catch (IOException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-					} else {//µã»÷ÁËÈ¡Ïû»òÕßÍË³ö
+					} else {//ç‚¹å‡»äº†å–æ¶ˆæˆ–è€…é€€å‡º
 						
 					}
 				}
@@ -437,13 +427,12 @@ public class Main {
 		jmi_save.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				if(t.getHasModeified().get(t.getTreeAtTxt().getTxtPath())) {//ÎÄ¼ş±»ĞŞ¸Ä¹ı
+				if(t.getHasModeified().get(t.getTreeAtTxt().getTxtPath())) {//æ–‡ä»¶è¢«ä¿®æ”¹è¿‡
 					if (t.getTreeLists().size() != 1) {
-						JOptionPane.showMessageDialog(f, "±£´æÊ±»­°å±ØĞëÖ»ÓĞÒ»¿ÃÊ÷", "ÏûÏ¢ÌáÊ¾¿ò", JOptionPane.INFORMATION_MESSAGE);
-					} else {//Òª±£´æµÄÃæ°åÖĞÖ»ÓĞÒ»¿ÃÊ÷
-						if (t.getTreeLists().get(0).examTheTree() && t.getTreeLists().get(0) != null) {//¸ñÊ½ÕıÈ·
-							if(t.getTreeAtTxt().getTxtPath() == null ) {//»¹Ã»ÓĞÎªµ±Ç°ÎÄ¼şÉèÖÃÂ·¾¶ºÍÃû³Æ
+						JOptionPane.showMessageDialog(f, "ä¿å­˜æ—¶ç”»æ¿å¿…é¡»åªæœ‰ä¸€æ£µæ ‘", "æ¶ˆæ¯æç¤ºæ¡†", JOptionPane.INFORMATION_MESSAGE);
+					} else {//è¦ä¿å­˜çš„é¢æ¿ä¸­åªæœ‰ä¸€æ£µæ ‘
+						if (t.getTreeLists().get(0).examTheTree() && t.getTreeLists().get(0) != null) {//æ ¼å¼æ­£ç¡®
+							if(t.getTreeAtTxt().getTxtPath() == null ) {//è¿˜æ²¡æœ‰ä¸ºå½“å‰æ–‡ä»¶è®¾ç½®è·¯å¾„å’Œåç§°
 								SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");							
 								fileChooser.setSelectedFile(new File(sdf.format(new Date()) + ".txt"));
 								if(fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION ) {
@@ -453,10 +442,10 @@ public class Main {
 										for (String word : t.getTreeLists().get(0).changeIntoText())
 											fw.write(word);
 
-										hasModeified.remove(null);// ½«Ã»ÓĞÉèÖÃÎ»ÖÃºÍÎÄ¼şÃûµÄÉ¾³ı£¬ÒòÎªÒÑ¾­ÎªËü±£´æµ½ÁËÖ¸¶¨ÎÄ¼şÖĞ
+										hasModeified.remove(null);// å°†æ²¡æœ‰è®¾ç½®ä½ç½®å’Œæ–‡ä»¶åçš„åˆ é™¤ï¼Œå› ä¸ºå·²ç»ä¸ºå®ƒä¿å­˜åˆ°äº†æŒ‡å®šæ–‡ä»¶ä¸­
 										hasModeified.put(currentTxtPath, Boolean.FALSE);
 										t.setHasModeified(hasModeified);
-										t.getTreeAtTxt().setTxtPath(currentTxtPath);// ĞŞ¸ÄÎÄ¼şµÄÂ·¾¶£¬Ö®Ç°ÊÇnull
+										t.getTreeAtTxt().setTxtPath(currentTxtPath);// ä¿®æ”¹æ–‡ä»¶çš„è·¯å¾„ï¼Œä¹‹å‰æ˜¯null
 										resetButtonstatus();
 										t.setSelectedNodes(-1);
 										t.initCombineNodes();
@@ -464,11 +453,10 @@ public class Main {
 										t.repaint();
 										fw.close();
 									} catch (IOException e1) {
-										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 								}
-							}else {//¸ÃÎÄ¼şÊÇ´ò¿ªÒÑÓĞµÄÎÄ±¾
+							}else {//è¯¥æ–‡ä»¶æ˜¯æ‰“å¼€å·²æœ‰çš„æ–‡æœ¬
 								String currentTxtPath = t.getTreeAtTxt().getTxtPath();
 								ArrayList<TreePanelNode> treesOfSameTxt = new ArrayList<TreePanelNode>();
 								for (TreeAtTxt tat : allTreesAtTxt) {
@@ -477,7 +465,7 @@ public class Main {
 								}
 								if(!treesOfSameTxt.isEmpty()) {
 									boolean correctFormat = true;
-									for (TreePanelNode treeRoot : treesOfSameTxt) {//¼ì²éÊ÷µÄ¸ñÊ½ÊÇ·ñÕıÈ·
+									for (TreePanelNode treeRoot : treesOfSameTxt) {//æ£€æŸ¥æ ‘çš„æ ¼å¼æ˜¯å¦æ­£ç¡®
 										if (treeRoot.examTheTree() && treeRoot != null) {
 											
 										}else {
@@ -486,7 +474,7 @@ public class Main {
 										}
 									}
 									if(correctFormat == false) {
-										JOptionPane.showMessageDialog(f, "½á¹¹Ê÷¸ñÊ½ÓĞ´íÎó,Çë¼ì²é¡£", "ÏûÏ¢ÌáÊ¾¿ò",
+										JOptionPane.showMessageDialog(f, "ç»“æ„æ ‘æ ¼å¼æœ‰é”™è¯¯,è¯·æ£€æŸ¥ã€‚", "æ¶ˆæ¯æç¤ºæ¡†",
 												JOptionPane.INFORMATION_MESSAGE);
 									} else {
 										try {
@@ -496,7 +484,7 @@ public class Main {
 													fw.write(word);
 												fw.write("\r\n");
 											}
-											//ĞŞ¸ÄÃæ°åµÄ²¿·Ö×´Ì¬
+											//ä¿®æ”¹é¢æ¿çš„éƒ¨åˆ†çŠ¶æ€
 											hasModeified.put(currentTxtPath, Boolean.FALSE);
 											t.setHasModeified(hasModeified);
 											resetButtonstatus();
@@ -506,23 +494,22 @@ public class Main {
 											fw.close();
 											
 										} catch (IOException e1) {
-											// TODO Auto-generated catch block
 											e1.printStackTrace();
 										}
 									}
 									
 								}
 							}
-						} else{//¸ñÊ½²»ÕıÈ·
-							JOptionPane.showMessageDialog(f, "Ê÷µÄ¸ñÊ½²»ÕıÈ·¡£", "Ê÷µÄ¸ñÊ½²»ÕıÈ·", JOptionPane.INFORMATION_MESSAGE);
+						} else{//æ ¼å¼ä¸æ­£ç¡®
+							JOptionPane.showMessageDialog(f, "æ ‘çš„æ ¼å¼ä¸æ­£ç¡®ã€‚", "æ ‘çš„æ ¼å¼ä¸æ­£ç¡®", JOptionPane.INFORMATION_MESSAGE);
 							resetButtonstatus();
 							t.setSelectedNodes(-1);
 							t.initCombineNodes();
 							t.repaint();
 						}
 					}
-				}else {//ÎÄ¼şÃ»ÓĞ±»ĞŞ¸Ä
-					//ÔİÊ±ÈÏÎª²»ÓÃ¹Ü
+				}else {//æ–‡ä»¶æ²¡æœ‰è¢«ä¿®æ”¹
+					//æš‚æ—¶è®¤ä¸ºä¸ç”¨ç®¡
 					resetButtonstatus();
 					t.setSelectedNodes(-1);
 					t.initCombineNodes();
@@ -536,16 +523,15 @@ public class Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				treeLists = t.getTreeLists();
 				nodes = TreePanelNode.nodesOfAllTrees(treeLists);
 				int returnValue = JOptionPane.YES_OPTION;
 				for (TreePanelNode root : treeLists) {
-					if (root.examTheTree() && root != null) {//ÅĞ¶ÏÉ­ÁÖÖĞµÄÊ÷ÊÇ·ñ¶¼·ûºÏ¸ñÊ½
+					if (root.examTheTree() && root != null) {//åˆ¤æ–­æ£®æ—ä¸­çš„æ ‘æ˜¯å¦éƒ½ç¬¦åˆæ ¼å¼
 						System.out.println(returnValue);
 					} else {
 
-						returnValue = JOptionPane.showConfirmDialog(f, "À¨ºÅ±í´ïÊ½¸ñÊ½ÓĞ´íÎó,ÊÇ·ñÒª±£´æ¡£", "È·ÈÏ¶Ô»°¿ò",
+						returnValue = JOptionPane.showConfirmDialog(f, "æ‹¬å·è¡¨è¾¾å¼æ ¼å¼æœ‰é”™è¯¯,æ˜¯å¦è¦ä¿å­˜ã€‚", "ç¡®è®¤å¯¹è¯æ¡†",
 								JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 
 						break;
@@ -559,7 +545,7 @@ public class Main {
 						SimpleDateFormat date = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
 						System.out.println(date.format(new Date()) + ".txt");
 						fileChooser.setSelectedFile(new File(date.format(new Date()) + ".txt"));
-						if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {// È·¶¨±£´æ						
+						if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {// ç¡®å®šä¿å­˜						
 							String filePath = fileChooser.getSelectedFile().toString();
 							FileWriter treeToText = new FileWriter(filePath);
 							count = 0;
@@ -569,7 +555,7 @@ public class Main {
 									for (String word : root.changeIntoText())
 										treeToText.write(word);
 								else
-									treeToText.write("µÚ" + count + "¸öÀ¨ºÅ±í´ïÊ½¸ñÊ½´íÎó¡£");
+									treeToText.write("ç¬¬" + count + "ä¸ªæ‹¬å·è¡¨è¾¾å¼æ ¼å¼é”™è¯¯ã€‚");
 
 								treeToText.write("\r\n");
 							}
@@ -581,7 +567,6 @@ public class Main {
 						t.setSelectedNodes(-1);
 						t.repaint();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -591,9 +576,8 @@ public class Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				String text = editArea0.getText();
-				if (text.trim().length() != 0) {//½«ÎŞ¸ñÊ½µÄÀ¨ºÅ±í´ïÊ½×ª»¯ÎªÓĞ¸ñÊ½µÄ±í´ïÊ½
+				if (text.trim().length() != 0) {//å°†æ— æ ¼å¼çš„æ‹¬å·è¡¨è¾¾å¼è½¬åŒ–ä¸ºæœ‰æ ¼å¼çš„è¡¨è¾¾å¼
 					annotation = new Annotation(text);
 					pipeline.annotate(annotation);
 					List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);
@@ -614,7 +598,7 @@ public class Main {
 								for (String word : root.changeIntoText())
 									sentencesofMultLines = sentencesofMultLines + word;
 							else
-								sentencesofMultLines = sentencesofMultLines + "µÚ" + count + "¸öÀ¨ºÅ±í´ïÊ½¸ñÊ½´íÎó¡£";
+								sentencesofMultLines = sentencesofMultLines + "ç¬¬" + count + "ä¸ªæ‹¬å·è¡¨è¾¾å¼æ ¼å¼é”™è¯¯ã€‚";
 
 							sentencesofMultLines = sentencesofMultLines + "\r\n";
 						}
@@ -655,7 +639,7 @@ public class Main {
 					t.repaint();
 				}
 				else {
-					JOptionPane.showMessageDialog(f, "À¨ºÅ±í´ïÊ½¸ñÊ½ÓĞ´íÎó,Çë¼ì²é¡£", "ÏûÏ¢ÌáÊ¾¿ò",
+					JOptionPane.showMessageDialog(f, "æ‹¬å·è¡¨è¾¾å¼æ ¼å¼æœ‰é”™è¯¯,è¯·æ£€æŸ¥ã€‚", "æ¶ˆæ¯æç¤ºæ¡†",
 							JOptionPane.INFORMATION_MESSAGE);
 					resetButtonstatus();
 					t.setSelectedNodes(-1);
@@ -664,20 +648,19 @@ public class Main {
 				}
 			}
 		});
-		treeToText.addActionListener(new ActionListener() {//½«±»ĞŞ¸ÄÎªÁí´æÎª
+		treeToText.addActionListener(new ActionListener() {//å°†è¢«ä¿®æ”¹ä¸ºå¦å­˜ä¸º
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				treeLists = t.getTreeLists();
 				nodes = TreePanelNode.nodesOfAllTrees(treeLists);
 				int returnValue = JOptionPane.YES_OPTION;
 				for (TreePanelNode root : treeLists) {
-					if (root.examTheTree() && root != null) {//ÅĞ¶ÏÉ­ÁÖÖĞµÄÊ÷ÊÇ·ñ¶¼·ûºÏ¸ñÊ½
+					if (root.examTheTree() && root != null) {//åˆ¤æ–­æ£®æ—ä¸­çš„æ ‘æ˜¯å¦éƒ½ç¬¦åˆæ ¼å¼
 						System.out.println(returnValue);
 					} else {
 
-						returnValue = JOptionPane.showConfirmDialog(f, "À¨ºÅ±í´ïÊ½¸ñÊ½ÓĞ´íÎó,ÊÇ·ñÒª±£´æ¡£", "È·ÈÏ¶Ô»°¿ò",
+						returnValue = JOptionPane.showConfirmDialog(f, "æ‹¬å·è¡¨è¾¾å¼æ ¼å¼æœ‰é”™è¯¯,æ˜¯å¦è¦ä¿å­˜ã€‚", "ç¡®è®¤å¯¹è¯æ¡†",
 								JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 
 						break;
@@ -691,7 +674,7 @@ public class Main {
 						SimpleDateFormat date = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
 						System.out.println(date.format(new Date()) + ".txt");
 						fileChooser.setSelectedFile(new File(date.format(new Date()) + ".txt"));
-						if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {// È·¶¨±£´æ						
+						if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {// ç¡®å®šä¿å­˜						
 							String filePath = fileChooser.getSelectedFile().toString();
 							FileWriter treeToText = new FileWriter(filePath);
 							count = 0;
@@ -701,7 +684,7 @@ public class Main {
 									for (String word : root.changeIntoText())
 										treeToText.write(word);
 								else
-									treeToText.write("µÚ" + count + "¸öÀ¨ºÅ±í´ïÊ½¸ñÊ½´íÎó¡£");
+									treeToText.write("ç¬¬" + count + "ä¸ªæ‹¬å·è¡¨è¾¾å¼æ ¼å¼é”™è¯¯ã€‚");
 
 								treeToText.write("\r\n");
 							}
@@ -710,7 +693,6 @@ public class Main {
 						}
 						
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -726,7 +708,6 @@ public class Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				
 				nodes = t.getNodes();
 				treeLists = t.getTreeLists();
@@ -745,16 +726,15 @@ public class Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				nodes = t.getNodes();
 				treeLists = t.getTreeLists();
 				int returnValue = JOptionPane.YES_OPTION;
 				for (TreePanelNode root : treeLists) {
-					if (root.examTheTree() && root != null) {//ÅĞ¶ÏÉ­ÁÖÖĞµÄÊ÷ÊÇ·ñ¶¼·ûºÏ¸ñÊ½
+					if (root.examTheTree() && root != null) {//åˆ¤æ–­æ£®æ—ä¸­çš„æ ‘æ˜¯å¦éƒ½ç¬¦åˆæ ¼å¼
 						
 					} else {
 
-						returnValue = JOptionPane.showConfirmDialog(f, "À¨ºÅ±í´ïÊ½¸ñÊ½ÓĞ´íÎó,ÊÇ·ñÒª¸üĞÂÀ¨ºÅ±í´ïÊ½¡£", "È·ÈÏ¶Ô»°¿ò",
+						returnValue = JOptionPane.showConfirmDialog(f, "æ‹¬å·è¡¨è¾¾å¼æ ¼å¼æœ‰é”™è¯¯,æ˜¯å¦è¦æ›´æ–°æ‹¬å·è¡¨è¾¾å¼ã€‚", "ç¡®è®¤å¯¹è¯æ¡†",
 								JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 
 						break;
@@ -770,7 +750,7 @@ public class Main {
 							for (String word : root.changeIntoText())
 								allExpressionFormatted = allExpressionFormatted + word;
 						else 
-							allExpressionFormatted = allExpressionFormatted + "µÚ"+count+"¸öÀ¨ºÅ±í´ïÊ½¸ñÊ½´íÎó¡£";
+							allExpressionFormatted = allExpressionFormatted + "ç¬¬"+count+"ä¸ªæ‹¬å·è¡¨è¾¾å¼æ ¼å¼é”™è¯¯ã€‚";
 						allExpressionFormatted = allExpressionFormatted + "\r\n"; 
 					}
 					editArea.setText(allExpressionFormatted);
@@ -785,9 +765,8 @@ public class Main {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (!treeLists.isEmpty()) {
-					if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(f, "ÊÇ·ñÇå³ı»­°å£¿", "È·ÈÏÇå³ı»­°å",
+					if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(f, "æ˜¯å¦æ¸…é™¤ç”»æ¿ï¼Ÿ", "ç¡®è®¤æ¸…é™¤ç”»æ¿",
 							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE)) {
-						// TODO Auto-generated method stub
 						treeLists.clear();
 						nodes.clear();
 						
@@ -814,10 +793,9 @@ public class Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				t.setCombine_Clicked(!t.isCombine_Clicked());
 				t.initCombineNodes();
-				t.setSelectedNodes(-1);//²»Ñ¡ÖĞ½Úµã
+				t.setSelectedNodes(-1);//ä¸é€‰ä¸­èŠ‚ç‚¹
 				
 				if (t.isCombine_Clicked()) {
 					combine.setBackground(Color.green);
@@ -840,10 +818,8 @@ public class Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-		
 
-				// TODO Auto-generated method stub
-				t.setSelectedNodes(-1);//²»Ñ¡ÖĞ½Úµã
+				t.setSelectedNodes(-1);//ä¸é€‰ä¸­èŠ‚ç‚¹
 				t.setAdd_Clicked(!t.isAdd_Clicked());
 				if (t.isAdd_Clicked())
 					add.setBackground(Color.green);
@@ -865,8 +841,7 @@ public class Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				t.setSelectedNodes(-1);//²»Ñ¡ÖĞ½Úµã
+				t.setSelectedNodes(-1);//ä¸é€‰ä¸­èŠ‚ç‚¹
 				t.setDelete_Clicked(!t.isDelete_Clicked());
 				if (t.isDelete_Clicked())
 					delete.setBackground(Color.green);
@@ -888,8 +863,7 @@ public class Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				t.setSelectedNodes(-1);//²»Ñ¡ÖĞ½Úµã
+				t.setSelectedNodes(-1);//ä¸é€‰ä¸­èŠ‚ç‚¹
 				t.setSelectRoot_Clicked(!t.isSelectRoot_Clicked());
 				if (t.isSelectRoot_Clicked())
 					selectRoot.setBackground(Color.green);
@@ -911,48 +885,47 @@ public class Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				int returnValue = JOptionPane.YES_OPTION;
 				String currentTxtPath = t.getTreeAtTxt().getTxtPath();
-				if (!hasModeified.get(currentTxtPath).booleanValue()) {// txtPath¶ÔÓ¦ÎÄ¼şÃ»ÓĞĞŞ¸Ä
-					//ÏòÓÒ»¬¶¯
-					if( !nextTreeLists( Main.RIGHT ) ) //ÏòÓÒ»¬¶¯Ê§°Ü
-						JOptionPane.showMessageDialog(null, "ÒÑ¾­µ½×îºóÒ»ÆªÎÄµµµÄ×îºóÒ»¿ÃÊ÷¡£", "ÏòÓÒ»¬¶¯", JOptionPane.INFORMATION_MESSAGE);		
+				if (!hasModeified.get(currentTxtPath).booleanValue()) {// txtPathå¯¹åº”æ–‡ä»¶æ²¡æœ‰ä¿®æ”¹
+					//å‘å³æ»‘åŠ¨
+					if( !nextTreeLists( Main.RIGHT ) ) //å‘å³æ»‘åŠ¨å¤±è´¥
+						JOptionPane.showMessageDialog(null, "å·²ç»åˆ°æœ€åä¸€ç¯‡æ–‡æ¡£çš„æœ€åä¸€æ£µæ ‘ã€‚", "å‘å³æ»‘åŠ¨", JOptionPane.INFORMATION_MESSAGE);		
 					else {
 						rightTree.setBackground(Color.green);
 						rightTree.setBackground((Color)new ColorUIResource(238,238,238));
 					}
 				} else {
-					returnValue = JOptionPane.showConfirmDialog(f, "±ØĞëÏÈ±£´æµ±Ç°½çÃæÉÏµÄÊ÷¡£", "È·ÈÏ¶Ô»°¿ò",
+					returnValue = JOptionPane.showConfirmDialog(f, "å¿…é¡»å…ˆä¿å­˜å½“å‰ç•Œé¢ä¸Šçš„æ ‘ã€‚", "ç¡®è®¤å¯¹è¯æ¡†",
 							JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
 					if (returnValue == JOptionPane.YES_OPTION) {
 						
 						ArrayList<TreePanelNode> treesOfSameTxt = new ArrayList<TreePanelNode>();
-						if (t.getTreeLists().size() == 1) {// µ±Ç°Ãæ°åÉÏÖ»ÓĞÒ»¿ÃÊ÷ÊÇ²Å¿ÉÒÔ±£´æ
-							if (currentTxtPath == null) {//ĞÂ½¨µÄÃæ°å£¬´ú±íÒ»¸ötxtÖĞÖ»ÓĞÒ»¿ÃÊ÷
+						if (t.getTreeLists().size() == 1) {// å½“å‰é¢æ¿ä¸Šåªæœ‰ä¸€æ£µæ ‘æ˜¯æ‰å¯ä»¥ä¿å­˜
+							if (currentTxtPath == null) {//æ–°å»ºçš„é¢æ¿ï¼Œä»£è¡¨ä¸€ä¸ªtxtä¸­åªæœ‰ä¸€æ£µæ ‘
 								if (t.getTreeLists().get(0).examTheTree() && t.getTreeLists().get(0) != null) {
 									try {
 										SimpleDateFormat date = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
 										fileChooser.setSelectedFile(new File(date.format(new Date()) + ".txt"));
-										if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {//È·¶¨±£´æ
+										if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {//ç¡®å®šä¿å­˜
 											currentTxtPath = fileChooser.getSelectedFile().toString();
 											FileWriter fw = new FileWriter(currentTxtPath);
 											for (String word : t.getTreeLists().get(0).changeIntoText())
 												fw.write(word);
 
-											hasModeified.remove(null);// ½«Ã»ÓĞÉèÖÃÎ»ÖÃºÍÎÄ¼şÃûµÄÉ¾³ı£¬ÒòÎªÒÑ¾­ÎªËü±£´æµ½ÁËÖ¸¶¨ÎÄ¼şÖĞ
+											hasModeified.remove(null);// å°†æ²¡æœ‰è®¾ç½®ä½ç½®å’Œæ–‡ä»¶åçš„åˆ é™¤ï¼Œå› ä¸ºå·²ç»ä¸ºå®ƒä¿å­˜åˆ°äº†æŒ‡å®šæ–‡ä»¶ä¸­
 											hasModeified.put(currentTxtPath, Boolean.FALSE);
 											t.setHasModeified(hasModeified);
 											treeAtTxt.setTxtPath(currentTxtPath);											
-											t.getTreeAtTxt().setTxtPath(currentTxtPath);// ĞŞ¸ÄÎÄ¼şµÄÂ·¾¶£¬Ö®Ç°ÊÇnull
+											t.getTreeAtTxt().setTxtPath(currentTxtPath);// ä¿®æ”¹æ–‡ä»¶çš„è·¯å¾„ï¼Œä¹‹å‰æ˜¯null
 											f.setTitle(new File(currentTxtPath).getName() +"[ " + "1 / 1" + " ]" );
 											fw.close();
 											
-											//ÏòÓÒ»¬¶¯
-											if( !nextTreeLists( Main.RIGHT ) ) //ÏòÓÒ»¬¶¯Ê§°Ü
-												JOptionPane.showMessageDialog(null, "ÒÑ¾­µ½×îºóÒ»ÆªÎÄµµµÄ×îºóÒ»¿ÃÊ÷¡£", "ÏòÓÒ»¬¶¯", JOptionPane.INFORMATION_MESSAGE);		
+											//å‘å³æ»‘åŠ¨
+											if( !nextTreeLists( Main.RIGHT ) ) //å‘å³æ»‘åŠ¨å¤±è´¥
+												JOptionPane.showMessageDialog(null, "å·²ç»åˆ°æœ€åä¸€ç¯‡æ–‡æ¡£çš„æœ€åä¸€æ£µæ ‘ã€‚", "å‘å³æ»‘åŠ¨", JOptionPane.INFORMATION_MESSAGE);		
 											
-										}else {//µã»÷ÁËÈ¡Ïû»òÍË³ö¶Ô»°¿ò£¬Ê²Ã´Ò²²»ÓÃ×ö
+										}else {//ç‚¹å‡»äº†å–æ¶ˆæˆ–é€€å‡ºå¯¹è¯æ¡†ï¼Œä»€ä¹ˆä¹Ÿä¸ç”¨åš
 											
 										}
 										
@@ -960,24 +933,23 @@ public class Main {
 										
 										
 									} catch (IOException e1) {
-										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 									
 								}else {
-									JOptionPane.showMessageDialog(f, "½á¹¹Ê÷¸ñÊ½ÓĞ´íÎó,Çë¼ì²é¡£", "ÏûÏ¢ÌáÊ¾¿ò",
+									JOptionPane.showMessageDialog(f, "ç»“æ„æ ‘æ ¼å¼æœ‰é”™è¯¯,è¯·æ£€æŸ¥ã€‚", "æ¶ˆæ¯æç¤ºæ¡†",
 											JOptionPane.INFORMATION_MESSAGE);
 								}
 								
 								
-							}else {//ĞŞ¸ÄÁË´ò¿ªµÄÎÄ¼şÖĞµÄÄ³¿ÃÊ÷
+							}else {//ä¿®æ”¹äº†æ‰“å¼€çš„æ–‡ä»¶ä¸­çš„æŸæ£µæ ‘
 								for (TreeAtTxt tat : allTreesAtTxt) {
 									if(tat.getTxtPath().equals(currentTxtPath))
 										treesOfSameTxt.add(tat.getTreeListWithOneTree().get(0));
 								}
 							}
 							
-							if(!treesOfSameTxt.isEmpty()) {//Ö´ĞĞÁËÉÏÃæµÄelse
+							if(!treesOfSameTxt.isEmpty()) {//æ‰§è¡Œäº†ä¸Šé¢çš„else
 								boolean correctFormat = true;
 								for (TreePanelNode treeRoot : treesOfSameTxt) {
 									if (treeRoot.examTheTree() && treeRoot != null) {
@@ -988,7 +960,7 @@ public class Main {
 									}
 								}
 								if(correctFormat == false) {
-									JOptionPane.showMessageDialog(f, "½á¹¹Ê÷¸ñÊ½ÓĞ´íÎó,Çë¼ì²é¡£", "ÏûÏ¢ÌáÊ¾¿ò",
+									JOptionPane.showMessageDialog(f, "ç»“æ„æ ‘æ ¼å¼æœ‰é”™è¯¯,è¯·æ£€æŸ¥ã€‚", "æ¶ˆæ¯æç¤ºæ¡†",
 											JOptionPane.INFORMATION_MESSAGE);
 								} else {
 									try {
@@ -1001,13 +973,12 @@ public class Main {
 										hasModeified.put(currentTxtPath, Boolean.FALSE);
 										t.setHasModeified(hasModeified);
 										fw.close();
-										//ÏòÓÒ»¬¶¯
-										if( !nextTreeLists( Main.RIGHT ) ) //ÏòÓÒ»¬¶¯Ê§°Ü
-											JOptionPane.showMessageDialog(null, "ÒÑ¾­µ½×îºóÒ»ÆªÎÄµµµÄ×îºóÒ»¿ÃÊ÷¡£", "ÏòÓÒ»¬¶¯", JOptionPane.INFORMATION_MESSAGE);		
+										//å‘å³æ»‘åŠ¨
+										if( !nextTreeLists( Main.RIGHT ) ) //å‘å³æ»‘åŠ¨å¤±è´¥
+											JOptionPane.showMessageDialog(null, "å·²ç»åˆ°æœ€åä¸€ç¯‡æ–‡æ¡£çš„æœ€åä¸€æ£µæ ‘ã€‚", "å‘å³æ»‘åŠ¨", JOptionPane.INFORMATION_MESSAGE);		
 										
 										
 									} catch (IOException e1) {
-										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 								}
@@ -1015,18 +986,18 @@ public class Main {
 							}
 							
 							
-						}else {//µ±Ç°Ãæ°å²»Ö¹Ò»¿ÃÊ÷/»òÕßÃ»ÓĞÊ÷
-							JOptionPane.showMessageDialog(f, "»­°åÉÏÖ»ÓĞÒ»¿ÃÊ÷Ê±²ÅÄÜ±£´æ¡£", "ÏûÏ¢ÌáÊ¾¿ò",
+						}else {//å½“å‰é¢æ¿ä¸æ­¢ä¸€æ£µæ ‘/æˆ–è€…æ²¡æœ‰æ ‘
+							JOptionPane.showMessageDialog(f, "ç”»æ¿ä¸Šåªæœ‰ä¸€æ£µæ ‘æ—¶æ‰èƒ½ä¿å­˜ã€‚", "æ¶ˆæ¯æç¤ºæ¡†",
 									JOptionPane.INFORMATION_MESSAGE);
 						}
 
 					} else if (returnValue == JOptionPane.NO_OPTION) {
 						hasModeified.put(currentTxtPath, Boolean.FALSE);
 						t.setHasModeified(hasModeified);
-						//ÏòÓÒ»¬¶¯
-						if( !nextTreeLists( Main.RIGHT ) ) //ÏòÓÒ»¬¶¯Ê§°Ü
-							JOptionPane.showMessageDialog(null, "ÒÑ¾­µ½×îºóÒ»ÆªÎÄµµµÄ×îºóÒ»¿ÃÊ÷¡£", "ÏòÓÒ»¬¶¯", JOptionPane.INFORMATION_MESSAGE);		
-					} else {//µã»÷ÁËÈ¡Ïû»òÕßÍË³ö
+						//å‘å³æ»‘åŠ¨
+						if( !nextTreeLists( Main.RIGHT ) ) //å‘å³æ»‘åŠ¨å¤±è´¥
+							JOptionPane.showMessageDialog(null, "å·²ç»åˆ°æœ€åä¸€ç¯‡æ–‡æ¡£çš„æœ€åä¸€æ£µæ ‘ã€‚", "å‘å³æ»‘åŠ¨", JOptionPane.INFORMATION_MESSAGE);		
+					} else {//ç‚¹å‡»äº†å–æ¶ˆæˆ–è€…é€€å‡º
 					}
 				}
 				resetButtonstatus();
@@ -1038,43 +1009,42 @@ public class Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				int returnValue = JOptionPane.YES_OPTION;
 				String currentTxtPath = t.getTreeAtTxt().getTxtPath();
-				if (!hasModeified.get(currentTxtPath).booleanValue()) {// txtPath¶ÔÓ¦ÎÄ¼şÃ»ÓĞĞŞ¸Ä
-					//Ïò×ó»¬¶¯
-					if( !nextTreeLists( Main.LEFT ) ) //Ïò×ó»¬¶¯Ê§°Ü
-						JOptionPane.showMessageDialog(null, "ÒÑ¾­µ½µÚÒ»ÆªÎÄµµµÄµÚÒ»¿ÃÊ÷¡£", "Ïò×ó»¬¶¯", JOptionPane.INFORMATION_MESSAGE);					
+				if (!hasModeified.get(currentTxtPath).booleanValue()) {// txtPathå¯¹åº”æ–‡ä»¶æ²¡æœ‰ä¿®æ”¹
+					//å‘å·¦æ»‘åŠ¨
+					if( !nextTreeLists( Main.LEFT ) ) //å‘å·¦æ»‘åŠ¨å¤±è´¥
+						JOptionPane.showMessageDialog(null, "å·²ç»åˆ°ç¬¬ä¸€ç¯‡æ–‡æ¡£çš„ç¬¬ä¸€æ£µæ ‘ã€‚", "å‘å·¦æ»‘åŠ¨", JOptionPane.INFORMATION_MESSAGE);					
 				} else {
-					returnValue = JOptionPane.showConfirmDialog(f, "ÇëÏÈ±£´æµ±Ç°Ò³ÃæµÄÄÚÈİ¡£", "È·ÈÏ¶Ô»°¿ò",
+					returnValue = JOptionPane.showConfirmDialog(f, "è¯·å…ˆä¿å­˜å½“å‰é¡µé¢çš„å†…å®¹ã€‚", "ç¡®è®¤å¯¹è¯æ¡†",
 							JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
 					if (returnValue == JOptionPane.YES_OPTION) {
 						ArrayList<TreePanelNode> treesOfSameTxt = new ArrayList<TreePanelNode>();
-						if (t.getTreeLists().size() == 1) {// µ±Ç°Ãæ°åÉÏÖ»ÓĞÒ»¿ÃÊ÷ÊÇ²Å¿ÉÒÔ±£´æ
-							if (currentTxtPath == null) {//ĞÂ½¨µÄÃæ°å£¬´ú±íÒ»¸ötxtÖĞÖ»ÓĞÒ»¿ÃÊ÷
+						if (t.getTreeLists().size() == 1) {// å½“å‰é¢æ¿ä¸Šåªæœ‰ä¸€æ£µæ ‘æ˜¯æ‰å¯ä»¥ä¿å­˜
+							if (currentTxtPath == null) {//æ–°å»ºçš„é¢æ¿ï¼Œä»£è¡¨ä¸€ä¸ªtxtä¸­åªæœ‰ä¸€æ£µæ ‘
 								if (t.getTreeLists().get(0).examTheTree() && t.getTreeLists().get(0) != null) {
 									try {
 										SimpleDateFormat date = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
 										fileChooser.setSelectedFile(new File(date.format(new Date()) + ".txt"));
-										if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {//È·¶¨±£´æ
+										if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {//ç¡®å®šä¿å­˜
 											currentTxtPath = fileChooser.getSelectedFile().toString();
 											FileWriter fw = new FileWriter(currentTxtPath);
 											for (String word : t.getTreeLists().get(0).changeIntoText())
 												fw.write(word);
 
-											hasModeified.remove(null);// ½«Ã»ÓĞÉèÖÃÎ»ÖÃºÍÎÄ¼şÃûµÄÉ¾³ı£¬ÒòÎªÒÑ¾­ÎªËü±£´æµ½ÁËÖ¸¶¨ÎÄ¼şÖĞ
+											hasModeified.remove(null);// å°†æ²¡æœ‰è®¾ç½®ä½ç½®å’Œæ–‡ä»¶åçš„åˆ é™¤ï¼Œå› ä¸ºå·²ç»ä¸ºå®ƒä¿å­˜åˆ°äº†æŒ‡å®šæ–‡ä»¶ä¸­
 											hasModeified.put(currentTxtPath, Boolean.FALSE);
 											t.setHasModeified(hasModeified);
 											treeAtTxt.setTxtPath(currentTxtPath);
-											t.getTreeAtTxt().setTxtPath(currentTxtPath);// ĞŞ¸ÄÎÄ¼şµÄÂ·¾¶£¬Ö®Ç°ÊÇnull
+											t.getTreeAtTxt().setTxtPath(currentTxtPath);// ä¿®æ”¹æ–‡ä»¶çš„è·¯å¾„ï¼Œä¹‹å‰æ˜¯null
 											f.setTitle(new File(currentTxtPath).getName() + "[ " + "1 / 1" +" ]");
 											fw.close();
 											
-											//Ïò×ó»¬¶¯
-											if( !nextTreeLists( Main.LEFT ) ) //Ïò×ó»¬¶¯Ê§°Ü
-												JOptionPane.showMessageDialog(null, "ÒÑ¾­µ½µÚÒ»ÆªÎÄµµµÄµÚÒ»¿ÃÊ÷¡£", "Ïò×ó»¬¶¯", JOptionPane.INFORMATION_MESSAGE);	
+											//å‘å·¦æ»‘åŠ¨
+											if( !nextTreeLists( Main.LEFT ) ) //å‘å·¦æ»‘åŠ¨å¤±è´¥
+												JOptionPane.showMessageDialog(null, "å·²ç»åˆ°ç¬¬ä¸€ç¯‡æ–‡æ¡£çš„ç¬¬ä¸€æ£µæ ‘ã€‚", "å‘å·¦æ»‘åŠ¨", JOptionPane.INFORMATION_MESSAGE);	
 											
-										}else {//µã»÷ÁËÈ¡Ïû»òÍË³ö¶Ô»°¿ò£¬Ê²Ã´Ò²²»ÓÃ×ö
+										}else {//ç‚¹å‡»äº†å–æ¶ˆæˆ–é€€å‡ºå¯¹è¯æ¡†ï¼Œä»€ä¹ˆä¹Ÿä¸ç”¨åš
 											
 										}
 										
@@ -1082,24 +1052,23 @@ public class Main {
 										
 										
 									} catch (IOException e1) {
-										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 									
 								}else {
-									JOptionPane.showMessageDialog(f, "½á¹¹Ê÷¸ñÊ½ÓĞ´íÎó,Çë¼ì²é¡£", "ÏûÏ¢ÌáÊ¾¿ò",
+									JOptionPane.showMessageDialog(f, "ç»“æ„æ ‘æ ¼å¼æœ‰é”™è¯¯,è¯·æ£€æŸ¥ã€‚", "æ¶ˆæ¯æç¤ºæ¡†",
 											JOptionPane.INFORMATION_MESSAGE);
 								}
 								
 								
-							}else {//ĞŞ¸ÄÁË´ò¿ªµÄÎÄ¼şÖĞµÄÄ³¿ÃÊ÷
+							}else {//ä¿®æ”¹äº†æ‰“å¼€çš„æ–‡ä»¶ä¸­çš„æŸæ£µæ ‘
 								for (TreeAtTxt tat : allTreesAtTxt) {
 									if(tat.getTxtPath().equals(currentTxtPath))
 										treesOfSameTxt.add(tat.getTreeListWithOneTree().get(0));
 								}
 							}
 							
-							if(!treesOfSameTxt.isEmpty()) {//Ö´ĞĞÁËÉÏÃæµÄelse
+							if(!treesOfSameTxt.isEmpty()) {//æ‰§è¡Œäº†ä¸Šé¢çš„else
 								boolean correctFormat = true;
 								for (TreePanelNode treeRoot : treesOfSameTxt) {
 									if (treeRoot.examTheTree() && treeRoot != null) {
@@ -1110,7 +1079,7 @@ public class Main {
 									}
 								}
 								if(correctFormat == false) {
-									JOptionPane.showMessageDialog(f, "½á¹¹Ê÷¸ñÊ½ÓĞ´íÎó,Çë¼ì²é¡£", "ÏûÏ¢ÌáÊ¾¿ò",
+									JOptionPane.showMessageDialog(f, "ç»“æ„æ ‘æ ¼å¼æœ‰é”™è¯¯,è¯·æ£€æŸ¥ã€‚", "æ¶ˆæ¯æç¤ºæ¡†",
 											JOptionPane.INFORMATION_MESSAGE);
 								} else {
 									try {
@@ -1123,13 +1092,12 @@ public class Main {
 										hasModeified.put(currentTxtPath, Boolean.FALSE);
 										t.setHasModeified(hasModeified);
 										fw.close();
-										//Ïò×ó»¬¶¯
-										if( !nextTreeLists( Main.LEFT ) ) //Ïò×ó»¬¶¯Ê§°Ü
-											JOptionPane.showMessageDialog(null, "ÒÑ¾­µ½µÚÒ»ÆªÎÄµµµÄµÚÒ»¿ÃÊ÷¡£", "Ïò×ó»¬¶¯", JOptionPane.INFORMATION_MESSAGE);	
+										//å‘å·¦æ»‘åŠ¨
+										if( !nextTreeLists( Main.LEFT ) ) //å‘å·¦æ»‘åŠ¨å¤±è´¥
+											JOptionPane.showMessageDialog(null, "å·²ç»åˆ°ç¬¬ä¸€ç¯‡æ–‡æ¡£çš„ç¬¬ä¸€æ£µæ ‘ã€‚", "å‘å·¦æ»‘åŠ¨", JOptionPane.INFORMATION_MESSAGE);	
 										
 										
 									} catch (IOException e1) {
-										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 								}
@@ -1137,18 +1105,18 @@ public class Main {
 							}
 							
 							
-						}else {//µ±Ç°Ãæ°å²»Ö¹Ò»¿ÃÊ÷/»òÕßÃ»ÓĞÊ÷
-							JOptionPane.showMessageDialog(f, "»­°åÉÏÖ»ÓĞÒ»¿ÃÊ÷Ê±²ÅÄÜ±£´æ¡£", "ÏûÏ¢ÌáÊ¾¿ò",
+						}else {//å½“å‰é¢æ¿ä¸æ­¢ä¸€æ£µæ ‘/æˆ–è€…æ²¡æœ‰æ ‘
+							JOptionPane.showMessageDialog(f, "ç”»æ¿ä¸Šåªæœ‰ä¸€æ£µæ ‘æ—¶æ‰èƒ½ä¿å­˜ã€‚", "æ¶ˆæ¯æç¤ºæ¡†",
 									JOptionPane.INFORMATION_MESSAGE);
 						}
 
 					} else if (returnValue == JOptionPane.NO_OPTION) {
-						//Ïò×ó»¬¶¯
+						//å‘å·¦æ»‘åŠ¨
 						hasModeified.put(currentTxtPath, Boolean.FALSE);
 						t.setHasModeified(hasModeified);
-						if( !nextTreeLists( Main.LEFT ) ) //Ïò×ó»¬¶¯Ê§°Ü
-							JOptionPane.showMessageDialog(null, "ÒÑ¾­µ½µÚÒ»ÆªÎÄµµµÄµÚÒ»¿ÃÊ÷¡£", "Ïò×ó»¬¶¯", JOptionPane.INFORMATION_MESSAGE);	
-					} else {//µã»÷ÁËÈ¡Ïû»òÕßÍË³ö
+						if( !nextTreeLists( Main.LEFT ) ) //å‘å·¦æ»‘åŠ¨å¤±è´¥
+							JOptionPane.showMessageDialog(null, "å·²ç»åˆ°ç¬¬ä¸€ç¯‡æ–‡æ¡£çš„ç¬¬ä¸€æ£µæ ‘ã€‚", "å‘å·¦æ»‘åŠ¨", JOptionPane.INFORMATION_MESSAGE);	
+					} else {//ç‚¹å‡»äº†å–æ¶ˆæˆ–è€…é€€å‡º
 					}
 				}
 				resetButtonstatus();
@@ -1185,15 +1153,15 @@ public class Main {
 		t.setSelectedNodes(-1);
 		t.initCombineNodes();
 		t.repaint();
-		f.setTitle("Î´ÃüÃû.txt"+"[ "+1+" / "+1+" ]");
-		System.out.println("Ãæ°å±»Çå¿ÕÁË");	
+		f.setTitle("æœªå‘½å.txt"+"[ "+1+" / "+1+" ]");
+		System.out.println("é¢æ¿è¢«æ¸…ç©ºäº†");	
 	}
 	
 	private boolean nextTreeLists(int direction) {
 		int sizeOfTrees = allTreesAtTxt.size();
 		int positionOfTreeAtList = allTreesAtTxt.indexOf(t.getTreeAtTxt());
 		System.out.println("positionOfTreeAtList"+positionOfTreeAtList);
-		if (direction == Main.LEFT) {//Ïò×ó»¬¶¯
+		if (direction == Main.LEFT) {//å‘å·¦æ»‘åŠ¨
 			if (positionOfTreeAtList != 0) {
 				treeLists = allTreesAtTxt.get(positionOfTreeAtList - 1).getTreeListWithOneTree();
 				nodes = TreePanelNode.nodesOfAllTrees(treeLists);
@@ -1216,7 +1184,7 @@ public class Main {
 				return true;
 			}else
 				return false;
-		}else {//ÏòÓÒ»¬¶¯
+		}else {//å‘å³æ»‘åŠ¨
 			if (positionOfTreeAtList != sizeOfTrees - 1) {
 				treeLists = allTreesAtTxt.get(positionOfTreeAtList + 1).getTreeListWithOneTree();
 				nodes = TreePanelNode.nodesOfAllTrees(treeLists);
@@ -1248,7 +1216,7 @@ public class Main {
 		fileChooser.setMultiSelectionEnabled(true);
 		if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			File[] files =  fileChooser.getSelectedFiles();
-			for(int i = 0,j = files.length -1;i<files.length;i++,j--) {//ÓÉÓÚJFileChooser»á½«ÏÈÑ¡ÔñµÄÎÄ¼şºó´ò¿ª£¬¹Ê½«Êı×éfiles·­×ª
+			for(int i = 0,j = files.length -1;i<files.length;i++,j--) {//ç”±äºJFileChooserä¼šå°†å…ˆé€‰æ‹©çš„æ–‡ä»¶åæ‰“å¼€ï¼Œæ•…å°†æ•°ç»„filesç¿»è½¬
 				if( i < j  ) {
 					File temp = files[i];
 					files[i] = files[j];
@@ -1298,12 +1266,11 @@ public class Main {
 			props.load(this.getClass().getClassLoader().getResourceAsStream("StanfordCoreNLP-chinese.properties"));
 			props.setProperty("annotators", "tokenize,ssplit,pos,parse");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		pipeline = new StanfordCoreNLP(props);
-		annotation = new Annotation("¾ä·¨·ÖÎö¡£");
+		annotation = new Annotation("å¥æ³•åˆ†æã€‚");
 		pipeline.annotate(annotation);
 	}
 	

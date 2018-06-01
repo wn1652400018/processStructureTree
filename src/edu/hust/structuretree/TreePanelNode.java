@@ -14,10 +14,10 @@ public class TreePanelNode  {
 	private TreePanelNode root;
 	private int x, y, width, height;
 	private Object value;
-	private double angle;// ¸Ã½ÚµãÓë¸¸½ÚµãÖ®¼äµÄ¡°¼Ğ½Ç¡±£¬¸ù½Úµã²»ÓÃ¼ÆËã
+	private double angle;// è¯¥èŠ‚ç‚¹ä¸çˆ¶èŠ‚ç‚¹ä¹‹é—´çš„â€œå¤¹è§’â€ï¼Œæ ¹èŠ‚ç‚¹ä¸ç”¨è®¡ç®—
 	
 	
-    //²âÊÔÓÃ¹¹Ôìº¯Êı
+    //æµ‹è¯•ç”¨æ„é€ å‡½æ•°
 	public TreePanelNode(TreePanelNode parent, int x, int y, int width, int height, Object value) {
 		this.x = x;
 		this.y = y;
@@ -40,8 +40,8 @@ public class TreePanelNode  {
 	/*
 	 *
 	 * 
-	 * ÅĞ¶ÏÊ÷µÄÒ¶×Ó½ÚµãÊÇ·ñ¾ùÃ»ÓĞĞÖµÜ½Úµã(ÔÚµ¼³öÀ¨ºÅ±í´ïÊ½Ê±²»ÔÊĞíÒ¶×Ó½ÚµãÓĞĞÖµÜ½Úµã)
-	 * ÈôÊ÷ÉÏÖ»ÓĞÁ½¸ö½Úµã£¬Ôò¸ÃÊ÷Ò²²»·ûºÏÌõ¼ş
+	 *  åˆ¤æ–­æ ‘çš„å¶å­èŠ‚ç‚¹æ˜¯å¦å‡æ²¡æœ‰å…„å¼ŸèŠ‚ç‚¹(åœ¨å¯¼å‡ºæ‹¬å·è¡¨è¾¾å¼æ—¶ä¸å…è®¸å¶å­èŠ‚ç‚¹æœ‰å…„å¼ŸèŠ‚ç‚¹)
+	 * è‹¥æ ‘ä¸Šåªæœ‰ä¸¤ä¸ªèŠ‚ç‚¹ï¼Œåˆ™è¯¥æ ‘ä¹Ÿä¸ç¬¦åˆæ¡ä»¶
 	 * */
 	public boolean examTheTree() {
 		TreePanelNode root = this.getRoot();
@@ -57,7 +57,7 @@ public class TreePanelNode  {
 	}
 	
 	
-	//ÅĞ¶ÏÈÎÒâÒ»¸ö½ÚµãÊÇ·ñÓĞĞÖµÜ½Úµã
+	//åˆ¤æ–­ä»»æ„ä¸€ä¸ªèŠ‚ç‚¹æ˜¯å¦æœ‰å…„å¼ŸèŠ‚ç‚¹
 	public boolean hasSibling() {
 		if (this.equals(this.getRoot()))
 			return false;
@@ -71,7 +71,7 @@ public class TreePanelNode  {
 	public static Vector<TreePanelNode> nodesOfAllTrees(ArrayList<TreePanelNode> treeLists){
 		Vector<TreePanelNode> nodes = new Vector<TreePanelNode>();
 		int i = 0;
-		for(TreePanelNode aRoot:treeLists) {//Ã¿Ñ­»·Ò»´Î¾Í½«Ò»¸öÊ÷ÉÏËùÓĞµÄ½Úµã·Åµ½nodesÖĞ£¬i±íÊ¾nodesµÄ½Úµã¸öÊı
+		for(TreePanelNode aRoot:treeLists) {//æ¯å¾ªç¯ä¸€æ¬¡å°±å°†ä¸€ä¸ªæ ‘ä¸Šæ‰€æœ‰çš„èŠ‚ç‚¹æ”¾åˆ°nodesä¸­ï¼Œiè¡¨ç¤ºnodesçš„èŠ‚ç‚¹ä¸ªæ•°
 			if(aRoot == null)
 				continue;
 			
@@ -87,7 +87,7 @@ public class TreePanelNode  {
 		return nodes;
 	}
 	
-	//·µ»ØÒÔroot½ÚµãÎª¸ù½ÚµãµÄËùÓĞ½ÚµãµÄVectorĞòÁĞ£¬¿ÉÒÔÍ¨¹ı²ãĞò±éÀúµÃµ½
+	//è¿”å›ä»¥rootèŠ‚ç‚¹ä¸ºæ ¹èŠ‚ç‚¹çš„æ‰€æœ‰èŠ‚ç‚¹çš„Vectoråºåˆ—ï¼Œå¯ä»¥é€šè¿‡å±‚åºéå†å¾—åˆ°
 	public static Vector<TreePanelNode> allNodes(TreePanelNode root) {
 		Vector<TreePanelNode> nodes = new Vector<TreePanelNode>();
 		if (root == null)
@@ -106,7 +106,7 @@ public class TreePanelNode  {
 		}
 	}
 	
-	//¸ø¶¨Ò»¸ö½Úµã£¬½«¸Ã×é½ÚµãµÄ×Ó½Úµã°´ÕÕÆäangleµÄ´óĞ¡´Ó¸ßµ½µÍÅÅÁĞ
+	//ç»™å®šä¸€ä¸ªèŠ‚ç‚¹ï¼Œå°†è¯¥ç»„èŠ‚ç‚¹çš„å­èŠ‚ç‚¹æŒ‰ç…§å…¶angleçš„å¤§å°ä»é«˜åˆ°ä½æ’åˆ—
 	
 	public  Vector<TreePanelNode> sortByAngle(){
 		int length = children.size();
@@ -127,11 +127,11 @@ public class TreePanelNode  {
 	}
 	
 	
-	// ¼ÆËã¸Ã½ÚµãÓë¸¸½ÚµãÖ®¼äµÄ¡°¼Ğ½Ç¡±
-	//¸¸½ÚµãµÄº¢×Ó½Úµã´æ·ÅÔÚVectorÖĞ£¬VectorÖĞĞòºÅĞ¡µÄ½ÚµãÊÇĞÖ³¤½Úµã,
-	//ĞÖ³¤½Úµã´óÓÚĞÖµÜ½ÚµãÓë¸¸½ÚµãµÄ"¼Ğ½Ç"£¬¼Ğ½Ç´Ópi/2µ½-3pi/2.ÓÉÓÚyÖáÏòÏÂ£¬¹Ê¸Ã¼Ğ½ÇÓëÕı³£µÄ¼Ğ½Ç¶¼ÓĞĞ©²»Ò»Ñù¡£
-	//×Ó½ÚµãÔÚÒÔ¸¸½ÚµãÎªÔ­µãµÄÕı³£×ø±êÖáµÄµÚ¶şÏóÏŞÊ±£¬¼Ğ½ÇÎªpi/2->0;ÔÚµÚÈıÏóÏŞ£¬¼Ğ½ÇÎª0->-pi/2;ÔÚµÚËÄÏóÏŞ£¬¼Ğ½ÇÎª-pi/2->-pi;ÔÚµÚÒ»ÏóÏŞ£¬¼Ğ½ÇÎª-pi->-3pi/2.
-	//¼Ğ½Ç´óĞ¡±íÊ¾Ò»ÖÖÏÈºó¹ØÏµ
+	// è®¡ç®—è¯¥èŠ‚ç‚¹ä¸çˆ¶èŠ‚ç‚¹ä¹‹é—´çš„â€œå¤¹è§’â€
+	//çˆ¶èŠ‚ç‚¹çš„å­©å­èŠ‚ç‚¹å­˜æ”¾åœ¨Vectorä¸­ï¼ŒVectorä¸­åºå·å°çš„èŠ‚ç‚¹æ˜¯å…„é•¿èŠ‚ç‚¹,
+	//å…„é•¿èŠ‚ç‚¹å¤§äºå…„å¼ŸèŠ‚ç‚¹ä¸çˆ¶èŠ‚ç‚¹çš„"å¤¹è§’"ï¼Œå¤¹è§’ä»pi/2åˆ°-3pi/2.ç”±äºyè½´å‘ä¸‹ï¼Œæ•…è¯¥å¤¹è§’ä¸æ­£å¸¸çš„å¤¹è§’éƒ½æœ‰äº›ä¸ä¸€æ ·ã€‚
+	//å­èŠ‚ç‚¹åœ¨ä»¥çˆ¶èŠ‚ç‚¹ä¸ºåŸç‚¹çš„æ­£å¸¸åæ ‡è½´çš„ç¬¬äºŒè±¡é™æ—¶ï¼Œå¤¹è§’ä¸ºpi/2->0;åœ¨ç¬¬ä¸‰è±¡é™ï¼Œå¤¹è§’ä¸º0->-pi/2;åœ¨ç¬¬å››è±¡é™ï¼Œå¤¹è§’ä¸º-pi/2->-pi;åœ¨ç¬¬ä¸€è±¡é™ï¼Œå¤¹è§’ä¸º-pi->-3pi/2.
+	//å¤¹è§’å¤§å°è¡¨ç¤ºä¸€ç§å…ˆåå…³ç³»
 	public void calculateAngle() {
 		if (this.parent != null) {
 			if ( (this.x+ this.width/2) != (this.parent.x+ this.parent.width/2) ){
@@ -154,12 +154,12 @@ public class TreePanelNode  {
 				else
 					this.angle = -3*Math.PI/2;
 		}else {
-			this.angle = 0;//¸ù½ÚµãµÄangleÔİÊ±¶¨Î»0
+			this.angle = 0;//æ ¹èŠ‚ç‚¹çš„angleæš‚æ—¶å®šä½0
 		}
 	}
 	
 	/*
-	 *¼ÆËã¸Ã½ÚµãµÄËùÓĞ×Ó½ÚµãÓë¸Ã½ÚµãµÄ½Ç¶È
+	 *è®¡ç®—è¯¥èŠ‚ç‚¹çš„æ‰€æœ‰å­èŠ‚ç‚¹ä¸è¯¥èŠ‚ç‚¹çš„è§’åº¦
 	 * */
 	public void calculateAngleOfChildren() {
 		int length = this.children.size();
@@ -174,10 +174,10 @@ public class TreePanelNode  {
 	public boolean hasChangeAfterMoveNode(int xAfterMoved,int yAfterMoved) {		
 		if (allNodes(root).size() <= 2)
 			return false;
-		if (getParent() != null && !getChildren().isEmpty() && getParent().getChildren().size() >= 2) {// ÓĞĞÖµÜ½Úµã
-			// ÅĞ¶ÏÊÇ·ñÕæµÄĞŞ¸Ä
+		if (getParent() != null && !getChildren().isEmpty() && getParent().getChildren().size() >= 2) {// æœ‰å…„å¼ŸèŠ‚ç‚¹
+			// åˆ¤æ–­æ˜¯å¦çœŸçš„ä¿®æ”¹
 			double angelAfterMoved = 0;
-			if ((xAfterMoved + this.width / 2) != (this.parent.x + this.parent.width / 2)) {// ¼ÆËãÒÆ¶¯ºóÓë¸¸½ÚµãµÄ½Ç¶È£¬Ã»ÓĞ½«Êı¾İ½á¹¹¸úĞÂ£¬Ö»ÊÇ¼òµ¥¼ÆËãÖµ
+			if ((xAfterMoved + this.width / 2) != (this.parent.x + this.parent.width / 2)) {// è®¡ç®—ç§»åŠ¨åä¸çˆ¶èŠ‚ç‚¹çš„è§’åº¦ï¼Œæ²¡æœ‰å°†æ•°æ®ç»“æ„è·Ÿæ–°ï¼Œåªæ˜¯ç®€å•è®¡ç®—å€¼
 				double xChild = xAfterMoved + this.width / 2;
 				double yChild = yAfterMoved + this.height / 2;
 				double xParent = this.parent.x + this.parent.width / 2;
@@ -211,12 +211,12 @@ public class TreePanelNode  {
 			} else
 				return (count - children.indexOf(this)) >= 2 ? true : false;
 
-		} else if (getChildren().size() >= 2) {// ½ÚµãÓĞÁ½¸öÒÔÉÏ¶ù×Ó
-			// ÅĞ¶ÏÊÇ·ñĞŞ¸Ä
+		} else if (getChildren().size() >= 2) {// èŠ‚ç‚¹æœ‰ä¸¤ä¸ªä»¥ä¸Šå„¿å­
+			// åˆ¤æ–­æ˜¯å¦ä¿®æ”¹
 			ArrayList<Double> angles = new ArrayList<>();
 			for (TreePanelNode son : children) {
 				double angelAfterMoved = 0;
-				if ((son.x + son.width / 2) != (xAfterMoved + this.width / 2)) {// ¼ÆËãÒÆ¶¯ºóÓë¸¸½ÚµãµÄ½Ç¶È£¬Ã»ÓĞ½«Êı¾İ½á¹¹¸úĞÂ£¬Ö»ÊÇ¼òµ¥¼ÆËãÖµ
+				if ((son.x + son.width / 2) != (xAfterMoved + this.width / 2)) {// è®¡ç®—ç§»åŠ¨åä¸çˆ¶èŠ‚ç‚¹çš„è§’åº¦ï¼Œæ²¡æœ‰å°†æ•°æ®ç»“æ„è·Ÿæ–°ï¼Œåªæ˜¯ç®€å•è®¡ç®—å€¼
 					double xChild = son.x + son.width / 2;
 					double yChild = son.y + son.height / 2;
 					double xParent = xAfterMoved + this.width / 2;
@@ -247,7 +247,7 @@ public class TreePanelNode  {
 	
 	/*
 	 * 
-	 *É¾³ı¸Ã½ÚµãÓëÆä¸¸½ÚµãµÄ¹ØÏµ£¬Ê¹µÃ¸Ã½Úµã³ÉÎªĞÂÊ÷µÄ¸ù½Úµã 
+	 *åˆ é™¤è¯¥èŠ‚ç‚¹ä¸å…¶çˆ¶èŠ‚ç‚¹çš„å…³ç³»ï¼Œä½¿å¾—è¯¥èŠ‚ç‚¹æˆä¸ºæ–°æ ‘çš„æ ¹èŠ‚ç‚¹ 
 	 * 
 	 * */
 	public void relieveRelationship() {
@@ -265,10 +265,10 @@ public class TreePanelNode  {
 	/*
 	 * 
 	 * 
-	 * ÅĞ¶Ï¸Ã½ÚµãÓëÆä¸¸½ÚµãµÄÁ¬ÏßÊÇ·ñ±»Ñ¡ÖĞ
+	 * åˆ¤æ–­è¯¥èŠ‚ç‚¹ä¸å…¶çˆ¶èŠ‚ç‚¹çš„è¿çº¿æ˜¯å¦è¢«é€‰ä¸­
 	 * 
 	 * */
-	public boolean isLineSelected2(int X1,int Y1,int X2,int Y2) {//ÀûÓÃ¾ØĞÎ
+	public boolean isLineSelected2(int X1,int Y1,int X2,int Y2) {//åˆ©ç”¨çŸ©å½¢
 		if(this == this.root) return false;
 		if(Math.min(X1, X2) <= Math.max(x+width/2,parent.x+parent.width/2) 
 				&& Math.max(X1, X2) >= Math.min(x+width/2,parent.x+parent.width/2) 
@@ -279,7 +279,7 @@ public class TreePanelNode  {
 			return false;
 	}
 	
-	public boolean isLineSelected(int X1,int Y1,int X2,int Y2) {//Á½¸öÏß¶ÎÓĞ½»µã
+	public boolean isLineSelected(int X1,int Y1,int X2,int Y2) {//ä¸¤ä¸ªçº¿æ®µæœ‰äº¤ç‚¹
 		if(this == this.root) return false;
 		if (!(Math.min(X1, X2) <= Math.max(x + width / 2, parent.x + parent.width / 2)
 				&& Math.max(X1, X2) >= Math.min(x + width / 2, parent.x + parent.width / 2)
@@ -302,21 +302,21 @@ public class TreePanelNode  {
 	}
 	
 	/*
-	 * ½«Ñ¡ÖĞ½ÚµãĞŞ¸ÄÎª¸Ã½ÚµãËùÔÚÊ÷µÄ¸ù½Úµã
+	 * å°†é€‰ä¸­èŠ‚ç‚¹ä¿®æ”¹ä¸ºè¯¥èŠ‚ç‚¹æ‰€åœ¨æ ‘çš„æ ¹èŠ‚ç‚¹
 	 * */
 	public TreePanelNode changeRoot() {
 		TreePanelNode preRoot = this.root;
 		if( this.equals(this.root) ) return preRoot;
-		//ËùÓĞ½Úµã¾ùÏÈĞŞ¸ÄÆärootÖµ
+		//æ‰€æœ‰èŠ‚ç‚¹å‡å…ˆä¿®æ”¹å…¶rootå€¼
 		
 		for(TreePanelNode node: allNodes(preRoot))
 			node.setRoot(this);
-		//1.ĞŞ¸Ä±»Ñ¡ÖĞ½Úµã	
+		//1.ä¿®æ”¹è¢«é€‰ä¸­èŠ‚ç‚¹	
 		this.setAngle(0);
 		this.children.add(this.parent);
 	    
 		
-		//2.ĞŞ¸Ä±»Ñ¡½ÚµãÓëÔ­rootÂ·¾¶ÉÏËùÓĞ£¨²»°üÀ¨±»Ñ¡½Úµã¼°Ô­root£©µÄ½Úµã
+		//2.ä¿®æ”¹è¢«é€‰èŠ‚ç‚¹ä¸åŸrootè·¯å¾„ä¸Šæ‰€æœ‰ï¼ˆä¸åŒ…æ‹¬è¢«é€‰èŠ‚ç‚¹åŠåŸrootï¼‰çš„èŠ‚ç‚¹
 		TreePanelNode cursor = this.getParent(),begin ,preParent;
 		begin = this;
 
@@ -331,18 +331,18 @@ public class TreePanelNode  {
 		this.setParent(null);
 		this.sortByAngle();
 		
-		//3.ĞŞ¸ÄÔ­root
+		//3.ä¿®æ”¹åŸroot
 		preRoot.setParent(begin);
 		preRoot.getChildren().remove(begin);
 		preRoot.calculateAngle();
 		preRoot.sortByAngle();
 		
-		//ÆäËû½Úµã¾ùÖ»ĞèÒªĞŞ¸ÄÆäroot
+		//å…¶ä»–èŠ‚ç‚¹å‡åªéœ€è¦ä¿®æ”¹å…¶root
 		
 		return this;
 	}
 	/*
-	 * ¶ÔÊ÷½øĞĞÏÈ¸ù±éÀúµÃµ½Ò»¸öĞòÁĞ
+	 * å¯¹æ ‘è¿›è¡Œå…ˆæ ¹éå†å¾—åˆ°ä¸€ä¸ªåºåˆ—
 	 * */
 	public  Vector<TreePanelNode> traverse_rootFisrt(TreePanelNode theNode,Vector<TreePanelNode> nodes_rootFirst){
 		nodes_rootFirst.add(theNode);
@@ -355,7 +355,7 @@ public class TreePanelNode  {
 		return nodes_rootFirst;
 	}
 	/*
-	 * ÅĞ¶Ï¸ÃÒ¶×Ó½ÚµãÊÇÊ÷ÉÏ°´ÏÈ¸ù±éÀúµÄµÚ¼¸¸öÒ¶×Ó½Úµã
+	 * åˆ¤æ–­è¯¥å¶å­èŠ‚ç‚¹æ˜¯æ ‘ä¸ŠæŒ‰å…ˆæ ¹éå†çš„ç¬¬å‡ ä¸ªå¶å­èŠ‚ç‚¹
 	 * */
 	public int getIndexOfLeaf(TreePanelNode leaf) {
 		int count = 0;
@@ -375,9 +375,9 @@ public class TreePanelNode  {
 	} 
 	
 	/*
-	 * ·µ»ØÖ¸¶¨½ÚµãÔÚÊ÷ÉÏµÄ¸ß¶È
+	 * è¿”å›æŒ‡å®šèŠ‚ç‚¹åœ¨æ ‘ä¸Šçš„é«˜åº¦
 	 * */
-	public int height() {//¸ù½Úµã¸ß¶ÈÎª0
+	public int height() {//æ ¹èŠ‚ç‚¹é«˜åº¦ä¸º0
 		TreePanelNode cursor = this;
 		int count =0;
 		while(!cursor.equals(this.root)) {
@@ -390,7 +390,7 @@ public class TreePanelNode  {
 	
 	
 	/*
-	 * ¸øÖ¸¶¨µÄµ¥¿ÅÊ÷·ÖÅäÎ»ÖÃ£¬²»»á¼ÆËã½Ç¶È¡£²ÉÓÃºó¸ù±éÀúÊ÷
+	 * ç»™æŒ‡å®šçš„å•é¢—æ ‘åˆ†é…ä½ç½®ï¼Œä¸ä¼šè®¡ç®—è§’åº¦ã€‚é‡‡ç”¨åæ ¹éå†æ ‘
 	 * */
 	public static TreePanelNode allocatePosition(TreePanelNode root) {
 //		if(!root.equals(root.getRoot()))
@@ -400,7 +400,7 @@ public class TreePanelNode  {
 			int countOfChild = 0;
 			int rootX = 0,rootY = 0,rootWidth = 60,rootHeight = 30;
 			for (TreePanelNode child : root.getChildren()) {
-				countOfChild ++;//ÅĞ¶Ïº¢×ÓµÄ¸öÊı
+				countOfChild ++;//åˆ¤æ–­å­©å­çš„ä¸ªæ•°
 				allocatePosition(child);
 			}
 			
@@ -411,7 +411,7 @@ public class TreePanelNode  {
 			root.setY(80*root.height()); 
 			root.setHeight(rootHeight);
 			root.setWidth(rootWidth);	
-		}else {//¸ÃrootÊÇÒ¶×Ó½Úµã
+		}else {//è¯¥rootæ˜¯å¶å­èŠ‚ç‚¹
 			root.setX(80*root.getIndexOfLeaf(root));
 			root.setY(80*root.height());
 			root.setHeight(30);
@@ -422,7 +422,7 @@ public class TreePanelNode  {
 	
 	
 	/*
-	 * ¸øÖ¸¶¨µÄÉ­ÁÖ·ÖÅäÎ»ÖÃ¡£²ÉÓÃºó¸ù±éÀúÊ÷
+	 * ç»™æŒ‡å®šçš„æ£®æ—åˆ†é…ä½ç½®ã€‚é‡‡ç”¨åæ ¹éå†æ ‘
 	 * */
 public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode> treeLists){
 		if (treeLists.size() == 0||treeLists == null  ) {
@@ -430,7 +430,7 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 			return new ArrayList<TreePanelNode>();
 		}
 			
-		int count =0;//±íÊ¾É­ÁÖÖĞµÄµÚcount¿ÅÊ÷
+		int count =0;//è¡¨ç¤ºæ£®æ—ä¸­çš„ç¬¬counté¢—æ ‘
 		for (TreePanelNode tree : treeLists) {		
 			if(count == 0)
 				allocatePosition(tree);
@@ -451,12 +451,12 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 	/*
 	 * 
 	 * 
-	 * ½«Ò»¸öÀ¨ºÅ±í´ïÊ½×ª»¯ÎªÒ»¿ÅÊ÷
+	 * å°†ä¸€ä¸ªæ‹¬å·è¡¨è¾¾å¼è½¬åŒ–ä¸ºä¸€é¢—æ ‘
 	 * 
 	 * 
 	 * 
 	 * */
-	//½«À¨ºÅ±í´ïÊ½×ª»¯ÎªÊ÷£¬²¢·ÖÅäÎ»ÖÃºÍ³õÊ¼»¯½Ç¶È
+	//å°†æ‹¬å·è¡¨è¾¾å¼è½¬åŒ–ä¸ºæ ‘ï¼Œå¹¶åˆ†é…ä½ç½®å’Œåˆå§‹åŒ–è§’åº¦
 	public ArrayList<TreePanelNode> fromTextToTree(String  strWithFormat) {
 		if(toOneLine(strWithFormat).trim().length() == 0) return null;
 		ArrayList<TreePanelNode> treeLists =  repaintTreeLists(getTree(stringToList(format(toOneLine(strWithFormat)))));
@@ -469,14 +469,14 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 		return treeLists;
 	}
 	
-	//½«¶àĞĞÀ¨ºÅ±í´ïÊ½×ª»»Îªµ¥ĞĞµÄ
+	//å°†å¤šè¡Œæ‹¬å·è¡¨è¾¾å¼è½¬æ¢ä¸ºå•è¡Œçš„
 	public String toOneLine(String str) {
 		return str.replaceAll("\n", "").replaceAll("\r", "");
 	}
 	
-	//´¦ÀíÀ¨ºÅ±í´ïÊ½ÀàËÆ(ROOT  (IP    (NP (NT È¥Äê      ))    (NP (NR ÄÍ¿Ë ))    (VP      (PP (P ÔÚ)        (NP          (NP            (DNP              (NP (NR Âü¹ş¶Ù))              (DEG µÄ))            (NP (NN ³±Á÷) (NN ¾Û¼¯µØ)))          (NP (NR ËÕºÉÇø))))      (VP (VV ¿ª) (AS ÁË)        (NP          (QP (CD Ò»)            (CLP (M ¼Ò)))          (NP (NN ĞÂµê)))))    (PU ¡£)))
-	//´¦Àí ½á¹û(ROOT(IP(NP(NT(È¥Äê)))(NP(NR(ÄÍ¿Ë)))(VP(PP(P(ÔÚ))(NP(NP(DNP(NP(NR(Âü¹ş¶Ù)))(DEG(µÄ)))(NP(NN(³±Á÷))(NN(¾Û¼¯µØ))))(NP(NR(ËÕºÉÇø)))))(VP(VV(¿ª))(AS(ÁË))(NP(QP(CD(Ò»))(CLP(M(¼Ò))))(NP(NN(ĞÂµê))))))(PU(¡£))))
-	//¸ñÊ½»¯µ¥ĞĞÀ¨ºÅ±í´ïÊ½£¬Ïû³ıÆäÖĞ¿Õ¸ñ
+	//å¤„ç†æ‹¬å·è¡¨è¾¾å¼ç±»ä¼¼(ROOT  (IP    (NP (NT å»å¹´      ))    (NP (NR è€å…‹ ))    (VP      (PP (P åœ¨)        (NP          (NP            (DNP              (NP (NR æ›¼å“ˆé¡¿))              (DEG çš„))            (NP (NN æ½®æµ) (NN èšé›†åœ°)))          (NP (NR è‹è·åŒº))))      (VP (VV å¼€) (AS äº†)        (NP          (QP (CD ä¸€)            (CLP (M å®¶)))          (NP (NN æ–°åº—)))))    (PU ã€‚)))
+	//å¤„ç† ç»“æœ(ROOT(IP(NP(NT(å»å¹´)))(NP(NR(è€å…‹)))(VP(PP(P(åœ¨))(NP(NP(DNP(NP(NR(æ›¼å“ˆé¡¿)))(DEG(çš„)))(NP(NN(æ½®æµ))(NN(èšé›†åœ°))))(NP(NR(è‹è·åŒº)))))(VP(VV(å¼€))(AS(äº†))(NP(QP(CD(ä¸€))(CLP(M(å®¶))))(NP(NN(æ–°åº—))))))(PU(ã€‚))))
+	//æ ¼å¼åŒ–å•è¡Œæ‹¬å·è¡¨è¾¾å¼ï¼Œæ¶ˆé™¤å…¶ä¸­ç©ºæ ¼
 	public String format2(String str) {
 		str = str.trim();
 		for (int i = 0; i < str.length(); i++) {
@@ -486,7 +486,7 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 					str = str.substring(0, i) + str.substring(i + 1, str.length());
 					i--;
 				} else if ((str.substring(i + 1).indexOf('(') != -1 ) && (str.substring(i + 1).indexOf(')') != -1)
-						&& (str.substring(i + 1).indexOf(')') < str.substring(i + 1).indexOf('(')) ) {//ÅÅ³ıÃèÊöÓï¾äÖĞ¿ÉÄÜ³öÏÖµÄ¿Õ¸ñ
+						&& (str.substring(i + 1).indexOf(')') < str.substring(i + 1).indexOf('(')) ) {//æ’é™¤æè¿°è¯­å¥ä¸­å¯èƒ½å‡ºç°çš„ç©ºæ ¼
 					System.out.println("i="+i);
 					System.out.println(")="+str.substring(i + 1).indexOf(')'));
 					System.out.println("(="+str.substring(i + 1).indexOf('('));
@@ -514,7 +514,7 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 		}
 		return str;
 	}
-//	´¦ÀíÀ¨ºÅ±í´ïÊ½ ÀàËÆ(ROOT  (IP    (NP (NT È¥Äê      ))    (NP (NR ÄÍ¿Ë ))    (VP      (PP (P ÔÚ)        (NP          (NP            (DNP              (NP (NR Âü¹ş¶Ù))              (DEG µÄ))            (NP (NN ³±Á÷) (NN ¾Û¼¯µØ)))          (NP (NR ËÕºÉÇø))))      (VP (VV ¿ª) (AS ÁË)        (NP          (QP (CD Ò»)            (CLP (M ¼Ò)))          (NP (NN ĞÂµê)))))    (PU ¡£)))
+//	å¤„ç†æ‹¬å·è¡¨è¾¾å¼ ç±»ä¼¼(ROOT  (IP    (NP (NT å»å¹´      ))    (NP (NR è€å…‹ ))    (VP      (PP (P åœ¨)        (NP          (NP            (DNP              (NP (NR æ›¼å“ˆé¡¿))              (DEG çš„))            (NP (NN æ½®æµ) (NN èšé›†åœ°)))          (NP (NR è‹è·åŒº))))      (VP (VV å¼€) (AS äº†)        (NP          (QP (CD ä¸€)            (CLP (M å®¶)))          (NP (NN æ–°åº—)))))    (PU ã€‚)))
 	public String format(String str) {
 		str = str.trim();
 		for (int i = 0; i < str.length(); i++) {
@@ -548,15 +548,15 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 		}
 		return str;
 	}
-	/*½«¸ñÊ½»¯ºóµÄÀ¨ºÅ±í´ïÊ½·â×°µ½ArrayListÖĞ ,Èç:
-	* ÖĞ¹úÀºÇòĞ­»áÔÚ±±¾©ÊĞÍ¨ÖİÇøÕÅ¼ÒÍåÕòÖĞĞÄĞ¡Ñ§¾ÙĞĞÁËĞ¡ÀºÇò·¢Õ¹¼Æ»®ôßĞ¡ÀºÇòÁªÈüÆô¶¯ÒÇÊ½¡£
-    * (ROOT(IP(NP(NP(NR(ÖĞ¹ú)))(NP(NN(ÀºÇò))(NN(Ğ­»á))))(VP(PP(P(ÔÚ))(NP(NP(NR(±±¾©ÊĞ))(NR(Í¨ÖİÇø))(NR(ÕÅ¼ÒÍåÕò)))(NP(NN(ÖĞĞÄ))(NN(Ğ¡Ñ§)))))(VP(VV(¾ÙĞĞ))(AS(ÁË))(NP(NP(NN(Ğ¡ÀºÇò))(NN(·¢Õ¹))(NN(¼Æ»®)))(CC(ôß))(NP(NN(Ğ¡ÀºÇò))(NN(ÁªÈü))(NN(Æô¶¯))(NN(ÒÇÊ½))))(PU(¡£))))
-	* Ğ¡ÀºÇò¹æÔòÊÊÓÃ¶ÔÏóÎª12Ëê¼°ÒÔÏÂµÄÉÙÄê¶ùÍ¯¡£
-	* (ROOT(IP(NP(NN(Ğ¡ÀºÇò))(NN(¹æÔò))(NN(ÊÊÓÃ))(NN(¶ÔÏó)))(VP(VC(Îª)))(NP(DNP(QP(CD(12))(CLP(M(Ëê)))(CC(¼°))(NP(PN(ÒÔÏÂ))))(DEG(µÄ)))(NP(NN(ÉÙÄê))(NN(¶ùÍ¯))))(PU(¡£))))
-	* »á½«×Ö·û´´str1= "ÖĞ¹úÀºÇòĞ­»áÔÚ±±¾©ÊĞÍ¨ÖİÇøÕÅ¼ÒÍåÕòÖĞĞÄĞ¡Ñ§¾ÙĞĞÁËĞ¡ÀºÇò·¢Õ¹¼Æ»®ôßĞ¡ÀºÇòÁªÈüÆô¶¯ÒÇÊ½¡£"
-	* str2="Ğ¡ÀºÇò¹æÔòÊÊÓÃ¶ÔÏóÎª12Ëê¼°ÒÔÏÂµÄÉÙÄê¶ùÍ¯¡£" Ò²Ìí¼Óµ½listÖĞ¡£
+	/*å°†æ ¼å¼åŒ–åçš„æ‹¬å·è¡¨è¾¾å¼å°è£…åˆ°ArrayListä¸­ ,å¦‚:
+	* ä¸­å›½ç¯®çƒåä¼šåœ¨åŒ—äº¬å¸‚é€šå·åŒºå¼ å®¶æ¹¾é•‡ä¸­å¿ƒå°å­¦ä¸¾è¡Œäº†å°ç¯®çƒå‘å±•è®¡åˆ’æš¨å°ç¯®çƒè”èµ›å¯åŠ¨ä»ªå¼ã€‚
+    * (ROOT(IP(NP(NP(NR(ä¸­å›½)))(NP(NN(ç¯®çƒ))(NN(åä¼š))))(VP(PP(P(åœ¨))(NP(NP(NR(åŒ—äº¬å¸‚))(NR(é€šå·åŒº))(NR(å¼ å®¶æ¹¾é•‡)))(NP(NN(ä¸­å¿ƒ))(NN(å°å­¦)))))(VP(VV(ä¸¾è¡Œ))(AS(äº†))(NP(NP(NN(å°ç¯®çƒ))(NN(å‘å±•))(NN(è®¡åˆ’)))(CC(æš¨))(NP(NN(å°ç¯®çƒ))(NN(è”èµ›))(NN(å¯åŠ¨))(NN(ä»ªå¼))))(PU(ã€‚))))
+	* å°ç¯®çƒè§„åˆ™é€‚ç”¨å¯¹è±¡ä¸º12å²åŠä»¥ä¸‹çš„å°‘å¹´å„¿ç«¥ã€‚
+	* (ROOT(IP(NP(NN(å°ç¯®çƒ))(NN(è§„åˆ™))(NN(é€‚ç”¨))(NN(å¯¹è±¡)))(VP(VC(ä¸º)))(NP(DNP(QP(CD(12))(CLP(M(å²)))(CC(åŠ))(NP(PN(ä»¥ä¸‹))))(DEG(çš„)))(NP(NN(å°‘å¹´))(NN(å„¿ç«¥))))(PU(ã€‚))))
+	* ä¼šå°†å­—ç¬¦åˆ›str1= "ä¸­å›½ç¯®çƒåä¼šåœ¨åŒ—äº¬å¸‚é€šå·åŒºå¼ å®¶æ¹¾é•‡ä¸­å¿ƒå°å­¦ä¸¾è¡Œäº†å°ç¯®çƒå‘å±•è®¡åˆ’æš¨å°ç¯®çƒè”èµ›å¯åŠ¨ä»ªå¼ã€‚"
+	* str2="å°ç¯®çƒè§„åˆ™é€‚ç”¨å¯¹è±¡ä¸º12å²åŠä»¥ä¸‹çš„å°‘å¹´å„¿ç«¥ã€‚" ä¹Ÿæ·»åŠ åˆ°listä¸­ã€‚
 	* */
-//	public ArrayList<String> stringToList(String str){ //´íÎó
+//	public ArrayList<String> stringToList(String str){ //é”™è¯¯
 //
 //		ArrayList<String> list =new ArrayList<String>();
 //		char[] chars = str.toCharArray();
@@ -579,7 +579,7 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 //		}
 //		return list;
 //	}
-	public ArrayList<String> stringToList(String str){ //ÓĞÃèÊöºÍÎŞÃèÊö¾ùÕı³£
+	public ArrayList<String> stringToList(String str){ //æœ‰æè¿°å’Œæ— æè¿°å‡æ­£å¸¸
 
 		ArrayList<String> list =new ArrayList<String>();
 		char[] chars = str.toCharArray();
@@ -625,21 +625,21 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
         return parts;
 	}
 	
-	//½«À¨ºÅ±í´ïÊ½µÄlist×ª»¯ÎªÒ»¿ÃÊ÷,Ê÷ÖĞ½ÚµãµÄangleºÍÎ»ÖÃĞÅÏ¢Ã»ÓĞÈ·¶¨  (NP(NN(Ğ¡ÀºÇò))(NN(ÁªÈü))(NN(Æô¶¯))(NN(ÒÇÊ½)))
+	//å°†æ‹¬å·è¡¨è¾¾å¼çš„listè½¬åŒ–ä¸ºä¸€æ£µæ ‘,æ ‘ä¸­èŠ‚ç‚¹çš„angleå’Œä½ç½®ä¿¡æ¯æ²¡æœ‰ç¡®å®š  (NP(NN(å°ç¯®çƒ))(NN(è”èµ›))(NN(å¯åŠ¨))(NN(ä»ªå¼)))
 	public ArrayList<TreePanelNode> getTree2(ArrayList<String> list) {
 		if (list.isEmpty()) return null;
 		ArrayList<TreePanelNode> treeLists = new ArrayList<TreePanelNode>();
 		Stack<TreePanelNode> words = new Stack<TreePanelNode>();
 		
-	    int count =0;//¼ÆËãÉú³ÉÊ÷ÖĞÒ»¹²ÓĞ¶àÉÙ½Úµã
+	    int count =0;//è®¡ç®—ç”Ÿæˆæ ‘ä¸­ä¸€å…±æœ‰å¤šå°‘èŠ‚ç‚¹
 		
 		int len = list.size();
-		for(int i =0 ;i<len ;i++) {//É¨Ãèlist£¬
-			if(list.get(i).equals("("))//É¨Ãèµ½(
+		for(int i =0 ;i<len ;i++) {//æ‰«ælistï¼Œ
+			if(list.get(i).equals("("))//æ‰«æåˆ°(
 				continue;
 			else{
-				if (!(list.get(i).equals(")"))) {//É¨Ãèµ½word
-					if (words.isEmpty()) {//É¨Ãèµ½µÚÒ»¸öword£¬¼´¸ù½ÚµãµÄvalue
+				if (!(list.get(i).equals(")"))) {//æ‰«æåˆ°word
+					if (words.isEmpty()) {//æ‰«æåˆ°ç¬¬ä¸€ä¸ªwordï¼Œå³æ ¹èŠ‚ç‚¹çš„value
 						TreePanelNode root = new TreePanelNode();
 						root.setRoot(root);
 						root.setParent(null);
@@ -648,7 +648,7 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 						words.push(root);
 						treeLists.add(root);
 						count++;
-					} else {//É¨Ãèµ½ºóÃæµÄword
+					} else {//æ‰«æåˆ°åé¢çš„word
 						TreePanelNode child = new TreePanelNode();
 						child.setRoot(words.peek().getRoot());
 						child.setParent(words.peek());
@@ -658,7 +658,7 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 						words.push(child);
 						count++;
 					}
-				} else {//É¨Ãèµ½ )
+				} else {//æ‰«æåˆ° )
 					if( ! words.isEmpty() ) {
 						words.pop();
 					}
@@ -673,34 +673,34 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 		
 	}
 	
-	/* ½«À¨ºÅ±í´ïÊ½µÄlist×ª»¯ÎªÒ»¿ÃÊ÷,Ê÷ÖĞ½ÚµãµÄangleºÍÎ»ÖÃĞÅÏ¢Ã»ÓĞÈ·¶¨
-	 * ÅÅ³ıÀ¨ºÅ±í´ïÊ½ÉÏÃæµÄ¾ä×Ó  ,Èç£º
-	 * ÖĞ¹úÀºÇòĞ­»áÔÚ±±¾©ÊĞÍ¨ÖİÇøÕÅ¼ÒÍåÕòÖĞĞÄĞ¡Ñ§¾ÙĞĞÁËĞ¡ÀºÇò·¢Õ¹¼Æ»®ôßĞ¡ÀºÇòÁªÈüÆô¶¯ÒÇÊ½¡£
-	 * (ROOT(IP(NP(NP(NR(ÖĞ¹ú)))(NP(NN(ÀºÇò))(NN(Ğ­»á))))(VP(PP(P(ÔÚ))(NP(NP(NR(±±¾©ÊĞ))(NR(Í¨ÖİÇø))(NR(ÕÅ¼ÒÍåÕò)))(NP(NN(ÖĞĞÄ))(NN(Ğ¡Ñ§)))))(VP(VV(¾ÙĞĞ))(AS(ÁË))(NP(NP(NN(Ğ¡ÀºÇò))(NN(·¢Õ¹))(NN(¼Æ»®)))(CC(ôß))(NP(NN(Ğ¡ÀºÇò))(NN(ÁªÈü))(NN(Æô¶¯))(NN(ÒÇÊ½))))(PU(¡£))))
-	 * Ğ¡ÀºÇò¹æÔòÊÊÓÃ¶ÔÏóÎª12Ëê¼°ÒÔÏÂµÄÉÙÄê¶ùÍ¯¡£
-	 * (ROOT(IP(NP(NN(Ğ¡ÀºÇò))(NN(¹æÔò))(NN(ÊÊÓÃ))(NN(¶ÔÏó)))(VP(VC(Îª)))(NP(DNP(QP(CD(12))(CLP(M(Ëê)))(CC(¼°))(NP(PN(ÒÔÏÂ))))(DEG(µÄ)))(NP(NN(ÉÙÄê))(NN(¶ùÍ¯))))(PU(¡£))))
-	 * ÄÜ¹»½«ÃèÊöÀ¨ºÅ±í´ïÊ½µÄ¾ä×ÓÈ¥µô
+	/* å°†æ‹¬å·è¡¨è¾¾å¼çš„listè½¬åŒ–ä¸ºä¸€æ£µæ ‘,æ ‘ä¸­èŠ‚ç‚¹çš„angleå’Œä½ç½®ä¿¡æ¯æ²¡æœ‰ç¡®å®š
+	 * æ’é™¤æ‹¬å·è¡¨è¾¾å¼ä¸Šé¢çš„å¥å­  ,å¦‚ï¼š
+	 * ä¸­å›½ç¯®çƒåä¼šåœ¨åŒ—äº¬å¸‚é€šå·åŒºå¼ å®¶æ¹¾é•‡ä¸­å¿ƒå°å­¦ä¸¾è¡Œäº†å°ç¯®çƒå‘å±•è®¡åˆ’æš¨å°ç¯®çƒè”èµ›å¯åŠ¨ä»ªå¼ã€‚
+	 * (ROOT(IP(NP(NP(NR(ä¸­å›½)))(NP(NN(ç¯®çƒ))(NN(åä¼š))))(VP(PP(P(åœ¨))(NP(NP(NR(åŒ—äº¬å¸‚))(NR(é€šå·åŒº))(NR(å¼ å®¶æ¹¾é•‡)))(NP(NN(ä¸­å¿ƒ))(NN(å°å­¦)))))(VP(VV(ä¸¾è¡Œ))(AS(äº†))(NP(NP(NN(å°ç¯®çƒ))(NN(å‘å±•))(NN(è®¡åˆ’)))(CC(æš¨))(NP(NN(å°ç¯®çƒ))(NN(è”èµ›))(NN(å¯åŠ¨))(NN(ä»ªå¼))))(PU(ã€‚))))
+	 * å°ç¯®çƒè§„åˆ™é€‚ç”¨å¯¹è±¡ä¸º12å²åŠä»¥ä¸‹çš„å°‘å¹´å„¿ç«¥ã€‚
+	 * (ROOT(IP(NP(NN(å°ç¯®çƒ))(NN(è§„åˆ™))(NN(é€‚ç”¨))(NN(å¯¹è±¡)))(VP(VC(ä¸º)))(NP(DNP(QP(CD(12))(CLP(M(å²)))(CC(åŠ))(NP(PN(ä»¥ä¸‹))))(DEG(çš„)))(NP(NN(å°‘å¹´))(NN(å„¿ç«¥))))(PU(ã€‚))))
+	 * èƒ½å¤Ÿå°†æè¿°æ‹¬å·è¡¨è¾¾å¼çš„å¥å­å»æ‰
 	 * */
 	public ArrayList<TreePanelNode> getTree(ArrayList<String> list) {
 		if (list.isEmpty()) return null;
 		ArrayList<TreePanelNode> treeLists = new ArrayList<TreePanelNode>();
 		Stack<TreePanelNode> words = new Stack<TreePanelNode>();
 		
-	    int count =0;//¼ÆËãÉú³ÉÊ÷ÖĞÒ»¹²ÓĞ¶àÉÙ½Úµã
+	    int count =0;//è®¡ç®—ç”Ÿæˆæ ‘ä¸­ä¸€å…±æœ‰å¤šå°‘èŠ‚ç‚¹
 		
 		int len = list.size();
-		for(int i =0 ;i<len ;i++) {//É¨Ãèlist£¬
-			if (list.get(i).equals("(")) {// É¨Ãèµ½(
-				TreePanelNode left = new TreePanelNode();// Ìí¼Ó×óÀ¨ºÅÊÇÎªÁËÅÅ³ıÀ¨ºÅ±í´ïÊ½×ó±ßµÄ¾ä×Ó
+		for(int i =0 ;i<len ;i++) {//æ‰«ælistï¼Œ
+			if (list.get(i).equals("(")) {// æ‰«æåˆ°(
+				TreePanelNode left = new TreePanelNode();// æ·»åŠ å·¦æ‹¬å·æ˜¯ä¸ºäº†æ’é™¤æ‹¬å·è¡¨è¾¾å¼å·¦è¾¹çš„å¥å­
 				left.setValue("(");
 				words.push(left);
 			}
 				
 			else{
-				if (!(list.get(i).equals(")"))) {//É¨Ãèµ½word
+				if (!(list.get(i).equals(")"))) {//æ‰«æåˆ°word
 					if (words.isEmpty()) continue;
-					if (words.peek().getValue().equals("(") && count == 0) {// É¨Ãèµ½µÚÒ»¸öword£¬¼´¸ù½ÚµãµÄvalue
-						words.pop();// ½«Õ»¶¥µÄ£¨ µ¯³ö
+					if (words.peek().getValue().equals("(") && count == 0) {// æ‰«æåˆ°ç¬¬ä¸€ä¸ªwordï¼Œå³æ ¹èŠ‚ç‚¹çš„value
+						words.pop();// å°†æ ˆé¡¶çš„ï¼ˆ å¼¹å‡º
 						TreePanelNode root = new TreePanelNode();
 						root.setRoot(root);
 						root.setParent(null);
@@ -709,8 +709,8 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 						words.push(root);
 						treeLists.add(root);
 						count++;
-					} else if (words.peek().getValue().equals("(")) {// É¨Ãèµ½ºóÃæµÄword
-						words.pop();// ½«Õ»¶¥µÄ£¨ µ¯³ö
+					} else if (words.peek().getValue().equals("(")) {// æ‰«æåˆ°åé¢çš„word
+						words.pop();// å°†æ ˆé¡¶çš„ï¼ˆ å¼¹å‡º
 						TreePanelNode child = new TreePanelNode();
 						child.setRoot(words.peek().getRoot());
 						child.setParent(words.peek());
@@ -720,14 +720,14 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 						words.push(child);
 						count++;
 					}
-				} else {//É¨Ãèµ½ )
+				} else {//æ‰«æåˆ° )
 					if( ! words.isEmpty() ) {
 						words.pop();
 					}else
 						return null;
 				}	
 			}
-			if (words.isEmpty()) //×ª»¯Íê³ÉÒ»¿ÃÊ÷
+			if (words.isEmpty()) //è½¬åŒ–å®Œæˆä¸€æ£µæ ‘
 				count = 0;
 			
 			
@@ -743,13 +743,13 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 	 * 
 	 * 
 	 * 
-	 * ½«Ê÷×ª»¯ÎªÀ¨ºÅ±í´ïÊ½
+	 * å°†æ ‘è½¬åŒ–ä¸ºæ‹¬å·è¡¨è¾¾å¼
 	 * */
-	//½«Ê÷×ª»¯ÎªÒ»¸ö×Ö·û´®Êı×é£¬ÆäÖĞ°üÀ¨Ìí¼ÓµÄÓÃÓÚ»»ĞĞºÍ¿Õ¸ñµÄ×Ö·û´®
+	//å°†æ ‘è½¬åŒ–ä¸ºä¸€ä¸ªå­—ç¬¦ä¸²æ•°ç»„ï¼Œå…¶ä¸­åŒ…æ‹¬æ·»åŠ çš„ç”¨äºæ¢è¡Œå’Œç©ºæ ¼çš„å­—ç¬¦ä¸²
 	public  LinkedList<String> changeIntoText(){
 
 		LinkedList<String> tree = new LinkedList<String>();
-		if(treeToText(this,tree) != -1 ) {//±íÊ¾²»ÊÇ¿ÕÊ÷
+		if(treeToText(this,tree) != -1 ) {//è¡¨ç¤ºä¸æ˜¯ç©ºæ ‘
 			tree.set(0, "(");
 			return tree;
 		}
@@ -757,7 +757,7 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 			return null;
 	}
 	
-//	//½«Ê÷×ª»¯Îªµ¥ĞĞµÄÀ¨ºÅ±í´ïÊ½
+//	//å°†æ ‘è½¬åŒ–ä¸ºå•è¡Œçš„æ‹¬å·è¡¨è¾¾å¼
 //	public  LinkedList<String> changeIntoList(){
 //		
 //		LinkedList<String> tree = new LinkedList<String>();
@@ -770,9 +770,9 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 	
 	
 	
-	//½«Ê÷µÄ½Úµã²åÈëµ½listÖĞ£¬²¢·µ»Ø¸ù½ÚµãÔÚlistÖĞµÄË÷Òı¡£°üÀ¨»»ĞĞ·ûºÍ¿Õ¸ñ£¬±ãÓÚ½«listÊä³öµ½ÎÄ±¾ÖĞ³ÉÎªÒ»¸ö¶àĞĞÓĞ¸ñÊ½µÄÀ¨ºÅ±í´ïÊ½¡£
-	public int treeToText(TreePanelNode root, LinkedList<String> listOfTree) {// ¸Ãº¯Êı±íÊ¾½«rootÎª¸ùµÄÊ÷ÅÅÁĞºÃÔÚlistÖĞ£¬²¢·µ»Øroot½ÚµãÔÚlistÖĞµÄË÷Òı£¬Í¬Ê±ÅĞ¶Ï¸Ã¸ù½ÚµãÊÇ·ñÓĞ¶ù×Ó½Úµã£¬
-		// Èç¹û¸Ã½ÚµãÓĞ¶ù×Ó½ÚµãÇÒ¶ù×Ó½Úµã²»ÊÇÒ¶×Ó½Úµã¾ÍÔÚlistÖĞrootµÄ'('Ç°²åÈë»»ĞĞ·ûºÍÒ»¶¨µÄ¿Õ¸ñ×é³ÉµÄ×Ö·û´®¡£
+	//å°†æ ‘çš„èŠ‚ç‚¹æ’å…¥åˆ°listä¸­ï¼Œå¹¶è¿”å›æ ¹èŠ‚ç‚¹åœ¨listä¸­çš„ç´¢å¼•ã€‚åŒ…æ‹¬æ¢è¡Œç¬¦å’Œç©ºæ ¼ï¼Œä¾¿äºå°†listè¾“å‡ºåˆ°æ–‡æœ¬ä¸­æˆä¸ºä¸€ä¸ªå¤šè¡Œæœ‰æ ¼å¼çš„æ‹¬å·è¡¨è¾¾å¼ã€‚
+	public int treeToText(TreePanelNode root, LinkedList<String> listOfTree) {// è¯¥å‡½æ•°è¡¨ç¤ºå°†rootä¸ºæ ¹çš„æ ‘æ’åˆ—å¥½åœ¨listä¸­ï¼Œå¹¶è¿”å›rootèŠ‚ç‚¹åœ¨listä¸­çš„ç´¢å¼•ï¼ŒåŒæ—¶åˆ¤æ–­è¯¥æ ¹èŠ‚ç‚¹æ˜¯å¦æœ‰å„¿å­èŠ‚ç‚¹ï¼Œ
+		// å¦‚æœè¯¥èŠ‚ç‚¹æœ‰å„¿å­èŠ‚ç‚¹ä¸”å„¿å­èŠ‚ç‚¹ä¸æ˜¯å¶å­èŠ‚ç‚¹å°±åœ¨listä¸­rootçš„'('å‰æ’å…¥æ¢è¡Œç¬¦å’Œä¸€å®šçš„ç©ºæ ¼ç»„æˆçš„å­—ç¬¦ä¸²ã€‚
 		if (root == null) {
 			return -1;
 		}
@@ -781,7 +781,7 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 		int indexOfRoot = -1;
 		if (root.getChildren().size() != 0) {
 			int count = 0;
-			for (; count < root.getChildren().size();) {// °ÑËùÓĞÒÔrootµÄ¶ù×ÓÎª¸ù½ÚµãµÄ×ÓÊ÷²åÈëµ½listOfTreeÖĞÈ¥£¬²¢·µ»ØµÚÒ»¸ö¶ù×ÓÔÚlistOfTreeÖĞµÄË÷Òı
+			for (; count < root.getChildren().size();) {// æŠŠæ‰€æœ‰ä»¥rootçš„å„¿å­ä¸ºæ ¹èŠ‚ç‚¹çš„å­æ ‘æ’å…¥åˆ°listOfTreeä¸­å»ï¼Œå¹¶è¿”å›ç¬¬ä¸€ä¸ªå„¿å­åœ¨listOfTreeä¸­çš„ç´¢å¼•
 				count++;
 				if (count == 1) {
 					indexOfFirstChild = treeToText(root.getChildren().get(count - 1), listOfTree);
@@ -789,18 +789,18 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 					treeToText(root.getChildren().get(count - 1), listOfTree);
 				}
 			}
-			// ´¦Àí¸ù½Úµã
+			// å¤„ç†æ ¹èŠ‚ç‚¹
 //			System.out.println("indexOfFirst====" + indexOfFirstChild);
 
-			if (!isInsertString(root.getChildren().get(0))) {// ÅĞ¶ÏrootµÄµÚÒ»¸öº¢×Ó½ÚµãÇ°ÃæÊÇ·ñÌí¼Óµ÷Õû¸ñÊ½µÄ×Ö·û´®£¬if³ÉÁ¢±íÊ¾Ã»ÓĞÌí¼Ó
-				if (!isInsertString(root)) {// ÅĞ¶Ïroot½ÚµãÇ°ÃæÊÇ·ñÓÃÌí¼Ó¸ñÊ½×Ö·û´®¡£Î´Ìí¼Ó
+			if (!isInsertString(root.getChildren().get(0))) {// åˆ¤æ–­rootçš„ç¬¬ä¸€ä¸ªå­©å­èŠ‚ç‚¹å‰é¢æ˜¯å¦æ·»åŠ è°ƒæ•´æ ¼å¼çš„å­—ç¬¦ä¸²ï¼Œifæˆç«‹è¡¨ç¤ºæ²¡æœ‰æ·»åŠ 
+				if (!isInsertString(root)) {// åˆ¤æ–­rootèŠ‚ç‚¹å‰é¢æ˜¯å¦ç”¨æ·»åŠ æ ¼å¼å­—ç¬¦ä¸²ã€‚æœªæ·»åŠ 
 					listOfTree.add(indexOfFirstChild - 1, root.getValue().toString());
-					listOfTree.add(indexOfFirstChild - 1, " (");// rootµÄindexºÍµÚÒ»¸öº¢×Ó·µ»ØµÄindex´óĞ¡ÏàÍ¬
+					listOfTree.add(indexOfFirstChild - 1, " (");// rootçš„indexå’Œç¬¬ä¸€ä¸ªå­©å­è¿”å›çš„indexå¤§å°ç›¸åŒ
 					listOfTree.add(")");
 					indexOfRoot = indexOfFirstChild;
-				} else {// root½ÚµãÇ°ÃæÒªÌí¼Ó¸ñÊ½×Ö·û´®
+				} else {// rootèŠ‚ç‚¹å‰é¢è¦æ·»åŠ æ ¼å¼å­—ç¬¦ä¸²
 					listOfTree.add(indexOfFirstChild - 1, root.getValue().toString());
-					listOfTree.add(indexOfFirstChild - 1, " (");// rootµÄindexºÍµÚÒ»¸öº¢×Ó·µ»ØµÄindex´óĞ¡ÏàÍ¬
+					listOfTree.add(indexOfFirstChild - 1, " (");// rootçš„indexå’Œç¬¬ä¸€ä¸ªå­©å­è¿”å›çš„indexå¤§å°ç›¸åŒ
 					String format = "";
 					for (int i = 0; i < root.height(); i++) {
 						format = format + " ";
@@ -813,15 +813,15 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 					indexOfRoot = indexOfFirstChild + 1;
 				}
 			} else {
-				// ¼´ÅĞ¶Ïroot½ÚµãÇ°ÃæÊÇ·ñÓÃÌí¼Ó¸ñÊ½×Ö·û´®
-				if (!isInsertString(root)) {// root½ÚµãÇ°Ãæ²»ÓÃÌí¼Ó¸ñÊ½×Ö·û´®
+				// å³åˆ¤æ–­rootèŠ‚ç‚¹å‰é¢æ˜¯å¦ç”¨æ·»åŠ æ ¼å¼å­—ç¬¦ä¸²
+				if (!isInsertString(root)) {// rootèŠ‚ç‚¹å‰é¢ä¸ç”¨æ·»åŠ æ ¼å¼å­—ç¬¦ä¸²
 					listOfTree.add(indexOfFirstChild - 2, root.getValue().toString());
-					listOfTree.add(indexOfFirstChild - 2, " (");// rootµÄindexºÍµÚÒ»¸öº¢×Ó·µ»ØµÄindex´óĞ¡ÏàÍ¬
+					listOfTree.add(indexOfFirstChild - 2, " (");// rootçš„indexå’Œç¬¬ä¸€ä¸ªå­©å­è¿”å›çš„indexå¤§å°ç›¸åŒ
 					listOfTree.add(")");
 					indexOfRoot = indexOfFirstChild - 1;
-				} else {// root½ÚµãÇ°ÃæÒªÌí¼Ó¸ñÊ½×Ö·û´®
+				} else {// rootèŠ‚ç‚¹å‰é¢è¦æ·»åŠ æ ¼å¼å­—ç¬¦ä¸²
 					listOfTree.add(indexOfFirstChild - 2, root.getValue().toString());
-					listOfTree.add(indexOfFirstChild - 2, " (");// rootµÄindexºÍµÚÒ»¸öº¢×Ó·µ»ØµÄindex´óĞ¡ÏàÍ¬
+					listOfTree.add(indexOfFirstChild - 2, " (");// rootçš„indexå’Œç¬¬ä¸€ä¸ªå­©å­è¿”å›çš„indexå¤§å°ç›¸åŒ
 					String format = "\r\n";
 					for (int i = 0; i < root.height(); i++) {
 						format = format + "  ";
@@ -834,14 +834,14 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 				}
 			}
 
-		} else {// ´¦ÀírootÊÇÒ¶×Ó½Úµã£¬½áÊøµİ¹éµÄÌõ¼ş
-			if (root.equals(this.getRoot())) {// ¼´Ê÷ÉÏÖ»ÓĞÒ»¸ö¸ù½Úµã
+		} else {// å¤„ç†rootæ˜¯å¶å­èŠ‚ç‚¹ï¼Œç»“æŸé€’å½’çš„æ¡ä»¶
+			if (root.equals(this.getRoot())) {// å³æ ‘ä¸Šåªæœ‰ä¸€ä¸ªæ ¹èŠ‚ç‚¹
 				listOfTree.add("(");
 				listOfTree.add(root.getValue().toString());
 				listOfTree.add(")");
 				indexOfRoot = 1;
 			} else {
-				listOfTree.add(" ");// °ÑÒ¶×Ó½ÚµãÍâ±ßµÄÀ¨ºÅÉ¾³ı
+				listOfTree.add(" ");// æŠŠå¶å­èŠ‚ç‚¹å¤–è¾¹çš„æ‹¬å·åˆ é™¤
 				listOfTree.add(root.getValue().toString());
 				indexOfFirstChild = listOfTree.size() - 1;
 				// listOfTree.add(")");
@@ -853,7 +853,7 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 		return indexOfRoot;
 	}
 	
-	//ÅĞ¶ÏlistÖĞ¸Ã½ÚµãÖ®Ç°ÊÇ·ñÒª²åÈë¸ñÊ½×Ö·û´®
+	//åˆ¤æ–­listä¸­è¯¥èŠ‚ç‚¹ä¹‹å‰æ˜¯å¦è¦æ’å…¥æ ¼å¼å­—ç¬¦ä¸²
 	private boolean isInsertString(TreePanelNode node) {
 		if (node.equals(node.getRoot()))
 			return false;
@@ -874,15 +874,15 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 		}
 	}
 	
-	//½«Ê÷µÄ½Úµã²åÈëµ½listÖĞ£¬²¢·µ»Ø¸ù½ÚµãÔÚlistÖĞµÄË÷Òı¡£°üÀ¨»»ĞĞ·ûºÍ¿Õ¸ñ£¬±ãÓÚ½«listÊä³öµ½ÎÄ±¾ÖĞ³ÉÎªÒ»¸ö¶àĞĞÓĞ¸ñÊ½µÄÀ¨ºÅ±í´ïÊ½¡£
-		public  int treeToText2(TreePanelNode root,LinkedList<String> listOfTree){//¸Ãº¯Êı±íÊ¾½«rootÎª¸ùµÄÊ÷ÅÅÁĞºÃÔÚlistÖĞ£¬²¢·µ»Øroot½ÚµãÔÚlistÖĞµÄË÷Òı£¬Í¬Ê±ÅĞ¶Ï¸Ã¸ù½ÚµãÊÇ·ñÓĞ¶ù×Ó½Úµã£¬
-			                                                                     // Èç¹û¸Ã½ÚµãÓĞ¶ù×Ó½ÚµãÇÒ¶ù×Ó½Úµã²»ÊÇÒ¶×Ó½Úµã¾ÍÔÚlistÖĞrootµÄ'('Ç°²åÈë»»ĞĞ·ûºÍÒ»¶¨µÄ¿Õ¸ñ×é³ÉµÄ×Ö·û´®¡£
+	//å°†æ ‘çš„èŠ‚ç‚¹æ’å…¥åˆ°listä¸­ï¼Œå¹¶è¿”å›æ ¹èŠ‚ç‚¹åœ¨listä¸­çš„ç´¢å¼•ã€‚åŒ…æ‹¬æ¢è¡Œç¬¦å’Œç©ºæ ¼ï¼Œä¾¿äºå°†listè¾“å‡ºåˆ°æ–‡æœ¬ä¸­æˆä¸ºä¸€ä¸ªå¤šè¡Œæœ‰æ ¼å¼çš„æ‹¬å·è¡¨è¾¾å¼ã€‚
+		public  int treeToText2(TreePanelNode root,LinkedList<String> listOfTree){//è¯¥å‡½æ•°è¡¨ç¤ºå°†rootä¸ºæ ¹çš„æ ‘æ’åˆ—å¥½åœ¨listä¸­ï¼Œå¹¶è¿”å›rootèŠ‚ç‚¹åœ¨listä¸­çš„ç´¢å¼•ï¼ŒåŒæ—¶åˆ¤æ–­è¯¥æ ¹èŠ‚ç‚¹æ˜¯å¦æœ‰å„¿å­èŠ‚ç‚¹ï¼Œ
+			                                                                     // å¦‚æœè¯¥èŠ‚ç‚¹æœ‰å„¿å­èŠ‚ç‚¹ä¸”å„¿å­èŠ‚ç‚¹ä¸æ˜¯å¶å­èŠ‚ç‚¹å°±åœ¨listä¸­rootçš„'('å‰æ’å…¥æ¢è¡Œç¬¦å’Œä¸€å®šçš„ç©ºæ ¼ç»„æˆçš„å­—ç¬¦ä¸²ã€‚
 			if(root == null) return -1;
 			int indexOfFirstChild = -1;
 			int indexOfRoot = -1;
 			if(root.getChildren().size() != 0) {
 				int count =0;
-				for(;count < root.getChildren().size();) {//°ÑËùÓĞÒÔrootµÄ¶ù×ÓÎª¸ù½ÚµãµÄ×ÓÊ÷²åÈëµ½listOfTreeÖĞÈ¥£¬²¢·µ»ØµÚÒ»¸ö¶ù×ÓÔÚlistOfTreeÖĞµÄË÷Òı
+				for(;count < root.getChildren().size();) {//æŠŠæ‰€æœ‰ä»¥rootçš„å„¿å­ä¸ºæ ¹èŠ‚ç‚¹çš„å­æ ‘æ’å…¥åˆ°listOfTreeä¸­å»ï¼Œå¹¶è¿”å›ç¬¬ä¸€ä¸ªå„¿å­åœ¨listOfTreeä¸­çš„ç´¢å¼•
 					count++;
 					if(count == 1) {
 						indexOfFirstChild=treeToText(root.getChildren().get(count - 1),listOfTree);
@@ -890,19 +890,19 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 						treeToText(root.getChildren().get(count - 1),listOfTree);
 					}
 				}
-				//´¦Àí¸ù½Úµã
+				//å¤„ç†æ ¹èŠ‚ç‚¹
 //				System.out.println("indexOfFirst===="+indexOfFirstChild);
-				//ÅĞ¶ÏrootµÄµÚÒ»¸öº¢×Ó½ÚµãÊÇ·ñÓĞ¶ù×Ó£¬¼´ÅĞ¶ÏlistÖĞrootµÄµÚÒ»¸öº¢×Ó½ÚµãÇ°ÊÇ·ñÌí¼ÓÁËÒ»¸öÓÉ»»ĞĞ·ûºÍ¿Õ¸ñ×é³ÉµÄ×Ö·û´®
-				if(root.getChildren().get(0).getChildren().size() == 0 || root.getChildren().get(0).getChildren().get(0).getChildren().size() == 0 ) {//if³ÉÁ¢±íÊ¾rootµÄµÚÒ»¸öº¢×Ó½ÚµãÃ»ÓĞ¶ù×Ó£¬»òÕßrootµÄµÚÒ»¸öº¢×Ó½ÚµãµÄº¢×ÓÊÇÒ¶×Ó½Úµã£¬rootµÄµÚÒ»¸öº¢×Ó½ÚµãÇ°ÃæÃ»ÓĞÌí¼Óµ÷Õû¸ñÊ½µÄ×Ö·û´®
-					//ÅĞ¶Ï¸Ãroot½ÚµãµÄ¶ù×Ó½ÚµãÊÇ·ñÊÇÒ¶×Ó½Úµã£¬(×îÍâ²ãifÒÑ¾­ÅĞ¶Ï³ö¸Ãroot½ÚµãÓĞ¶ù×Ó)£¬¼´ÅĞ¶Ïroot½ÚµãÇ°ÃæÊÇ·ñÓÃÌí¼Ó¸ñÊ½×Ö·û´®
-					if(root.getChildren().get(0).getChildren().size() == 0) {//ÊÇÒ¶×Ó½Úµã£¬root½ÚµãÇ°Ãæ²»ÓÃÌí¼Ó¸ñÊ½×Ö·û´®
+				//åˆ¤æ–­rootçš„ç¬¬ä¸€ä¸ªå­©å­èŠ‚ç‚¹æ˜¯å¦æœ‰å„¿å­ï¼Œå³åˆ¤æ–­listä¸­rootçš„ç¬¬ä¸€ä¸ªå­©å­èŠ‚ç‚¹å‰æ˜¯å¦æ·»åŠ äº†ä¸€ä¸ªç”±æ¢è¡Œç¬¦å’Œç©ºæ ¼ç»„æˆçš„å­—ç¬¦ä¸²
+				if(root.getChildren().get(0).getChildren().size() == 0 || root.getChildren().get(0).getChildren().get(0).getChildren().size() == 0 ) {//ifæˆç«‹è¡¨ç¤ºrootçš„ç¬¬ä¸€ä¸ªå­©å­èŠ‚ç‚¹æ²¡æœ‰å„¿å­ï¼Œæˆ–è€…rootçš„ç¬¬ä¸€ä¸ªå­©å­èŠ‚ç‚¹çš„å­©å­æ˜¯å¶å­èŠ‚ç‚¹ï¼Œrootçš„ç¬¬ä¸€ä¸ªå­©å­èŠ‚ç‚¹å‰é¢æ²¡æœ‰æ·»åŠ è°ƒæ•´æ ¼å¼çš„å­—ç¬¦ä¸²
+					//åˆ¤æ–­è¯¥rootèŠ‚ç‚¹çš„å„¿å­èŠ‚ç‚¹æ˜¯å¦æ˜¯å¶å­èŠ‚ç‚¹ï¼Œ(æœ€å¤–å±‚ifå·²ç»åˆ¤æ–­å‡ºè¯¥rootèŠ‚ç‚¹æœ‰å„¿å­)ï¼Œå³åˆ¤æ–­rootèŠ‚ç‚¹å‰é¢æ˜¯å¦ç”¨æ·»åŠ æ ¼å¼å­—ç¬¦ä¸²
+					if(root.getChildren().get(0).getChildren().size() == 0) {//æ˜¯å¶å­èŠ‚ç‚¹ï¼ŒrootèŠ‚ç‚¹å‰é¢ä¸ç”¨æ·»åŠ æ ¼å¼å­—ç¬¦ä¸²
 						listOfTree.add(indexOfFirstChild - 1,root.getValue().toString());                                                                 
-				        listOfTree.add(indexOfFirstChild - 1,"(");//rootµÄindexºÍµÚÒ»¸öº¢×Ó·µ»ØµÄindex´óĞ¡ÏàÍ¬
+				        listOfTree.add(indexOfFirstChild - 1,"(");//rootçš„indexå’Œç¬¬ä¸€ä¸ªå­©å­è¿”å›çš„indexå¤§å°ç›¸åŒ
 				        listOfTree.add(")");
 				        indexOfRoot = indexOfFirstChild;
-					}else {//²»ÊÇÒ¶×Ó½Úµã£¬root½ÚµãÇ°ÃæÒªÌí¼Ó¸ñÊ½×Ö·û´®
+					}else {//ä¸æ˜¯å¶å­èŠ‚ç‚¹ï¼ŒrootèŠ‚ç‚¹å‰é¢è¦æ·»åŠ æ ¼å¼å­—ç¬¦ä¸²
 						listOfTree.add(indexOfFirstChild - 1,root.getValue().toString());                                                                 
-				        listOfTree.add(indexOfFirstChild - 1,"(");//rootµÄindexºÍµÚÒ»¸öº¢×Ó·µ»ØµÄindex´óĞ¡ÏàÍ¬
+				        listOfTree.add(indexOfFirstChild - 1,"(");//rootçš„indexå’Œç¬¬ä¸€ä¸ªå­©å­è¿”å›çš„indexå¤§å°ç›¸åŒ
 				        String format = "";
 				        for(int i=0;i < root.height();i++) {
 				        	format = format + " ";
@@ -912,16 +912,16 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 				        listOfTree.add(")");
 				        indexOfRoot = indexOfFirstChild+1;
 					}					
-				}else {//rootµÄµÚÒ»¸öº¢×Ó½ÚµãÇ°ÃæÌí¼ÓÁËµ÷Õû¸ñÊ½µÄ×Ö·û´®
-					//ÅĞ¶Ï¸Ãroot½ÚµãµÄ¶ù×Ó½ÚµãÊÇ·ñÊÇÒ¶×Ó½Úµã£¬(×îÍâ²ãifÒÑ¾­ÅĞ¶Ï³ö¸Ãroot½ÚµãÓĞ¶ù×Ó)£¬¼´ÅĞ¶Ïroot½ÚµãÇ°ÃæÊÇ·ñÓÃÌí¼Ó¸ñÊ½×Ö·û´®
-					if(root.getChildren().get(0).getChildren().size() == 0) {//ÊÇÒ¶×Ó½Úµã£¬root½ÚµãÇ°Ãæ²»ÓÃÌí¼Ó¸ñÊ½×Ö·û´®
+				}else {//rootçš„ç¬¬ä¸€ä¸ªå­©å­èŠ‚ç‚¹å‰é¢æ·»åŠ äº†è°ƒæ•´æ ¼å¼çš„å­—ç¬¦ä¸²
+					//åˆ¤æ–­è¯¥rootèŠ‚ç‚¹çš„å„¿å­èŠ‚ç‚¹æ˜¯å¦æ˜¯å¶å­èŠ‚ç‚¹ï¼Œ(æœ€å¤–å±‚ifå·²ç»åˆ¤æ–­å‡ºè¯¥rootèŠ‚ç‚¹æœ‰å„¿å­)ï¼Œå³åˆ¤æ–­rootèŠ‚ç‚¹å‰é¢æ˜¯å¦ç”¨æ·»åŠ æ ¼å¼å­—ç¬¦ä¸²
+					if(root.getChildren().get(0).getChildren().size() == 0) {//æ˜¯å¶å­èŠ‚ç‚¹ï¼ŒrootèŠ‚ç‚¹å‰é¢ä¸ç”¨æ·»åŠ æ ¼å¼å­—ç¬¦ä¸²
 						listOfTree.add(indexOfFirstChild - 2,root.getValue().toString());                                                                 
-				        listOfTree.add(indexOfFirstChild - 2,"(");//rootµÄindexºÍµÚÒ»¸öº¢×Ó·µ»ØµÄindex´óĞ¡ÏàÍ¬
+				        listOfTree.add(indexOfFirstChild - 2,"(");//rootçš„indexå’Œç¬¬ä¸€ä¸ªå­©å­è¿”å›çš„indexå¤§å°ç›¸åŒ
 				        listOfTree.add(")");
 				        indexOfRoot = indexOfFirstChild -1;
-					}else {//²»ÊÇÒ¶×Ó½Úµã,root½ÚµãÇ°ÃæÒªÌí¼Ó¸ñÊ½×Ö·û´®
+					}else {//ä¸æ˜¯å¶å­èŠ‚ç‚¹,rootèŠ‚ç‚¹å‰é¢è¦æ·»åŠ æ ¼å¼å­—ç¬¦ä¸²
 						listOfTree.add(indexOfFirstChild - 2,root.getValue().toString());                                                                 
-				        listOfTree.add(indexOfFirstChild - 2,"(");//rootµÄindexºÍµÚÒ»¸öº¢×Ó·µ»ØµÄindex´óĞ¡ÏàÍ¬
+				        listOfTree.add(indexOfFirstChild - 2,"(");//rootçš„indexå’Œç¬¬ä¸€ä¸ªå­©å­è¿”å›çš„indexå¤§å°ç›¸åŒ
 				        String format = "";
 				        for(int i=0;i < root.height();i++) {
 				        	format = format + " ";
@@ -933,7 +933,7 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 					}
 				}
 				
-			}else {//´¦ÀírootÊÇÒ¶×Ó½Úµã£¬½áÊøµİ¹éµÄÌõ¼ş
+			}else {//å¤„ç†rootæ˜¯å¶å­èŠ‚ç‚¹ï¼Œç»“æŸé€’å½’çš„æ¡ä»¶
 				listOfTree.add("(");
 				listOfTree.add(root.getValue().toString());
 				indexOfFirstChild = listOfTree.size() -1;
@@ -944,13 +944,13 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 			return indexOfRoot;
 		}
 		
-		//½«Ê÷µÄ½Úµã²åÈëµ½listÖĞ£¬²¢·µ»Ø¸ù½ÚµãÔÚlistÖĞµÄË÷Òı£¬Ã»ÓĞ»»ĞĞ·ûºÍ¶àÓà¿Õ¸ñ
-		public  int treeToList(TreePanelNode root,LinkedList<String> listOfTree){//½«rootÎª¸ùµÄÊ÷ÅÅÁĞºÃÔÚlistÖĞ£¬²¢·µ»Øroot½ÚµãÔÚlistÖĞµÄË÷Òı
+		//å°†æ ‘çš„èŠ‚ç‚¹æ’å…¥åˆ°listä¸­ï¼Œå¹¶è¿”å›æ ¹èŠ‚ç‚¹åœ¨listä¸­çš„ç´¢å¼•ï¼Œæ²¡æœ‰æ¢è¡Œç¬¦å’Œå¤šä½™ç©ºæ ¼
+		public  int treeToList(TreePanelNode root,LinkedList<String> listOfTree){//å°†rootä¸ºæ ¹çš„æ ‘æ’åˆ—å¥½åœ¨listä¸­ï¼Œå¹¶è¿”å›rootèŠ‚ç‚¹åœ¨listä¸­çš„ç´¢å¼•
 			if(root == null) return -1;
 			int indexOfFirst = -1;
 			if(root.getChildren().size() != 0) {
 				int count =0;
-				for(;count < root.getChildren().size();) {//°ÑËùÓĞÒÔrootµÄ¶ù×ÓÎª¸ù½ÚµãµÄ×ÓÊ÷²åÈëµ½listOfTreeÖĞÈ¥£¬²¢·µ»ØµÚÒ»¸ö¶ù×ÓÔÚlistOfTreeÖĞµÄË÷Òı
+				for(;count < root.getChildren().size();) {//æŠŠæ‰€æœ‰ä»¥rootçš„å„¿å­ä¸ºæ ¹èŠ‚ç‚¹çš„å­æ ‘æ’å…¥åˆ°listOfTreeä¸­å»ï¼Œå¹¶è¿”å›ç¬¬ä¸€ä¸ªå„¿å­åœ¨listOfTreeä¸­çš„ç´¢å¼•
 					count++;
 					if(count == 1) {
 						indexOfFirst=treeToList(root.getChildren().get(count - 1),listOfTree);
@@ -958,12 +958,12 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 						treeToList(root.getChildren().get(count - 1),listOfTree);
 					}
 				} 
-				//´¦Àí¸ù½Úµã
+				//å¤„ç†æ ¹èŠ‚ç‚¹
 //				System.out.println("indexOfFirst===="+indexOfFirst);
 				listOfTree.add(indexOfFirst - 1,root.getValue().toString());
-				listOfTree.add(indexOfFirst - 1,"(");//rootµÄindexºÍµÚÒ»¸öº¢×Ó·´»ÚµÄindex´óĞ¡ÏàÍ¬
+				listOfTree.add(indexOfFirst - 1,"(");//rootçš„indexå’Œç¬¬ä¸€ä¸ªå­©å­åæ‚”çš„indexå¤§å°ç›¸åŒ
 				listOfTree.add(")");
-			}else {//´¦ÀíÒ¶×Ó½Úµã£¬½áÊøµİ¹éµÄÌõ¼ş
+			}else {//å¤„ç†å¶å­èŠ‚ç‚¹ï¼Œç»“æŸé€’å½’çš„æ¡ä»¶
 				listOfTree.add("(");
 				listOfTree.add(root.getValue().toString());
 				indexOfFirst = listOfTree.size() -1;
@@ -1086,13 +1086,13 @@ public static ArrayList<TreePanelNode> repaintTreeLists(ArrayList<TreePanelNode>
 	this.angle = angle;
 }
 	
-	//²âÊÔÊä³öÊ÷µÄ»ù±¾Öµ
+	//æµ‹è¯•è¾“å‡ºæ ‘çš„åŸºæœ¬å€¼
 	public void print() {
-		//²âÊÔ
+		//æµ‹è¯•
 		int count=-1;
 		for(TreePanelNode theNode:allNodes(this.getRoot())) {
 			count++;
-			System.out.println("count:"+count+theNode.getValue()+"µÄx,yÎª£º"+theNode.getX()+","+theNode.getY()+"½Ç¶ÈÊÇ"+theNode.getAngle());
+			System.out.println("count:"+count+theNode.getValue()+"çš„x,yä¸ºï¼š"+theNode.getX()+","+theNode.getY()+"è§’åº¦æ˜¯"+theNode.getAngle());
 			if(!theNode.getChildren().isEmpty())
 				System.out.println("firstChlild:"+theNode.getChildren().get(0).getValue().toString());
 			if(theNode.getParent() != null)System.out.println("parent"+theNode.getParent().getValue().toString());

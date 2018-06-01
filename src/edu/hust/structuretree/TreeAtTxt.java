@@ -3,7 +3,7 @@ package edu.hust.structuretree;
 import java.util.ArrayList;
 
 public class TreeAtTxt {//一个括号表达式对应一个TreeAtTxt对象
-	private ArrayList<TreePanelNode>  treeListWithOneTree ;//只有一颗树的森林，用来表示某个txt文件中的一个由括号表达式表示的树
+	private ArrayList<TreePanelNode>  treeListWithOneTree ;// 只有一颗树的森林，用来表示某个txt文件中的一个由括号表达式表示的树
 	private String txtPath;
 	public TreeAtTxt() {
 	}

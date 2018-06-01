@@ -24,22 +24,22 @@ public class TreePanel extends JPanel {
 	private Vector<TreePanelNode> nodes;	
 	private ArrayList<TreePanelNode> treeLists; 
 	private TreeAtTxt treeAtTxt;
-	private HashMap<String,Boolean> hasModeified;//¼ÇÂ¼ÎÄ±¾ÊÇ·ñ±»¸Ä±ä
+	private HashMap<String,Boolean> hasModeified;//è®°å½•æ–‡æœ¬æ˜¯å¦è¢«æ”¹å˜
 
-	private int selectedNodes = -1;// Ä¬ÈÏ±íÊ¾Ã»ÓĞÑ¡ÖĞ½Úµã
+	private int selectedNodes = -1;// é»˜è®¤è¡¨ç¤ºæ²¡æœ‰é€‰ä¸­èŠ‚ç‚¹
 	private ArrayList<Integer> selectedALines =new ArrayList<Integer>();
-	private int selectedALine = -1;//Ä¬ÈÏÃ»ÓĞÑ¡ÖĞÏß¡£selectedALine±íÊ¾ ±»Ñ¡ÖĞÏßµÄ¼ıÍ·Ö¸ÏòµÄ½Úµã ÓëÆä¸¸½ÚµãÖ®¼äµÄÁ¬Ïß
-	private int tempX;//¼ÇÂ¼Êó±êµã»÷Ê±µÄ×ø±ê£¬»òÕß¼ÇÂ¼ÍÏ¶¯Ê±Êó±êµÄÉÏÒ»¸ö×ø±ê
-	private int tempY;//¼ÇÂ¼Êó±êµã»÷Ê±µÄ×ø±ê£¬»òÕß¼ÇÂ¼ÍÏ¶¯Ê±Êó±êµÄÉÏÒ»¸ö×ø±ê
-	private int mouseX; //±íÊ¾ÈÎÒâÊ±¿ÌÊó±êµÄÎ»ÖÃ
-	private int mouseY;//±íÊ¾ÈÎÒâÊ±¿ÌÊó±êµÄÎ»ÖÃ
-	private int editingNode = -1;//±íÊ¾±»±à¼­µÄ½ÚµãµÄĞòºÅ£¬Ä¬ÈÏÊÇÃ»ÓĞÒª±à¼­µÄ½Úµã
-	private int parentOfAddingNode = -1;//±íÊ¾ÒªÌí¼Ó½ÚµãµÄ¸¸Ç×½Úµã£¬Ä¬ÈÏÎª-1¼´²»Ìí¼Ó½Úµã
-	private int[] combinedNodes = {-1,-1};//±íÊ¾½«ÒªÁ´½ÓµÄÁ½¸ö½Úµã
-	private int count = -1;//ÓÃÀ´±íÊ¾Ìí¼Óµ½Êı×écombinedNodesÖĞµÄÎ»ÖÃ£¬µ±Ä³´ÎÃ»ÓĞµã»÷µ½½ÚµãÊ±ÖØĞÂµ÷ÕûÎª-1
-	private int XBeforeDrag ;//ÓÃÀ´±íÊ¾×öÒ»´ÎÁ¬¹áµÄÍÏ×§ÊÂ¼şÖ®Ç°Êó±êµÄÎ»ÖÃ£¬Á¬¹áÊÇÖ¸ÍÏ×§¹ı³ÌÖĞÃ»ÓĞÊÍ·ÅÊó±ê
-	private int YBeforeDrag ;//ÓÃÀ´±íÊ¾×öÒ»´ÎÁ¬¹áµÄÍÏ×§ÊÂ¼şÖ®Ç°Êó±êµÄÎ»ÖÃ
-	private boolean add_Clicked = false,delete_Clicked = false,combine_Clicked = false,selectRoot_Clicked = false;//add,delete,modify,combine°´Å¥µÄ×´Ì¬
+	private int selectedALine = -1;//é»˜è®¤æ²¡æœ‰é€‰ä¸­çº¿ã€‚selectedALineè¡¨ç¤º è¢«é€‰ä¸­çº¿çš„ç®­å¤´æŒ‡å‘çš„èŠ‚ç‚¹ ä¸å…¶çˆ¶èŠ‚ç‚¹ä¹‹é—´çš„è¿çº¿
+	private int tempX;//è®°å½•é¼ æ ‡ç‚¹å‡»æ—¶çš„åæ ‡ï¼Œæˆ–è€…è®°å½•æ‹–åŠ¨æ—¶é¼ æ ‡çš„ä¸Šä¸€ä¸ªåæ ‡
+	private int tempY;//è®°å½•é¼ æ ‡ç‚¹å‡»æ—¶çš„åæ ‡ï¼Œæˆ–è€…è®°å½•æ‹–åŠ¨æ—¶é¼ æ ‡çš„ä¸Šä¸€ä¸ªåæ ‡
+	private int mouseX; //è¡¨ç¤ºä»»æ„æ—¶åˆ»é¼ æ ‡çš„ä½ç½®
+	private int mouseY;//è¡¨ç¤ºä»»æ„æ—¶åˆ»é¼ æ ‡çš„ä½ç½®
+	private int editingNode = -1;//è¡¨ç¤ºè¢«ç¼–è¾‘çš„èŠ‚ç‚¹çš„åºå·ï¼Œé»˜è®¤æ˜¯æ²¡æœ‰è¦ç¼–è¾‘çš„èŠ‚ç‚¹
+	private int parentOfAddingNode = -1;//è¡¨ç¤ºè¦æ·»åŠ èŠ‚ç‚¹çš„çˆ¶äº²èŠ‚ç‚¹ï¼Œé»˜è®¤ä¸º-1å³ä¸æ·»åŠ èŠ‚ç‚¹
+	private int[] combinedNodes = {-1,-1};//è¡¨ç¤ºå°†è¦é“¾æ¥çš„ä¸¤ä¸ªèŠ‚ç‚¹
+	private int count = -1;//ç”¨æ¥è¡¨ç¤ºæ·»åŠ åˆ°æ•°ç»„combinedNodesä¸­çš„ä½ç½®ï¼Œå½“æŸæ¬¡æ²¡æœ‰ç‚¹å‡»åˆ°èŠ‚ç‚¹æ—¶é‡æ–°è°ƒæ•´ä¸º-1
+	private int XBeforeDrag ;//ç”¨æ¥è¡¨ç¤ºåšä¸€æ¬¡è¿è´¯çš„æ‹–æ‹½äº‹ä»¶ä¹‹å‰é¼ æ ‡çš„ä½ç½®ï¼Œè¿è´¯æ˜¯æŒ‡æ‹–æ‹½è¿‡ç¨‹ä¸­æ²¡æœ‰é‡Šæ”¾é¼ æ ‡
+	private int YBeforeDrag ;//ç”¨æ¥è¡¨ç¤ºåšä¸€æ¬¡è¿è´¯çš„æ‹–æ‹½äº‹ä»¶ä¹‹å‰é¼ æ ‡çš„ä½ç½®
+	private boolean add_Clicked = false,delete_Clicked = false,combine_Clicked = false,selectRoot_Clicked = false;//add,delete,modify,combineæŒ‰é’®çš„çŠ¶æ€
 	private JButton add,delete,combine,selectRoot;
 	
 	
@@ -51,20 +51,20 @@ public class TreePanel extends JPanel {
 			public void mousePressed(MouseEvent me) {
 				mouseX = me.getX();
 				mouseY = me.getY();
-				tempX = me.getX();//ÍÏ×§µÄÖĞÒ»Ö±¸ü¸Ä£¬°ÑÍÏ×§ÊÂ¼ş·Ö½â³ÉĞ¡µÄÍÏ×§ÊÂ¼ş£¬Ã¿´ÎÖ»ÒÆ¶¯Ò»¸öÏñËØ
+				tempX = me.getX();//æ‹–æ‹½çš„ä¸­ä¸€ç›´æ›´æ”¹ï¼ŒæŠŠæ‹–æ‹½äº‹ä»¶åˆ†è§£æˆå°çš„æ‹–æ‹½äº‹ä»¶ï¼Œæ¯æ¬¡åªç§»åŠ¨ä¸€ä¸ªåƒç´ 
 				tempY = me.getY();
 				
-				XBeforeDrag = me.getX();//ÍÏ×§¹ı³ÌÖĞ²»¸ü¸Ä£¬ÔÚÍÏ×§ÊÂ¼şÒ»¿ªÊ¼¾ÍÉú³É
+				XBeforeDrag = me.getX();//æ‹–æ‹½è¿‡ç¨‹ä¸­ä¸æ›´æ”¹ï¼Œåœ¨æ‹–æ‹½äº‹ä»¶ä¸€å¼€å§‹å°±ç”Ÿæˆ
 				YBeforeDrag = me.getY();
 				
 				int i=0;
 				
 				for (; i < nodes.size(); i++) {
 //					System.out.println("--------"+mouseX+" "+mouseY);
-					if (nodes.get(i).getBounds().contains(mouseX, mouseY)) {// Êó±êÍ£ÁôÔÚ½ÚµãiµÄ¾ØĞÎÀïÃæ
+					if (nodes.get(i).getBounds().contains(mouseX, mouseY)) {// é¼ æ ‡åœç•™åœ¨èŠ‚ç‚¹içš„çŸ©å½¢é‡Œé¢
     					selectedNodes = i;
-//						if (me.getClickCount() == 2&&!me.isAltDown()&&!me.isControlDown()&&!me.isShiftDown()) {//Ë«»÷±à¼­½Úµã
-    					if (me.getClickCount() == 2&&!me.isAltDown()) {//Ë«»÷±à¼­½Úµã	
+//						if (me.getClickCount() == 2&&!me.isAltDown()&&!me.isControlDown()&&!me.isShiftDown()) {//åŒå‡»ç¼–è¾‘èŠ‚ç‚¹
+    					if (me.getClickCount() == 2&&!me.isAltDown()) {//åŒå‡»ç¼–è¾‘èŠ‚ç‚¹	
 							editingNode = i;
 							nodes.get(i).setValue(nodes.get(editingNode).getValue());
 							
@@ -73,8 +73,8 @@ public class TreePanel extends JPanel {
 							editingNode = -1;
 						}
 						
-//						if( ( me.isAltDown()&&!me.isControlDown() ) || isAdd_Clicked()) {//alt¼Óµã»÷i½Úµã,±»Ñ¡ÖĞ½Úµã»áÔö¼ÓÒ»¸ö×Ó½Úµã
-						if(  me.isAltDown() || isAdd_Clicked()) {//alt¼Óµã»÷i½Úµã,±»Ñ¡ÖĞ½Úµã»áÔö¼ÓÒ»¸ö×Ó½Úµã
+//						if( ( me.isAltDown()&&!me.isControlDown() ) || isAdd_Clicked()) {//altåŠ ç‚¹å‡»ièŠ‚ç‚¹,è¢«é€‰ä¸­èŠ‚ç‚¹ä¼šå¢åŠ ä¸€ä¸ªå­èŠ‚ç‚¹
+						if(  me.isAltDown() || isAdd_Clicked()) {//altåŠ ç‚¹å‡»ièŠ‚ç‚¹,è¢«é€‰ä¸­èŠ‚ç‚¹ä¼šå¢åŠ ä¸€ä¸ªå­èŠ‚ç‚¹
 							parentOfAddingNode = selectedNodes;
 							add_Clicked = false;
 							add.setBackground((Color)new ColorUIResource(238,238,238));
@@ -84,7 +84,7 @@ public class TreePanel extends JPanel {
 							parentOfAddingNode = -1;
 						}
 						
-						//½«Ñ¡ÔñµÄ½ÚµãÉèÖÃÎª¸ÃÊ÷µÄ¸ù½Úµã
+						//å°†é€‰æ‹©çš„èŠ‚ç‚¹è®¾ç½®ä¸ºè¯¥æ ‘çš„æ ¹èŠ‚ç‚¹
 						if(isSelectRoot_Clicked()) {
 							int indexOfPreRoot = treeLists.indexOf(nodes.get(selectedNodes).getRoot());
 							treeLists.set(indexOfPreRoot, nodes.get(selectedNodes).changeRoot());
@@ -95,24 +95,24 @@ public class TreePanel extends JPanel {
 							changeStatus_PanelModified();
 							repaint();
 						}
-						// Êó±êµã»÷ÁËcombine°´Å¥£¬¸Ã°´Å¥³ÊÑ¡ÖĞ×´Ì¬,Á¬½ÓÁ½¸ö½Úµã
+						// é¼ æ ‡ç‚¹å‡»äº†combineæŒ‰é’®ï¼Œè¯¥æŒ‰é’®å‘ˆé€‰ä¸­çŠ¶æ€,è¿æ¥ä¸¤ä¸ªèŠ‚ç‚¹
 						if (isCombine_Clicked()) {
 							count++;
 							count = count % 2;
 
 							combinedNodes[count] = selectedNodes;
 							if (combinedNodes[0] != -1 && combinedNodes[1] != -1
-									&& combinedNodes[0] != combinedNodes[1]) {// ´ËÊ±±íÊ¾Á¬½ÓÁ½¸ö½Úµã
+									&& combinedNodes[0] != combinedNodes[1]) {// æ­¤æ—¶è¡¨ç¤ºè¿æ¥ä¸¤ä¸ªèŠ‚ç‚¹
 
 								if (!nodes.get(combinedNodes[count % 2]).getRoot()
-										.equals(nodes.get(combinedNodes[(count + 1) % 2]).getRoot())) {// Á½¸ö½Úµã²»ÔÚÍ¬Ò»¿ÃÊ÷ÉÏ
+										.equals(nodes.get(combinedNodes[(count + 1) % 2]).getRoot())) {// ä¸¤ä¸ªèŠ‚ç‚¹ä¸åœ¨åŒä¸€æ£µæ ‘ä¸Š
 									TreePanelNode firstNode = nodes.elementAt(combinedNodes[(count + 1) % 2]);
 									TreePanelNode secondNode = nodes.get(combinedNodes[count % 2]);
 
 									
 
 									if (secondNode.equals(secondNode.getRoot()) == false) {
-										if (JOptionPane.showConfirmDialog(null, "Á¬½Ó¸Ã½Úµã½«»á¶ÔÊ÷µÄ½á¹¹½øĞĞĞŞ¸Ä£¬ÊÇ·ñÁ¬½Ó£¿", "È·ÈÏ¶Ô»°¿ò",
+										if (JOptionPane.showConfirmDialog(null, "è¿æ¥è¯¥èŠ‚ç‚¹å°†ä¼šå¯¹æ ‘çš„ç»“æ„è¿›è¡Œä¿®æ”¹ï¼Œæ˜¯å¦è¿æ¥ï¼Ÿ", "ç¡®è®¤å¯¹è¯æ¡†",
 												JOptionPane.YES_NO_OPTION,
 												JOptionPane.INFORMATION_MESSAGE) == JOptionPane.YES_OPTION) {
 											treeLists.remove(secondNode.getRoot());
@@ -171,23 +171,23 @@ public class TreePanel extends JPanel {
 						}
 
 						
-						if(isDelete_Clicked()) {//µã»÷ÁËÉ¾³ı°´Å¥£¬É¾³ıµã»÷µÄ½Úµã
+						if(isDelete_Clicked()) { //ç‚¹å‡»äº†åˆ é™¤æŒ‰é’®ï¼Œåˆ é™¤ç‚¹å‡»çš„èŠ‚ç‚¹
 							for(TreePanelNode child : nodes.get(selectedNodes).getChildren()) {
 								Vector<TreePanelNode> nodesOfTree_child =  TreePanelNode.allNodes(child);
 								child.setParent(null);
 								child.setRoot(child);
-								child.calculateAngle();//¸ù½ÚµãµÄangleÔİ¶¨Îª0
+								child.calculateAngle();//æ ¹èŠ‚ç‚¹çš„angleæš‚å®šä¸º0
 								for(int k = 1;k < nodesOfTree_child.size();k++) {
 									nodesOfTree_child.get(k).setRoot(child);
 								}
-								treeLists.add(child);//½«ÓÉ¸Ã½Úµã²úÉúµÄÊ÷¶¼¼ÓÈëµ½treeListsÖĞ
+								treeLists.add(child);//å°†ç”±è¯¥èŠ‚ç‚¹äº§ç”Ÿçš„æ ‘éƒ½åŠ å…¥åˆ°treeListsä¸­
 								
 							}
-//							nodes.get(selectedNodes).setChildren(new Vector<TreePanelNode>() );//½«¸Ã½ÚµãµÄ×Ó½ÚµãÈ¥µô
+//							nodes.get(selectedNodes).setChildren(new Vector<TreePanelNode>() );//å°†è¯¥èŠ‚ç‚¹çš„å­èŠ‚ç‚¹å»æ‰
 							if(nodes.get(selectedNodes) == nodes.get(selectedNodes).getRoot()) {
 								treeLists.remove(nodes.get(selectedNodes));
 							}else{
-								nodes.get(selectedNodes).getParent().getChildren().remove(nodes.get(selectedNodes));//É¾³ı¸Ã½Úµã
+								nodes.get(selectedNodes).getParent().getChildren().remove(nodes.get(selectedNodes));//åˆ é™¤è¯¥èŠ‚ç‚¹
 							}
 							
 							nodes = TreePanelNode.nodesOfAllTrees(treeLists);
@@ -195,8 +195,8 @@ public class TreePanel extends JPanel {
 							changeStatus_PanelModified();
 							
 							selectedNodes = -1;
-							editingNode = -1;//±à¼­¹ı³ÌÖĞ¿ÉÒÔÖ±½ÓÉ¾³ı¸Ã½Úµã
-							System.out.println("É¾³ıÁË¸Ã½Úµã");
+							editingNode = -1;//ç¼–è¾‘è¿‡ç¨‹ä¸­å¯ä»¥ç›´æ¥åˆ é™¤è¯¥èŠ‚ç‚¹
+							System.out.println("åˆ é™¤äº†è¯¥èŠ‚ç‚¹");
 							repaint();
 						}
 						
@@ -204,7 +204,7 @@ public class TreePanel extends JPanel {
 						
 						break;
 					}
-					else {//½Úµãi²»ÊÇÑ¡ÖĞ½Úµã
+					else {//èŠ‚ç‚¹iä¸æ˜¯é€‰ä¸­èŠ‚ç‚¹
 						selectedNodes = -1;
 						editingNode = -1;
 						parentOfAddingNode = -1;
@@ -214,7 +214,7 @@ public class TreePanel extends JPanel {
 				
 
 				
-				if(selectedNodes == -1 && parentOfAddingNode == -1) {//Ã»ÓĞÑ¡ÖĞ½Úµã£¬ÓÃÀ´Ìí¼ÓÒ»¿ÅĞÂµÄÊ÷
+				if(selectedNodes == -1 && parentOfAddingNode == -1) {//æ²¡æœ‰é€‰ä¸­èŠ‚ç‚¹ï¼Œç”¨æ¥æ·»åŠ ä¸€é¢—æ–°çš„æ ‘
 //					if( ( me.isAltDown() && !me.isControlDown() ) || isAdd_Clicked() ) {
 					if(  me.isAltDown() || isAdd_Clicked() ) {
 						parentOfAddingNode = -2;
@@ -227,24 +227,24 @@ public class TreePanel extends JPanel {
 				
 			}
 
-			public void mouseReleased(MouseEvent me) {// ¸ÃÊÂ¼şÔÚµã»÷ÊÕ»ØÊó±êÊ±»òÕßÍÏ×§½áÊøÊÍ·ÅÊó±êÊ±´¥·¢
+			public void mouseReleased(MouseEvent me) {// è¯¥äº‹ä»¶åœ¨ç‚¹å‡»æ”¶å›é¼ æ ‡æ—¶æˆ–è€…æ‹–æ‹½ç»“æŸé‡Šæ”¾é¼ æ ‡æ—¶è§¦å‘
 				parentOfAddingNode = -1;
 				System.out.println("selectedNodes=" + selectedNodes);
 
-				if ((selectedNodes != -1) && (((me.getX() - XBeforeDrag) != 0) || ((me.getY() - YBeforeDrag) != 0))) {// ±íÊ¾·¢ÉúÁËÍÏ×§ÊÂ¼ş£¬¸úĞÂnodes,µ÷ÓÃrepaint
-					if(nodes.get(selectedNodes).hasChangeAfterMoveNode(mouseX, mouseY))//×öÁËĞŞ¸Ä
+				if ((selectedNodes != -1) && (((me.getX() - XBeforeDrag) != 0) || ((me.getY() - YBeforeDrag) != 0))) {// è¡¨ç¤ºå‘ç”Ÿäº†æ‹–æ‹½äº‹ä»¶ï¼Œè·Ÿæ–°nodes,è°ƒç”¨repaint
+					if(nodes.get(selectedNodes).hasChangeAfterMoveNode(mouseX, mouseY))//åšäº†ä¿®æ”¹
 						changeStatus_PanelModified();
 					
-					nodes.get(selectedNodes).calculateAngle();//¼ÆËã±»ÒÆ¶¯½ÚµãÓë¸¸½ÚµãµÄ½Ç¶È
-	                nodes.get(selectedNodes).calculateAngleOfChildren();//¼ÆËã±»ÒÆ¶¯½ÚµãµÄ×Ó½ÚµãÓë±»ÒÆ¶¯½ÚµãÖ®¼äµÄ½Ç¶È
-					nodes.get(selectedNodes).sortByAngle();// ½«±»ÒÆ¶¯½ÚµãµÄËùÓĞ×Ó½ÚµãÅÅĞò
+					nodes.get(selectedNodes).calculateAngle();//è®¡ç®—è¢«ç§»åŠ¨èŠ‚ç‚¹ä¸çˆ¶èŠ‚ç‚¹çš„è§’åº¦
+	                nodes.get(selectedNodes).calculateAngleOfChildren();//è®¡ç®—è¢«ç§»åŠ¨èŠ‚ç‚¹çš„å­èŠ‚ç‚¹ä¸è¢«ç§»åŠ¨èŠ‚ç‚¹ä¹‹é—´çš„è§’åº¦
+					nodes.get(selectedNodes).sortByAngle();// å°†è¢«ç§»åŠ¨èŠ‚ç‚¹çš„æ‰€æœ‰å­èŠ‚ç‚¹æ’åº
 					if (nodes.get(selectedNodes).getParent() != null
-							&& nodes.get(selectedNodes).getParent().getChildren().size() != 1) {// Èç¹û±»ÒÆ¶¯µÄ½ÚµãÓĞĞÖµÜ½Úµã
+							&& nodes.get(selectedNodes).getParent().getChildren().size() != 1) {// å¦‚æœè¢«ç§»åŠ¨çš„èŠ‚ç‚¹æœ‰å…„å¼ŸèŠ‚ç‚¹
 						TreePanelNode theMovingNode = nodes.get(selectedNodes);
-						Vector<TreePanelNode> siblingOfMovedNode = theMovingNode.getParent().getChildren();// »ñµÃ°üÀ¨ÒÆ¶¯½ÚµãµÄÆäĞÖµÜ½ÚµãµÄVector
-						siblingOfMovedNode.remove(theMovingNode);// ½«±»ÒÆ¶¯½Úµã´ÓÆäĞÖµÜ½ÚµãĞòÁĞÖĞÒÆ³ı£¬ÔÚÖØĞÂ°´ºÏÀíË³ĞòÌí¼Ó½øÈ¥²¢ÇÒ¸úĞÂnodesĞòÁĞ
+						Vector<TreePanelNode> siblingOfMovedNode = theMovingNode.getParent().getChildren();// è·å¾—åŒ…æ‹¬ç§»åŠ¨èŠ‚ç‚¹çš„å…¶å…„å¼ŸèŠ‚ç‚¹çš„Vector
+						siblingOfMovedNode.remove(theMovingNode);// å°†è¢«ç§»åŠ¨èŠ‚ç‚¹ä»å…¶å…„å¼ŸèŠ‚ç‚¹åºåˆ—ä¸­ç§»é™¤ï¼Œåœ¨é‡æ–°æŒ‰åˆç†é¡ºåºæ·»åŠ è¿›å»å¹¶ä¸”è·Ÿæ–°nodesåºåˆ—
 						int i = 0;
-						for (; i < siblingOfMovedNode.size(); i++) {// ½«±»ÒÆ¶¯½ÚµãËùÔÚµÄVectorÖØĞÂ°´ÕÕkÖµ´óĞ¡ÅÅÁĞ
+						for (; i < siblingOfMovedNode.size(); i++) {// å°†è¢«ç§»åŠ¨èŠ‚ç‚¹æ‰€åœ¨çš„Vectoré‡æ–°æŒ‰ç…§kå€¼å¤§å°æ’åˆ—
 							if (theMovingNode.getAngle() > siblingOfMovedNode.get(i).getAngle()) {
 								siblingOfMovedNode.insertElementAt(theMovingNode, i);
 								nodes = TreePanelNode.nodesOfAllTrees(treeLists);
@@ -259,12 +259,12 @@ public class TreePanel extends JPanel {
 					}
 					nodes = TreePanelNode.nodesOfAllTrees(treeLists);
 
-					// ²âÊÔ
+					// æµ‹è¯•
 //					int count = -1;
 //					for (TreePanelNode theNode : nodes) {
 //						count++;
-//						System.out.print("count:" + count + theNode.getValue() + "µÄx,yÎª£º" + theNode.getX() + ","
-//								+ theNode.getY() + "½Ç¶ÈÊÇ" + theNode.getAngle() + "firstChild:");
+//						System.out.print("count:" + count + theNode.getValue() + "çš„x,yä¸ºï¼š" + theNode.getX() + ","
+//								+ theNode.getY() + "è§’åº¦æ˜¯" + theNode.getAngle() + "firstChild:");
 //						if (!theNode.getChildren().isEmpty())
 //							System.out.println("firstChlild:" + theNode.getChildren().get(0).getValue().toString());
 //					}
@@ -273,7 +273,7 @@ public class TreePanel extends JPanel {
 				}
 				
 				
-				if (selectedNodes == -1 && !selectedALines.isEmpty()) {//É¾³ıÁ¬Ïß
+				if (selectedNodes == -1 && !selectedALines.isEmpty()) {//åˆ é™¤è¿çº¿
 					for(int selectedALine:selectedALines) {
 						nodes.get(selectedALine).relieveRelationship();
 						treeLists.add(nodes.get(selectedALine));
@@ -289,9 +289,9 @@ public class TreePanel extends JPanel {
 			}
 		});
 		
-		//¼üÅÌÊäÈë¼àÌıÆ÷
+		//é”®ç›˜è¾“å…¥ç›‘å¬å™¨
 		addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent ke) {//¸Ã·½·¨ÔçÓÚkeyType
+			public void keyPressed(KeyEvent ke) {//è¯¥æ–¹æ³•æ—©äºkeyType
 //				if(ke.isControlDown()||ke.isAltDown()) {
 				if( ke.isAltDown() ) {
 					add_Clicked = false;
@@ -324,18 +324,18 @@ public class TreePanel extends JPanel {
 						Vector<TreePanelNode> nodesOfTree_child =  TreePanelNode.allNodes(child);
 						child.setParent(null);
 						child.setRoot(child);
-						child.calculateAngle();//¸ù½ÚµãµÄangleÔİ¶¨Îª0
+						child.calculateAngle();//æ ¹èŠ‚ç‚¹çš„angleæš‚å®šä¸º0
 						for(int k = 1;k < nodesOfTree_child.size();k++) {
 							nodesOfTree_child.get(k).setRoot(child);
 						}
-						treeLists.add(child);//½«ÓÉ¸Ã½Úµã²úÉúµÄÊ÷¶¼¼ÓÈëµ½treeListsÖĞ
+						treeLists.add(child);//å°†ç”±è¯¥èŠ‚ç‚¹äº§ç”Ÿçš„æ ‘éƒ½åŠ å…¥åˆ°treeListsä¸­
 						
 					}
-//					nodes.get(selectedNodes).setChildren(new Vector<TreePanelNode>() );//½«¸Ã½ÚµãµÄ×Ó½ÚµãÈ¥µô
+//					nodes.get(selectedNodes).setChildren(new Vector<TreePanelNode>() );//å°†è¯¥èŠ‚ç‚¹çš„å­èŠ‚ç‚¹å»æ‰
 					if(nodes.get(selectedNodes) == nodes.get(selectedNodes).getRoot()) {
 						treeLists.remove(nodes.get(selectedNodes));
 					}else{
-						nodes.get(selectedNodes).getParent().getChildren().remove(nodes.get(selectedNodes));//É¾³ı¸Ã½Úµã
+						nodes.get(selectedNodes).getParent().getChildren().remove(nodes.get(selectedNodes));//åˆ é™¤è¯¥èŠ‚ç‚¹
 					}
 					
 					nodes = TreePanelNode.nodesOfAllTrees(treeLists);
@@ -343,12 +343,12 @@ public class TreePanel extends JPanel {
 					
 					changeStatus_PanelModified();
 					selectedNodes = -1;
-					editingNode = -1;//±à¼­¹ı³ÌÖĞ¿ÉÒÔÖ±½ÓÉ¾³ı¸Ã½Úµã
-					System.out.println("É¾³ıÁË¸Ã½Úµã");
+					editingNode = -1;//ç¼–è¾‘è¿‡ç¨‹ä¸­å¯ä»¥ç›´æ¥åˆ é™¤è¯¥èŠ‚ç‚¹
+					System.out.println("åˆ é™¤äº†è¯¥èŠ‚ç‚¹");
 					repaint();
 				}
 					
-				if (editingNode != -1 && ke.getKeyCode() == KeyEvent.VK_BACK_SPACE) {//µ±µãÁËbackspaceÊ± ¿ÉÒÔÉ¾³ı×Ö·û
+				if (editingNode != -1 && ke.getKeyCode() == KeyEvent.VK_BACK_SPACE) {//å½“ç‚¹äº†backspaceæ—¶ å¯ä»¥åˆ é™¤å­—ç¬¦
 					String str = nodes.get(editingNode).getValue().toString() + String.valueOf(ke.getKeyChar()).trim();
 					if(str.length() != 0) {
 						str = str.substring(0, str.length()-1);
@@ -356,13 +356,13 @@ public class TreePanel extends JPanel {
 						changeStatus_PanelModified();
 					}		
 				}
-				if(editingNode !=-1 && ke.getKeyCode() == KeyEvent.VK_ENTER) {//ÊäÈëenter±íÊ¾ÊäÈëÍê³É
+				if(editingNode !=-1 && ke.getKeyCode() == KeyEvent.VK_ENTER) {//è¾“å…¥enterè¡¨ç¤ºè¾“å…¥å®Œæˆ
 					editingNode = -1;
 					changeStatus_PanelModified();
 				}
 				
 			}
-			public void keyTyped(KeyEvent ke) {//³ıÁËShift¡¢Ctrl¡¢altÖ®ÍâÊäÈëÈÎÒ»¸ö×Ö·û¾ù»áµ÷ÓÃ¸Ã·½·¨
+			public void keyTyped(KeyEvent ke) {//é™¤äº†Shiftã€Ctrlã€altä¹‹å¤–è¾“å…¥ä»»ä¸€ä¸ªå­—ç¬¦å‡ä¼šè°ƒç”¨è¯¥æ–¹æ³•
 //				System.out.println("====");
 				if (editingNode != -1  ) { 
 					nodes.get(editingNode).setValue(nodes.get(editingNode).getValue().toString() + String.valueOf(ke.getKeyChar()).trim());
@@ -374,23 +374,23 @@ public class TreePanel extends JPanel {
 		});
 		
 		addMouseMotionListener(new MouseMotionAdapter() {
-			public void mouseDragged(MouseEvent me) {//¸ÃÊÂ¼ş²»»á´¥·¢mouseMoved
+			public void mouseDragged(MouseEvent me) {//è¯¥äº‹ä»¶ä¸ä¼šè§¦å‘mouseMoved
 				mouseX = me.getX();
 				mouseY = me.getY();
-				System.out.println("ÍÏ×§ÁË");
-				// È·¶¨Êó±êÍ£ÁôÔÚËùÑ¡Ôñ½ÚµãµÄÉÏÃæ
+				System.out.println("æ‹–æ‹½äº†");
+				// ç¡®å®šé¼ æ ‡åœç•™åœ¨æ‰€é€‰æ‹©èŠ‚ç‚¹çš„ä¸Šé¢
 				if (selectedNodes != -1 ) {
 
 //					if (me.isAltDown() && !me.isControlDown()&&parentOfAddingNode!=-1) {
 					if (me.isAltDown() && parentOfAddingNode!=-1) {
 						parentOfAddingNode = selectedNodes;
-//						System.out.println("Ìí¼ÓÁË"+parentOfAddingNode+"µÄ×Ó½Úµã");
+//						System.out.println("æ·»åŠ äº†"+parentOfAddingNode+"çš„å­èŠ‚ç‚¹");
 					} else {
 						parentOfAddingNode = -1;
 
-						if(nodes.get(selectedNodes).hasChangeAfterMoveNode(mouseX, mouseY))//×öÁËĞŞ¸Ä
+						if(nodes.get(selectedNodes).hasChangeAfterMoveNode(mouseX, mouseY))//åšäº†ä¿®æ”¹
 							changeStatus_PanelModified();						
-						// ÓÃÀ´½«Ñ¡ÖĞµÄ½ÚµãÒÆ¶¯,ÒÆ¶¯½Úµã						
+						// ç”¨æ¥å°†é€‰ä¸­çš„èŠ‚ç‚¹ç§»åŠ¨,ç§»åŠ¨èŠ‚ç‚¹						
 						nodes.get(selectedNodes).setLocation(
 									nodes.get(selectedNodes).getLocation().x + mouseX - tempX,
 									nodes.get(selectedNodes).getLocation().y + mouseY - tempY);
@@ -399,11 +399,11 @@ public class TreePanel extends JPanel {
 						tempX = mouseX;
 						tempY = mouseY;
 						
-						System.out.println("ÒÆ¶¯ÁËµÚ"+selectedNodes+"¸ö½Úµã");
+						System.out.println("ç§»åŠ¨äº†ç¬¬"+selectedNodes+"ä¸ªèŠ‚ç‚¹");
 					}
 					repaint();
 				}
-				else if(isDelete_Clicked()) {//É¾³ı½ÚµãÖ®¼äµÄÁ¬Ïß
+				else if(isDelete_Clicked()) {//åˆ é™¤èŠ‚ç‚¹ä¹‹é—´çš„è¿çº¿
 					selectedALines = new ArrayList<Integer>();
 					for(int i=0;i<nodes.size();i++) {
 						if( nodes.get(i).isLineSelected(XBeforeDrag,YBeforeDrag,me.getX(),me.getY()) ) {
@@ -414,7 +414,7 @@ public class TreePanel extends JPanel {
 				}
 			}
 
-			public void mouseMoved(MouseEvent me) {// Êó±êÃ»ÓĞµã»÷Ê±µÄÒÆ¶¯
+			public void mouseMoved(MouseEvent me) {// é¼ æ ‡æ²¡æœ‰ç‚¹å‡»æ—¶çš„ç§»åŠ¨
 				mouseX = me.getX();
 				mouseY = me.getY();
 //				System.out.println(mouseX+" "+mouseY);
@@ -424,7 +424,7 @@ public class TreePanel extends JPanel {
 	}
 	
 	
-	public void changeStatus_PanelModified() {//½«txtPathµÄÎÄ¼ş×´Ì¬ĞŞ¸ÄÎª¡°ÒÑ¾­±»ĞŞ¸Ä£¬»¹Î´±£´æ¡±×´Ì¬
+	public void changeStatus_PanelModified() {//å°†txtPathçš„æ–‡ä»¶çŠ¶æ€ä¿®æ”¹ä¸ºâ€œå·²ç»è¢«ä¿®æ”¹ï¼Œè¿˜æœªä¿å­˜â€çŠ¶æ€
 		String txtPath = this.getTreeAtTxt().getTxtPath();
 		hasModeified.put(txtPath,Boolean.TRUE);
 	}
@@ -592,19 +592,19 @@ public class TreePanel extends JPanel {
 	public static void drawAL(int sx, int sy, int ex, int ey, Graphics2D g2)  
     {  
   
-        double H = 10; // ¼ıÍ·¸ß¶È  
-        double L = 4; // µ×±ßµÄÒ»°ë  
+        double H = 10; // ç®­å¤´é«˜åº¦  
+        double L = 4; // åº•è¾¹çš„ä¸€åŠ  
         int x3 = 0;  
         int y3 = 0;  
         int x4 = 0;  
         int y4 = 0;  
-        double awrad = Math.atan(L / H); // ¼ıÍ·½Ç¶È  
-        double arraow_len = Math.sqrt(L * L + H * H); // ¼ıÍ·µÄ³¤¶È  
+        double awrad = Math.atan(L / H); // ç®­å¤´è§’åº¦  
+        double arraow_len = Math.sqrt(L * L + H * H); // ç®­å¤´çš„é•¿åº¦  
         double[] arrXY_1 = rotateVec(ex - sx, ey - sy, awrad, true, arraow_len);  
         double[] arrXY_2 = rotateVec(ex - sx, ey - sy, -awrad, true, arraow_len);  
-        double x_3 = ex - arrXY_1[0]; // (x3,y3)ÊÇµÚÒ»¶Ëµã  
+        double x_3 = ex - arrXY_1[0]; // (x3,y3)æ˜¯ç¬¬ä¸€ç«¯ç‚¹  
         double y_3 = ey - arrXY_1[1];  
-        double x_4 = ex - arrXY_2[0]; // (x4,y4)ÊÇµÚ¶ş¶Ëµã  
+        double x_4 = ex - arrXY_2[0]; // (x4,y4)æ˜¯ç¬¬äºŒç«¯ç‚¹  
         double y_4 = ey - arrXY_2[1];  
   
         Double X3 = new Double(x_3);  
@@ -615,7 +615,7 @@ public class TreePanel extends JPanel {
         x4 = X4.intValue();  
         Double Y4 = new Double(y_4);  
         y4 = Y4.intValue();  
-        // »­Ïß  
+        // ç”»çº¿  
         g2.drawLine(sx, sy, ex, ey);  
         //  
         GeneralPath triangle = new GeneralPath();  
@@ -623,19 +623,19 @@ public class TreePanel extends JPanel {
         triangle.lineTo(x3, y3);  
         triangle.lineTo(x4, y4);  
         triangle.closePath();  
-        //ÊµĞÄ¼ıÍ·  
+        //å®å¿ƒç®­å¤´  
 //        g2.fill(triangle);  
-        //·ÇÊµĞÄ¼ıÍ·  
+        //éå®å¿ƒç®­å¤´  
         g2.draw(triangle);  
   
     }  
   
-    // ¼ÆËã  
+    // è®¡ç®—  
     public static double[] rotateVec(int px, int py, double ang,  
             boolean isChLen, double newLen) {  
   
         double mathstr[] = new double[2];  
-        // Ê¸Á¿Ğı×ªº¯Êı£¬²ÎÊıº¬Òå·Ö±ğÊÇx·ÖÁ¿¡¢y·ÖÁ¿¡¢Ğı×ª½Ç¡¢ÊÇ·ñ¸Ä±ä³¤¶È¡¢ĞÂ³¤¶È  
+        // çŸ¢é‡æ—‹è½¬å‡½æ•°ï¼Œå‚æ•°å«ä¹‰åˆ†åˆ«æ˜¯xåˆ†é‡ã€yåˆ†é‡ã€æ—‹è½¬è§’ã€æ˜¯å¦æ”¹å˜é•¿åº¦ã€æ–°é•¿åº¦  
         double vx = px * Math.cos(ang) - py * Math.sin(ang);  
         double vy = px * Math.sin(ang) + py * Math.cos(ang);  
         if (isChLen) {  
@@ -656,25 +656,25 @@ public class TreePanel extends JPanel {
 		int width = fm.stringWidth(str)+20;
 		int height = fm.getHeight()+20;	
 		
-		//Ìí¼ÓĞÂ½Úµã
-		if(parentOfAddingNode != -1 && parentOfAddingNode != -2 ) {//Ìí¼ÓÒ»¸öÊ÷Ò¶
+		//æ·»åŠ æ–°èŠ‚ç‚¹
+		if(parentOfAddingNode != -1 && parentOfAddingNode != -2 ) {//æ·»åŠ ä¸€ä¸ªæ ‘å¶
 			TreePanelNode newNode = new TreePanelNode(nodes.get(parentOfAddingNode),
 					mouseX, mouseY, width, height, "newNode") ;
-			newNode.setRoot(nodes.get(parentOfAddingNode).getRoot());//ÎªĞÂÔö½ÚµãÌí¼Óroot½Úµã
-			newNode.calculateAngle();//ÎªĞÂÔö½ÚµãÇóµÃkÖµ
+			newNode.setRoot(nodes.get(parentOfAddingNode).getRoot());//ä¸ºæ–°å¢èŠ‚ç‚¹æ·»åŠ rootèŠ‚ç‚¹
+			newNode.calculateAngle();//ä¸ºæ–°å¢èŠ‚ç‚¹æ±‚å¾—kå€¼
 			double kOfNewNode =  newNode.getAngle();
 			Vector<TreePanelNode> siblingOfNewNode = nodes.get(parentOfAddingNode).getChildren();
 			int j;
 			
-			for ( j=0 ; j<siblingOfNewNode.size() ; j++) {//½«ĞÂÔö½Úµã²åÈëµ½Æä¸¸½ÚµãµÄvector<>childrenĞòÁĞÖĞµÄÊÊµ±Î»ÖÃ
+			for ( j=0 ; j<siblingOfNewNode.size() ; j++) {//å°†æ–°å¢èŠ‚ç‚¹æ’å…¥åˆ°å…¶çˆ¶èŠ‚ç‚¹çš„vector<>childrenåºåˆ—ä¸­çš„é€‚å½“ä½ç½®
 				if( kOfNewNode > siblingOfNewNode.get(j).getAngle() ) {
 					siblingOfNewNode. insertElementAt(newNode,j);
 					nodes = TreePanelNode.nodesOfAllTrees(treeLists);
 					selectedNodes = nodes.indexOf(newNode);
 					
-					//²âÊÔ
+					//æµ‹è¯•
 					for(int i=0; i<nodes.size();i++) {
-						System.out.println(nodes.get(i).getValue()+"½ÚµãµÄĞ±ÂÊ£º"+nodes.get(i).getAngle());
+						System.out.println(nodes.get(i).getValue()+"èŠ‚ç‚¹çš„æ–œç‡ï¼š"+nodes.get(i).getAngle());
 					}
 					
 					break;
@@ -685,9 +685,9 @@ public class TreePanel extends JPanel {
 				nodes = TreePanelNode.nodesOfAllTrees(treeLists);
 				selectedNodes = nodes.indexOf(newNode);
 				
-				//²âÊÔ
+				//æµ‹è¯•
 				for(int i=0; i<nodes.size();i++) {
-					System.out.println(nodes.get(i).getValue()+"½ÚµãµÄĞ±ÂÊ£º"+nodes.get(i).getAngle());
+					System.out.println(nodes.get(i).getValue()+"èŠ‚ç‚¹çš„æ–œç‡ï¼š"+nodes.get(i).getAngle());
 				}
 				
 			}
@@ -695,22 +695,22 @@ public class TreePanel extends JPanel {
 			parentOfAddingNode = -1;
 		}
 
-		if(parentOfAddingNode == -2) {//Ôö¼ÓÒ»¿ÃÊ÷
+		if(parentOfAddingNode == -2) {//å¢åŠ ä¸€æ£µæ ‘
 			TreePanelNode newNode = new TreePanelNode(null,
 					mouseX, mouseY, width, height, "newNode") ;
-			newNode.setRoot(newNode);//ÎªĞÂÔö½ÚµãÌí¼Óroot½Úµã
-			newNode.calculateAngle();//ÎªĞÂÔö½ÚµãÇóµÃkÖµ
+			newNode.setRoot(newNode);//ä¸ºæ–°å¢èŠ‚ç‚¹æ·»åŠ rootèŠ‚ç‚¹
+			newNode.calculateAngle();//ä¸ºæ–°å¢èŠ‚ç‚¹æ±‚å¾—kå€¼
 			treeLists.add(newNode);
-//			System.out.println("treeListsÎª¿Õ£º"+treeLists.isEmpty());
+//			System.out.println("treeListsä¸ºç©ºï¼š"+treeLists.isEmpty());
 			nodes = TreePanelNode.nodesOfAllTrees(treeLists);
-//			System.out.println("nodesÎª¿Õ£º"+nodes.isEmpty());
+//			System.out.println("nodesä¸ºç©ºï¼š"+nodes.isEmpty());
 			selectedNodes = nodes.indexOf(newNode);
 			changeStatus_PanelModified();
 			parentOfAddingNode = -1;
 		}
 		
 		
-		for (int i = 0; i < nodes.size(); i++) {//repaint±»µ÷ÓÃ¸ÃforÑ­»·±ØÈ»±»µ÷ÓÃ
+		for (int i = 0; i < nodes.size(); i++) {//repaintè¢«è°ƒç”¨è¯¥forå¾ªç¯å¿…ç„¶è¢«è°ƒç”¨
 		   {	
 			if (selectedNodes == i)
 				g.setColor(Color.RED);
@@ -718,11 +718,11 @@ public class TreePanel extends JPanel {
 				g.setColor(Color.BLACK);
 		   }	
 		
-		   {//¸ù¾İËùÓĞµÄ½ÚµãÒÔVectorĞòÁĞnodes»­³ö½Úµã
+		   {//æ ¹æ®æ‰€æœ‰çš„èŠ‚ç‚¹ä»¥Vectoråºåˆ—nodesç”»å‡ºèŠ‚ç‚¹
 			String value = nodes.get(i).getValue().toString();
 			int wide = fm.stringWidth(value)+20;
 			int high = fm.getHeight()+20;		
-			nodes.get(i).setSize(wide , high );//¸ù¾İ½ÚµãÖĞÄÚÈİÉè¶¨½ÚµãµÄ¿í¸ß
+			nodes.get(i).setSize(wide , high );//æ ¹æ®èŠ‚ç‚¹ä¸­å†…å®¹è®¾å®šèŠ‚ç‚¹çš„å®½é«˜
 			
 //			g.drawLine(nodes.get(i).getLocation().x + nodes.get(i).getWidth() / 2,
 //					nodes.get(i).getLocation().y + nodes.get(i).getHeight() / 2,
@@ -749,7 +749,7 @@ public class TreePanel extends JPanel {
 						(Graphics2D)g);
 		}
 		
-		grabFocus();//ÓÃÀ´»ñÈ¡½¹µã£¬·ñÔòkeylistener²»ÏìÓ¦
+		grabFocus();//ç”¨æ¥è·å–ç„¦ç‚¹ï¼Œå¦åˆ™keylistenerä¸å“åº”
 	}
 
 }
