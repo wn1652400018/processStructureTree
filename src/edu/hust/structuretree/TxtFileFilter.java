@@ -14,9 +14,7 @@ public class TxtFileFilter extends FileFilter {
 	}
 
 	@Override
-	/**
-	 * 文本过滤器
-	 */
+	//文本过滤器
 	public String getDescription() {
 		return "*.txt";
 	}
