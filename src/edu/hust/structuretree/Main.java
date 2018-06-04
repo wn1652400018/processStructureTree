@@ -8,11 +8,15 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -58,6 +62,7 @@ public class Main {
 	private JButton importExpressionFromText = new JButton("导入表达式");
 	private JFileChooser fileChooser = new JFileChooser(); 
 	private TxtFileFilter txtFileFilter = new TxtFileFilter() ;
+	private static String  charsetName = "gbk";//默认读取文本编码为gbk
 	private Vector<TreePanelNode> nodes = new Vector<TreePanelNode>();
 	private ArrayList<TreePanelNode> treeLists = new ArrayList<TreePanelNode>();
 	private HashMap<String,Boolean> hasModeified = new HashMap<String,Boolean>(); //记录文本是否被改变
@@ -101,11 +106,18 @@ public class Main {
 		JMenuItem jmi_open = new JMenuItem("打开");
 		JMenuItem jmi_save = new JMenuItem("保存");
 		JMenuItem jmi_saveAs = new JMenuItem("另存为");
+		
+		JMenu charset = new JMenu("编码");
+		JMenuItem jmi_gbk = new JMenuItem("gbk");
+		JMenuItem jmi_utf_8 = new JMenuItem("utf-8");
 		jm.add(jmi_new);
 		jm.add(jmi_open);
 		jm.add(jmi_save);
 		jm.add(jmi_saveAs);
+		charset.add(jmi_gbk);
+		charset.add(jmi_utf_8);
 		jmb.add(jm);
+		jmb.add(charset);
 		
 		
 		
@@ -200,16 +212,18 @@ public class Main {
 										fileChooser.setSelectedFile(new File(date.format(new Date()) + ".txt"));
 										if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {//确定保存
 											currentTxtPath = fileChooser.getSelectedFile().toString();
-											FileWriter fw = new FileWriter(currentTxtPath);
+											FileOutputStream fos = new FileOutputStream(currentTxtPath);
+											OutputStreamWriter osw = new OutputStreamWriter(fos,charsetName);
+											BufferedWriter bw = new BufferedWriter(osw);
 											for (String word : t.getTreeLists().get(0).changeIntoText())
-												fw.write(word);
+												bw.write(word);
 
 											hasModeified.remove(null);// 将没有设置位置和文件名的删除，因为已经为它保存到了指定文件中
 											hasModeified.put(currentTxtPath, Boolean.FALSE);
 											t.setHasModeified(hasModeified);
 											t.getTreeAtTxt().setTxtPath(currentTxtPath);// 修改文件的路径，之前是null
 
-											fw.close();
+											bw.close();
 											
 											//新建
 											resetTreePanel();
@@ -253,15 +267,17 @@ public class Main {
 											JOptionPane.INFORMATION_MESSAGE);
 								} else {
 									try {
-										FileWriter fw = new FileWriter(currentTxtPath);
+										FileOutputStream fos = new FileOutputStream(currentTxtPath);
+										OutputStreamWriter osw = new OutputStreamWriter(fos,charsetName);
+										BufferedWriter bw = new BufferedWriter(osw);
 										for (TreePanelNode treeRoot : treesOfSameTxt) {
 											for (String word : treeRoot.changeIntoText())
-												fw.write(word);
-											fw.write("\r\n");
+												bw.write(word);
+											bw.write("\r\n");
 										}
 										hasModeified.put(currentTxtPath, Boolean.FALSE);
 										t.setHasModeified(hasModeified);
-										fw.close();
+										bw.close();
 										//新建
 										resetTreePanel();
 										
@@ -323,16 +339,20 @@ public class Main {
 										fileChooser.setSelectedFile(new File(date.format(new Date()) + ".txt"));
 										if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {//确定保存
 											currentTxtPath = fileChooser.getSelectedFile().toString();
-											FileWriter fw = new FileWriter(currentTxtPath);
+											
+											FileOutputStream fos = new FileOutputStream(currentTxtPath);
+											OutputStreamWriter osw = new OutputStreamWriter(fos,charsetName);
+											BufferedWriter bw = new BufferedWriter(osw);
+											
 											for (String word : t.getTreeLists().get(0).changeIntoText())
-												fw.write(word);
+												bw.write(word);
 
 											hasModeified.remove(null);// 将没有设置位置和文件名的删除，因为已经为它保存到了指定文件中
 											hasModeified.put(currentTxtPath, Boolean.FALSE);
 											t.setHasModeified(hasModeified);
 											t.getTreeAtTxt().setTxtPath(currentTxtPath);// 修改文件的路径，之前是null
 											f.setTitle(new File(currentTxtPath).getName()+"[ " + "1 / 1" +" ]");
-											fw.close();
+											bw.close();
 											
 											//打开
 											try {
@@ -380,15 +400,17 @@ public class Main {
 											JOptionPane.INFORMATION_MESSAGE);
 								} else {
 									try {
-										FileWriter fw = new FileWriter(currentTxtPath);
+										FileOutputStream fow = new FileOutputStream(currentTxtPath);
+										OutputStreamWriter osw =new OutputStreamWriter(fow,charsetName);
+										BufferedWriter bw = new BufferedWriter(osw);
 										for (TreePanelNode treeRoot : treesOfSameTxt) {
 											for (String word : treeRoot.changeIntoText())
-												fw.write(word);
-											fw.write("\r\n");
+												bw.write(word);
+											bw.write("\r\n");
 										}
 										hasModeified.put(currentTxtPath, Boolean.FALSE);
 										t.setHasModeified(hasModeified);
-										fw.close();
+										bw.close();
 										//打开
 										try {
 											openTxts();
@@ -438,9 +460,11 @@ public class Main {
 								if(fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION ) {
 									String currentTxtPath = fileChooser.getSelectedFile().toString();
 									try {
-										FileWriter fw = new FileWriter(currentTxtPath);
+										FileOutputStream fos = new FileOutputStream(currentTxtPath);
+										OutputStreamWriter osw = new OutputStreamWriter(fos,charsetName);
+										BufferedWriter bw = new BufferedWriter(osw);
 										for (String word : t.getTreeLists().get(0).changeIntoText())
-											fw.write(word);
+											bw.write(word);
 
 										hasModeified.remove(null);// 将没有设置位置和文件名的删除，因为已经为它保存到了指定文件中
 										hasModeified.put(currentTxtPath, Boolean.FALSE);
@@ -451,7 +475,7 @@ public class Main {
 										t.initCombineNodes();
 										f.setTitle(fileChooser.getSelectedFile().getName() + "[ " + "1 / 1" + " ]");	
 										t.repaint();
-										fw.close();
+										bw.close();
 									} catch (IOException e1) {
 										e1.printStackTrace();
 									}
@@ -478,11 +502,14 @@ public class Main {
 												JOptionPane.INFORMATION_MESSAGE);
 									} else {
 										try {
-											FileWriter fw = new FileWriter(currentTxtPath);
+											
+											FileOutputStream fos = new FileOutputStream(currentTxtPath);
+											OutputStreamWriter osw = new OutputStreamWriter(fos,charsetName);
+											BufferedWriter bw = new BufferedWriter(osw);
 											for (TreePanelNode treeRoot : treesOfSameTxt) {
 												for (String word : treeRoot.changeIntoText())
-													fw.write(word);
-												fw.write("\r\n");
+													bw.write(word);
+												bw.write("\r\n");
 											}
 											//修改面板的部分状态
 											hasModeified.put(currentTxtPath, Boolean.FALSE);
@@ -491,7 +518,7 @@ public class Main {
 											t.setSelectedNodes(-1);
 											t.initCombineNodes();
 											t.repaint();
-											fw.close();
+											bw.close();
 											
 										} catch (IOException e1) {
 											e1.printStackTrace();
@@ -547,19 +574,21 @@ public class Main {
 						fileChooser.setSelectedFile(new File(date.format(new Date()) + ".txt"));
 						if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {// 确定保存						
 							String filePath = fileChooser.getSelectedFile().toString();
-							FileWriter treeToText = new FileWriter(filePath);
+							FileOutputStream fos = new FileOutputStream(filePath);
+							OutputStreamWriter osw = new OutputStreamWriter(fos,charsetName);
+							BufferedWriter bw = new BufferedWriter(osw);
 							count = 0;
 							for (TreePanelNode root : treeLists) {
 								count++;
 								if (root.examTheTree() && root != null)
 									for (String word : root.changeIntoText())
-										treeToText.write(word);
+										bw.write(word);
 								else
-									treeToText.write("第" + count + "个括号表达式格式错误。");
+									bw.write("第" + count + "个括号表达式格式错误。");
 
-								treeToText.write("\r\n");
+								bw.write("\r\n");
 							}
-							treeToText.close();
+							bw.close();
 							
 						}
 						resetButtonstatus();
@@ -570,6 +599,21 @@ public class Main {
 						e1.printStackTrace();
 					}
 				}
+			}});
+		
+		jmi_gbk.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				charsetName = "gbk";
+			}});
+		jmi_utf_8.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				charsetName = "utf-8";
 			}});
 		
 		parse.addActionListener(new ActionListener() {
@@ -676,19 +720,21 @@ public class Main {
 						fileChooser.setSelectedFile(new File(date.format(new Date()) + ".txt"));
 						if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {// 确定保存						
 							String filePath = fileChooser.getSelectedFile().toString();
-							FileWriter treeToText = new FileWriter(filePath);
+							FileOutputStream fos = new FileOutputStream(filePath);
+							OutputStreamWriter osw = new OutputStreamWriter(fos,charsetName);
+							BufferedWriter bw = new BufferedWriter(osw);
 							count = 0;
 							for (TreePanelNode root : treeLists) {
 								count++;
 								if (root.examTheTree() && root != null)
 									for (String word : root.changeIntoText())
-										treeToText.write(word);
+										bw.write(word);
 								else
-									treeToText.write("第" + count + "个括号表达式格式错误。");
+									bw.write("第" + count + "个括号表达式格式错误。");
 
-								treeToText.write("\r\n");
+								bw.write("\r\n");
 							}
-							treeToText.close();
+							bw.close();
 							
 						}
 						
@@ -909,9 +955,11 @@ public class Main {
 										fileChooser.setSelectedFile(new File(date.format(new Date()) + ".txt"));
 										if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {//确定保存
 											currentTxtPath = fileChooser.getSelectedFile().toString();
-											FileWriter fw = new FileWriter(currentTxtPath);
+											FileOutputStream fos = new FileOutputStream(currentTxtPath);
+											OutputStreamWriter osw = new OutputStreamWriter(fos,charsetName);
+											BufferedWriter bw = new BufferedWriter(osw);
 											for (String word : t.getTreeLists().get(0).changeIntoText())
-												fw.write(word);
+												bw.write(word);
 
 											hasModeified.remove(null);// 将没有设置位置和文件名的删除，因为已经为它保存到了指定文件中
 											hasModeified.put(currentTxtPath, Boolean.FALSE);
@@ -919,7 +967,7 @@ public class Main {
 											treeAtTxt.setTxtPath(currentTxtPath);											
 											t.getTreeAtTxt().setTxtPath(currentTxtPath);// 修改文件的路径，之前是null
 											f.setTitle(new File(currentTxtPath).getName() +"[ " + "1 / 1" + " ]" );
-											fw.close();
+											bw.close();
 											
 											//向右滑动
 											if( !nextTreeLists( Main.RIGHT ) ) //向右滑动失败
@@ -964,15 +1012,17 @@ public class Main {
 											JOptionPane.INFORMATION_MESSAGE);
 								} else {
 									try {
-										FileWriter fw = new FileWriter(currentTxtPath);
+										FileOutputStream fos = new FileOutputStream(currentTxtPath);
+										OutputStreamWriter osw = new OutputStreamWriter(fos,charsetName);
+										BufferedWriter bw = new BufferedWriter(osw);
 										for (TreePanelNode treeRoot : treesOfSameTxt) {
 											for (String word : treeRoot.changeIntoText())
-												fw.write(word);
-											fw.write("\r\n");
+												bw.write(word);
+											bw.write("\r\n");
 										}
 										hasModeified.put(currentTxtPath, Boolean.FALSE);
 										t.setHasModeified(hasModeified);
-										fw.close();
+										bw.close();
 										//向右滑动
 										if( !nextTreeLists( Main.RIGHT ) ) //向右滑动失败
 											JOptionPane.showMessageDialog(null, "已经到最后一篇文档的最后一棵树。", "向右滑动", JOptionPane.INFORMATION_MESSAGE);		
@@ -1028,9 +1078,11 @@ public class Main {
 										fileChooser.setSelectedFile(new File(date.format(new Date()) + ".txt"));
 										if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {//确定保存
 											currentTxtPath = fileChooser.getSelectedFile().toString();
-											FileWriter fw = new FileWriter(currentTxtPath);
+											FileOutputStream fos = new FileOutputStream(currentTxtPath);
+											OutputStreamWriter osw = new OutputStreamWriter(fos,charsetName);
+											BufferedWriter bw = new BufferedWriter(osw);
 											for (String word : t.getTreeLists().get(0).changeIntoText())
-												fw.write(word);
+												bw.write(word);
 
 											hasModeified.remove(null);// 将没有设置位置和文件名的删除，因为已经为它保存到了指定文件中
 											hasModeified.put(currentTxtPath, Boolean.FALSE);
@@ -1038,7 +1090,7 @@ public class Main {
 											treeAtTxt.setTxtPath(currentTxtPath);
 											t.getTreeAtTxt().setTxtPath(currentTxtPath);// 修改文件的路径，之前是null
 											f.setTitle(new File(currentTxtPath).getName() + "[ " + "1 / 1" +" ]");
-											fw.close();
+											bw.close();
 											
 											//向左滑动
 											if( !nextTreeLists( Main.LEFT ) ) //向左滑动失败
@@ -1083,15 +1135,17 @@ public class Main {
 											JOptionPane.INFORMATION_MESSAGE);
 								} else {
 									try {
-										FileWriter fw = new FileWriter(currentTxtPath);
+										FileOutputStream fos = new FileOutputStream(currentTxtPath);
+										OutputStreamWriter osw = new OutputStreamWriter(fos,charsetName);
+										BufferedWriter bw = new BufferedWriter(osw);
 										for (TreePanelNode treeRoot : treesOfSameTxt) {
 											for (String word : treeRoot.changeIntoText())
-												fw.write(word);
-											fw.write("\r\n");
+												bw.write(word);
+											bw.write("\r\n");
 										}
 										hasModeified.put(currentTxtPath, Boolean.FALSE);
 										t.setHasModeified(hasModeified);
-										fw.close();
+										bw.close();
 										//向左滑动
 										if( !nextTreeLists( Main.LEFT ) ) //向左滑动失败
 											JOptionPane.showMessageDialog(null, "已经到第一篇文档的第一棵树。", "向左滑动", JOptionPane.INFORMATION_MESSAGE);	
@@ -1211,6 +1265,7 @@ public class Main {
 		
 	}
 	
+
 	private void openTxts() throws IOException {
 		fileChooser.addChoosableFileFilter(txtFileFilter);
 		fileChooser.setMultiSelectionEnabled(true);
@@ -1227,12 +1282,16 @@ public class Main {
 			hasModeified.clear();
 			allTreesAtTxt.clear();
 			for(File file : files) {
-				BufferedReader br = new BufferedReader(new FileReader(file.toString()));
+				
+				FileInputStream fis  = new FileInputStream(file.toString());
+				InputStreamReader isr = new InputStreamReader(fis, charsetName);		
+				BufferedReader br = new BufferedReader(isr);
 				String strOfaTxt = new String();
 				String line = null;
 				while ((line = br.readLine()) != null) {
 					strOfaTxt +=line; 
 				}
+				br.close();
 				System.out.println(strOfaTxt);
 				ArrayList<TreePanelNode> trees = new TreePanelNode().fromTextToTree(strOfaTxt);
 				hasModeified.put(file.toString(), Boolean.FALSE);	
