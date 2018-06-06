@@ -34,7 +34,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
+import javax.swing.JTextArea;
 import javax.swing.plaf.ColorUIResource;
 
 import edu.stanford.nlp.ling.CoreAnnotations;
@@ -44,13 +44,13 @@ import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeCoreAnnotations;
 import edu.stanford.nlp.util.CoreMap;
 
-public class Main {
+public class TreeEditorTool {
 	private JFrame f = new JFrame("未命名.txt" + "[ " + 1 + " / " + 1 + " ]");
 	private TreePanel t = new TreePanel();
 	private JScrollPane paintjsp;
 	private JPanel editPanel = new JPanel();
-	private TextArea editArea0 = new TextArea(2, 80);
-	private TextArea editArea = new TextArea(8, 80);
+	private JTextArea editArea0 = new JTextArea(2, 80);
+	private JTextArea editArea = new JTextArea(8, 80);
 	private JButton start = new JButton("生成结构树");
 	private JButton treeToText = new JButton("导出到文件");
 	private JButton rePaint = new JButton("重画结构树");
@@ -104,10 +104,12 @@ public class Main {
 		JMenuItem jmi_open = new JMenuItem("打开");
 		JMenuItem jmi_save = new JMenuItem("保存");
 		JMenuItem jmi_saveAs = new JMenuItem("另存为");
+		
 
 		JMenu charset = new JMenu("编码");
 		JMenuItem jmi_gbk = new JMenuItem("gbk");
 		JMenuItem jmi_utf_8 = new JMenuItem("utf-8");
+		jmi_gbk.setBackground(Color.GREEN);
 		jm.add(jmi_new);
 		jm.add(jmi_open);
 		jm.add(jmi_save);
@@ -590,6 +592,8 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				charsetName = "gbk";
+				jmi_utf_8.setBackground((Color) new ColorUIResource(238, 238, 238));
+				jmi_gbk.setBackground(Color.green);
 			}
 		});
 		jmi_utf_8.addActionListener(new ActionListener() {
@@ -598,6 +602,8 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				charsetName = "utf-8";
+				jmi_gbk.setBackground((Color) new ColorUIResource(238, 238, 238));
+				jmi_utf_8.setBackground(Color.GREEN);
 			}
 		});
 
@@ -925,7 +931,7 @@ public class Main {
 				String currentTxtPath = t.getTreeAtTxt().getTxtPath();
 				if (!hasModeified.get(currentTxtPath).booleanValue()) {// txtPath对应文件没有修改
 					// 向右滑动
-					if (!nextTreeLists(Main.RIGHT)) // 向右滑动失败
+					if (!nextTreeLists(TreeEditorTool.RIGHT)) // 向右滑动失败
 						JOptionPane.showMessageDialog(null, "已经到最后一篇文档的最后一棵树。", "向右滑动",
 								JOptionPane.INFORMATION_MESSAGE);
 					else {
@@ -961,7 +967,7 @@ public class Main {
 											bw.close();
 
 											// 向右滑动
-											if (!nextTreeLists(Main.RIGHT)) // 向右滑动失败
+											if (!nextTreeLists(TreeEditorTool.RIGHT)) // 向右滑动失败
 												JOptionPane.showMessageDialog(null, "已经到最后一篇文档的最后一棵树。", "向右滑动",
 														JOptionPane.INFORMATION_MESSAGE);
 
@@ -1012,7 +1018,7 @@ public class Main {
 										t.setHasModeified(hasModeified);
 										bw.close();
 										// 向右滑动
-										if (!nextTreeLists(Main.RIGHT)) // 向右滑动失败
+										if (!nextTreeLists(TreeEditorTool.RIGHT)) // 向右滑动失败
 											JOptionPane.showMessageDialog(null, "已经到最后一篇文档的最后一棵树。", "向右滑动",
 													JOptionPane.INFORMATION_MESSAGE);
 
@@ -1032,7 +1038,7 @@ public class Main {
 						hasModeified.put(currentTxtPath, Boolean.FALSE);
 						t.setHasModeified(hasModeified);
 						// 向右滑动
-						if (!nextTreeLists(Main.RIGHT)) // 向右滑动失败
+						if (!nextTreeLists(TreeEditorTool.RIGHT)) // 向右滑动失败
 							JOptionPane.showMessageDialog(null, "已经到最后一篇文档的最后一棵树。", "向右滑动",
 									JOptionPane.INFORMATION_MESSAGE);
 					} else {// 点击了取消或者退出
@@ -1052,7 +1058,7 @@ public class Main {
 				String currentTxtPath = t.getTreeAtTxt().getTxtPath();
 				if (!hasModeified.get(currentTxtPath).booleanValue()) {// txtPath对应文件没有修改
 					// 向左滑动
-					if (!nextTreeLists(Main.LEFT)) // 向左滑动失败
+					if (!nextTreeLists(TreeEditorTool.LEFT)) // 向左滑动失败
 						JOptionPane.showMessageDialog(null, "已经到第一篇文档的第一棵树。", "向左滑动", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					returnValue = JOptionPane.showConfirmDialog(f, "请先保存当前页面的内容。", "确认对话框",
@@ -1082,7 +1088,7 @@ public class Main {
 											bw.close();
 
 											// 向左滑动
-											if (!nextTreeLists(Main.LEFT)) // 向左滑动失败
+											if (!nextTreeLists(TreeEditorTool.LEFT)) // 向左滑动失败
 												JOptionPane.showMessageDialog(null, "已经到第一篇文档的第一棵树。", "向左滑动",
 														JOptionPane.INFORMATION_MESSAGE);
 
@@ -1133,7 +1139,7 @@ public class Main {
 										t.setHasModeified(hasModeified);
 										bw.close();
 										// 向左滑动
-										if (!nextTreeLists(Main.LEFT)) // 向左滑动失败
+										if (!nextTreeLists(TreeEditorTool.LEFT)) // 向左滑动失败
 											JOptionPane.showMessageDialog(null, "已经到第一篇文档的第一棵树。", "向左滑动",
 													JOptionPane.INFORMATION_MESSAGE);
 
@@ -1153,7 +1159,7 @@ public class Main {
 						// 向左滑动
 						hasModeified.put(currentTxtPath, Boolean.FALSE);
 						t.setHasModeified(hasModeified);
-						if (!nextTreeLists(Main.LEFT)) // 向左滑动失败
+						if (!nextTreeLists(TreeEditorTool.LEFT)) // 向左滑动失败
 							JOptionPane.showMessageDialog(null, "已经到第一篇文档的第一棵树。", "向左滑动",
 									JOptionPane.INFORMATION_MESSAGE);
 					} else {// 点击了取消或者退出
@@ -1202,7 +1208,7 @@ public class Main {
 		int sizeOfTrees = allTreesAtTxt.size();
 		int positionOfTreeAtList = allTreesAtTxt.indexOf(t.getTreeAtTxt());
 		System.out.println("positionOfTreeAtList" + positionOfTreeAtList);
-		if (direction == Main.LEFT) {// 向左滑动
+		if (direction == TreeEditorTool.LEFT) {// 向左滑动
 			if (positionOfTreeAtList != 0) {
 				treeLists = allTreesAtTxt.get(positionOfTreeAtList - 1).getTreeListWithOneTree();
 				nodes = TreePanelNode.nodesOfAllTrees(treeLists);
@@ -1321,7 +1327,7 @@ public class Main {
 	}
 
 	public static void main(String args[]) {
-		new Main().init();
+		new TreeEditorTool().init();
 	}
 
 }
